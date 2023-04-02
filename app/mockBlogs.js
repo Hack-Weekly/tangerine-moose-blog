@@ -1,3 +1,4 @@
+// TODO: delete once Db connection has been established
 const mockCollection = [
   {
     _id: 1,
