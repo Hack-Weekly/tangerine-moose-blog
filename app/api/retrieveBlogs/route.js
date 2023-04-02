@@ -1,5 +1,5 @@
 // Pulling mock mongodb
-const { mockCollection } = require("../../mockBlogs");
+import mockCollection from "@/data/mockBlogs";
 
 export async function GET(request) {
   // TODO: get a connection to MongoDb and return from proper collection

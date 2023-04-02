@@ -1,5 +1,6 @@
 // Pulling mock mongodb
-const { mockCollection } = require("../../mockBlogs");
+
+import mockCollection from "@/data/mockBlogs";
 
 export async function POST(request) {
   //console.log(request);
