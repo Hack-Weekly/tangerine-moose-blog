@@ -11,7 +11,6 @@
 # next.js
 /.next/
 /out/
-!/.next/static/media/metadata/favicon.603d046c.ico
 
 # production
 /build
