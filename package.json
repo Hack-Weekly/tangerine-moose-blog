@@ -5,13 +5,13 @@
   "scripts": {
     "build": "next build",
     "dev": "next dev",
-    "format": "prettier --write \"**/*.{js,cjs,mjs,ts,tsx,md,json}\" --ignore-path .gitignore",
+    "format": "prettier --write \"**/*.{js,jsx,cjs,mjs,ts,tsx,css,md,json}\" --ignore-path .gitignore",
     "lint": "next lint",
     "start": "next start",
     "prepare": "husky install"
   },
   "lint-staged": {
-    "*.{js,cjs,mjs,ts,tsx,md,json}": "prettier --write"
+    "*.{js,jsx,cjs,mjs,ts,tsx,css,md,json}": "prettier --write"
   },
   "dependencies": {
     "next": "13.2.4",
@@ -26,6 +26,6 @@
     "eslint-config-prettier": "^8.8.0",
     "husky": "^8.0.3",
     "lint-staged": "^13.2.0",
-    "prettier": "^2.8.5"
+    "prettier": "^2.8.7"
   }
 }
