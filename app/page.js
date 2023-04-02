@@ -7,7 +7,6 @@ export default function Home() {
       <DefaultTags />
       <nav>nav</nav>
       <main className={styles.main}>main</main>
-
       <footer>footer</footer>
     </div>
   );
