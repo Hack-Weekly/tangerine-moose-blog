@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 // TODO: delete once Db connection has been established
+=======
+>>>>>>> 9cc8bf9 (set up the api endpoints for retrieving list of blogs and creating a new blog)
 const mockCollection = [
   {
     _id: 1,
