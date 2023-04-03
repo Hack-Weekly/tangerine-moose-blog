@@ -17,6 +17,7 @@
   justify-content: space-between;
   align-items: center;
   position: relative;
+  font-size: 1.5rem;
 }
 
 .menu {
@@ -34,8 +35,7 @@
 
 .link {
   text-decoration: none;
-  font-size: 1.5rem;
-  font-weight: 500;
+  display: block;
 }
 
 .link:hover,
@@ -60,4 +60,11 @@
   align-items: center;
   justify-content: center;
   background-color: transparent;
+}
+
+.login {
+  color: rgb(var(--foreground-rgb));
+  border: 2px solid rgb(var(--foreground-rgb));
+  padding: 0.25rem 1rem;
+  border-radius: 0.25rem;
 }

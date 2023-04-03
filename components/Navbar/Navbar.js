@@ -39,7 +39,7 @@ export default function Navbar() {
             </Link>
           </div>
           <div className={styles.menu}>
-            <Link href={"/login"} className={styles.link}>
+            <Link href={"/login"} className={styles.login}>
               Login
             </Link>
             <div className={styles.dropdown} ref={dropdown}>
