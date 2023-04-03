@@ -66,14 +66,7 @@ const TextButton = styled.a`
   cursor: pointer;
 `;
 
-const addReaction = (emoji) => {
-  if (emoji in reactions) {
-    reactions[emoji] += 1;
-  } else {
-    reactions[emoji] = 1;
-    console.log(Object.keys(emoji));
-  }
-};
+const addReaction = (emoji) => (emoji in reactions ? (reactions[emoji] += 1) : (reactions[emoji] = 1));
 
 const Reactions = ({ reactions }) => {
   const [showPicker, setShowPicker] = useState(false);
