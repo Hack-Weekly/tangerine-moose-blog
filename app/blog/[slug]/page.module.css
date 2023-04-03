@@ -1,0 +1,36 @@
+.container {
+  background-color: rgb(var(--background-end-rgb));
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  align-self: center;
+}
+
+.text {
+  background-color: rgb(var(--callout-rgb));
+  border-radius: var(--border-radius);
+  padding: 1rem;
+  overflow-x: scroll;
+}
+
+.reacts {
+  margin-top: 1rem;
+}
+
+.buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.container a {
+  font-weight: bold;
+}
+
+.container a:hover {
+  opacity: 70%;
+}
