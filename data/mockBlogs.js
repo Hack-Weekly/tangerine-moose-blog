@@ -23,6 +23,4 @@ const mockCollection = [
   },
 ];
 
-module.exports = {
-  mockCollection,
-};
+export default mockCollection;
