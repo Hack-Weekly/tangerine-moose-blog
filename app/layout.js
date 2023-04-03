@@ -1,4 +1,7 @@
 import "./globals.css";
+import { Cabin } from "next/font/google";
+
+import Navbar from "@/components/Navbar/Navbar";
 
 export const metadata = {
   title: "Tangerine Moose Blog App",
@@ -7,10 +10,15 @@ export const metadata = {
   charSet: "utf-8",
 };
 
+const cabin = Cabin({ subsets: ["latin"] });
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className={cabin.className}>
+        <Navbar />
+        {children}
+      </body>
     </html>
   );
 }
