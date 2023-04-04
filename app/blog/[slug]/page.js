@@ -1,17 +1,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
-import EmojiPicker from "emoji-picker-react";
+import { usePathname, useSearchParams } from "next/navigation";
 import Markdown from "marked-react";
-import { VscReactions as AddReaction } from "react-icons/vsc";
-import styled from "styled-components";
 
+import PostButtons from "./PostButtons";
+import Reactions from "./Reactions";
 import styles from "./page.module.css";
 
 // mock data + api: ignore for now
-let reactions = { "👍": 2, "👎": 1, "👏": 1 };
-
 const fetchMockData = (slug) => ({
   postId: 1234,
   authorUsername: "TestUser",
@@ -53,111 +50,54 @@ const fetchMockData = (slug) => ({
   omnipotens manus, quare rursus timidas. Venerem quicumque idemque oppida
   sanguine, Pegason cultu, nunc admonuisse, ubi merito femina, solito inter;
   Orionis. Ferat mollesque nataque.
+  * [relative test link](/blog/test-blog-post-2)
+  * [absolute test link](https://vercel.com/)
 
   **Prolem manus**, nec in reminiscitur malum, hoc fors niveis. Est echidnis fera
   ille tenet te Peleus tenet dea lamentabile festaque digiti dictis? Est per
   ferrugine ipse, nata it dixi superi de praestantissima. Ferox procul mea tollere
   illis.`,
-  reactions: reactions,
+  reactions: { "👍": 2, "👎": 1, "👏": 1 },
 });
-const getAuthorName = (id) => "Test User";
-
-const TextButton = styled.a`
-  cursor: pointer;
-`;
-
-const addReaction = (emoji) => (emoji in reactions ? (reactions[emoji] += 1) : (reactions[emoji] = 1));
-
-const Reactions = ({ reactions }) => {
-  const [showPicker, setShowPicker] = useState(false);
-  const togglePicker = () => setShowPicker(!showPicker);
-
-  return (
-    <div style={{ display: "flex", gap: "15px" }}>
-      {Object.keys(reactions).map((objectKey, index) => (
-        <div key={index}>
-          {objectKey} {reactions[objectKey]}
-        </div>
-      ))}
-      <div key="new-react">
-        <TextButton onClick={togglePicker}>
-          <AddReaction size={22} />
-        </TextButton>
-        {showPicker && (
-          <div style={{ position: "absolute" }}>
-            <EmojiPicker
-              theme="auto"
-              emojiStyle="native"
-              onEmojiClick={(e) => {
-                togglePicker();
-                addReaction(e.emoji);
-              }}
-            />
-          </div>
-        )}
-      </div>
-    </div>
-  );
-};
+const getAuthorName = (_id) => "Test User";
+const useCurrentUser = () => ({ name: useSearchParams().get("user") }); // `?user=TestUser` in URL to test author view
 // mock end
 
 const Blog = () => {
   const path = usePathname();
   var slug = path.match(/.*\/([-a-z0-9]+)/i)[1];
   const [data, setData] = useState(null);
-  const [saved, setSaved] = useState(false);
+  const currentUser = useCurrentUser();
 
   useEffect(() => {
     const data = fetchMockData(slug);
     setData(data);
   }, [slug]);
 
-  const savePost = () => setSaved(!saved);
-  const hoverSave = () => saved && (document.getElementById("saveButton").innerHTML = "unsave");
-  const leaveSave = () => (document.getElementById("saveButton").innerHTML = saved ? "saved" : "save");
-  const report = () => {
-    const reportButton = document.getElementById("reportButton");
-    reportButton.innerHTML = "reported";
-    setTimeout(() => {
-      reportButton.innerHTML = "report";
-    }, 2000);
-  };
-
   if (!data) return <div>loading...</div>;
   if (data) {
     const { title, text, authorUsername, slug, created, updated, reactions } = data;
     const authorName = getAuthorName(authorUsername);
+    const isAuthor = currentUser.name === authorUsername;
 
     return (
-      <div className={styles.container}>
-        <a href="/">← Back to Home</a>
-        <h1 className={styles.title}>{title}</h1>
-        <div className={styles.text}>
-          <Markdown value={text} />
-          <div className={styles.reacts}>
-            <Reactions reactions={reactions} />
+      <>
+        <a href="/">{/* replace with Header/Navbar component */}← Back to Home</a>
+        <div className={styles.container}>
+          <h1 className={styles.title}>{title}</h1>
+          <div className={styles.text}>
+            <Markdown value={text} />
+            <div className={styles.reacts}>
+              <Reactions reactions={reactions} />
+            </div>
           </div>
+          <p>
+            {`submitted ${created.toLocaleString()} (last edited ${updated.toLocaleString()}) by `}{" "}
+            <a href={`/user/${authorUsername}`}>{authorName}</a>
+          </p>
+          <PostButtons slug={slug} isAuthor={isAuthor} />
         </div>
-        <p>
-          {`submitted ${created.toLocaleString()} (last edited ${updated.toLocaleString()}) by `}{" "}
-          <a href={`/user/${authorUsername}`}>{authorName}</a>
-        </p>
-        <div className={styles.buttons}>
-          <a href={slug}>3 comments</a>
-          <TextButton id="replyButton" onClick={() => console.log("reply test")}>
-            reply
-          </TextButton>
-          <TextButton id="shareButton" onClick={() => console.log("share test")}>
-            share
-          </TextButton>
-          <TextButton id="saveButton" onClick={savePost} onMouseOver={hoverSave} onMouseLeave={leaveSave}>
-            {saved ? "saved" : "save"}
-          </TextButton>
-          <TextButton id="reportButton" onClick={report}>
-            report
-          </TextButton>
-        </div>
-      </div>
+      </>
     );
   }
 };
