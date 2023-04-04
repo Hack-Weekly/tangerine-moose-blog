@@ -1,7 +1,8 @@
+import styles from "./page.module.css";
+
 export default function Home() {
   return (
-    <div>
-      <nav>nav</nav>
+    <div className={styles.container}>
       <main>main</main>
       <footer>footer</footer>
     </div>

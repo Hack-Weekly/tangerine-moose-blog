@@ -1,0 +1,70 @@
+.root {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.container {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: var(--max-width);
+}
+
+.nav {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  font-size: 1.5rem;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+}
+
+.menu > * {
+  margin-left: 1rem;
+}
+
+.menu > :first-child {
+  margin-left: 0;
+}
+
+.link {
+  text-decoration: none;
+  display: block;
+}
+
+.link:hover,
+.link:focus {
+  text-decoration: underline dotted;
+}
+
+.dropdown {
+  position: relative;
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 0.5rem;
+  z-index: 100;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+}
+
+.login {
+  color: rgb(var(--foreground-rgb));
+  border: 2px solid rgb(var(--foreground-rgb));
+  padding: 0.25rem 1rem;
+  border-radius: 0.25rem;
+}

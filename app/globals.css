@@ -126,6 +126,22 @@ img {
 }
 /* removes outlines from linked images (for older browsers and IE), sets up images for responsive design layout */
 
+/* reset default button styles */
+button,
+input[type="button"],
+input[type="submit"],
+input[type="reset"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  color: inherit;
+  cursor: pointer;
+}
+
 input[type="submit"]::-moz-focus-inner,
 input[type="button"]::-moz-focus-inner {
   border: 0px;
