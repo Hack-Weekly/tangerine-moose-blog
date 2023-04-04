@@ -99,6 +99,8 @@ p {
   -webkit-hyphens: auto;
   -ms-hyphens: auto;
   hyphens: auto;
+  margin-top: 0;
+  margin-bottom: 1rem;
 }
 /* sets hyphenation by default on paragraphs */
 

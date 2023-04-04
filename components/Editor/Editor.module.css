@@ -1,0 +1,30 @@
+.root {
+  position: relative;
+  border: 2px solid rgb(var(--foreground-rgb));
+  border-radius: 0.25rem;
+}
+
+.toolbar {
+  position: sticky;
+  top: 0;
+  border-top-right-radius: 0.25rem;
+  border-top-left-radius: 0.25rem;
+}
+
+.editor {
+  padding: 0.5rem;
+  min-height: 10rem;
+}
+
+.editor > * + * {
+  margin-top: 0.75em;
+}
+
+.placeholder::before {
+  content: attr(data-placeholder);
+  float: left;
+  color: rgb(var(--foreground-rgb));
+  opacity: 0.5;
+  pointer-events: none;
+  height: 0;
+}
