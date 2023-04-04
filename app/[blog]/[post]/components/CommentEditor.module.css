@@ -1,0 +1,6 @@
+.input {
+  margin: 1rem;
+  border-radius: var(--border-radius);
+  background-color: rgb(var(--background-end-rgb));
+  color: rgb(var(--foreground-rgb));
+}
