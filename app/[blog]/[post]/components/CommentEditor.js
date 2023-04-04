@@ -39,7 +39,7 @@ const CommentEditor = ({ onReplySubmit }) => {
       <div className={styles.input}>
         <MDEditor value={commentText} onChange={setCommentText} {...editorOptions} />
       </div>
-      <button className={styles.submit} type="submit" onClick={onReplySubmit}>
+      <button className={styles.submit} type="submit" onClick={() => onReplySubmit(commentText)}>
         send
       </button>
       {commentText && (

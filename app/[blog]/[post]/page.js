@@ -116,6 +116,7 @@ const comments = [
 
 const getAuthorName = (_id) => "Test User";
 const useCurrentUser = () => ({ name: useSearchParams().get("user") }); // `?user=TestUser` in URL to test author view
+const submitComment = (user, text) => comments.push({ id: text.length, user: user.name, text: text });
 // mock end
 
 const BlogPost = () => {
@@ -124,6 +125,10 @@ const BlogPost = () => {
   const currentUser = useCurrentUser();
   const [data, setData] = useState(null);
   const [replying, setReplying] = useState(false);
+  const handleCommentSubmit = (commentText) => {
+    setReplying(false);
+    submitComment(currentUser, commentText);
+  };
 
   useEffect(() => {
     const data = fetchMockData(postSlug);
@@ -157,7 +162,7 @@ const BlogPost = () => {
             replyCount={comments.length}
             onReply={() => setReplying(true)}
           />
-          {replying && <CommentEditor onReplySubmit={() => setReplying(false)} />}
+          {replying && <CommentEditor onReplySubmit={handleCommentSubmit} />}
           <CommentList comments={comments} />
         </div>
       </>
