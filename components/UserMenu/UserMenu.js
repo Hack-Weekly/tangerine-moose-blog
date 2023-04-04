@@ -1,7 +1,5 @@
-import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 
-import Avatar from "@/components/Avatar/Avatar";
 import styles from "./UserMenu.module.css";
 
 export default function UserMenu({ user }) {
@@ -11,10 +9,7 @@ export default function UserMenu({ user }) {
         <div>{user.name}</div>
       </div>
       <div className={styles.body}>
-        <Link className={styles.link} href={"#"}>
-          Create a Blog
-        </Link>
-        <Link className={styles.link} href={"/create"}>
+        <Link className={styles.link} href={`/create`}>
           Write a Post
         </Link>
         <Link className={styles.link} href={"/logout"}>
