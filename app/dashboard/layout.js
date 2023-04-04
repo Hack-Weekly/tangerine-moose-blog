@@ -1,5 +1,3 @@
-import "./globals.css";
-
 export const metadata = {
   title: "Tangerine Moose Blog App",
   description: "Blog app engineered by the Tangerine Moose team",

@@ -1,9 +1,15 @@
+import ViewsChart from "./components/viewsChart";
+import styles from "./dashboard.module.css";
+
 export default function DashboardPage() {
   return (
-    <div>
-      <nav>nav</nav>
-      <main>main</main>
-      <footer>footer</footer>
-    </div>
+    <>
+      <div className={styles.stats}>
+        <div className={styles.stat_box}>s</div>
+        <div className={styles.stat_box}>s</div>
+      </div>
+
+      <ViewsChart />
+    </>
   );
 }

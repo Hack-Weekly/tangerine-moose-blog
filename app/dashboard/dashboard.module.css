@@ -1,0 +1,19 @@
+.chart {
+  font-size: 1rem;
+  font-family: monospace;
+}
+
+.stats {
+  margin-top: 100px;
+  height: 100px;
+  display: flex;
+  background-color: rgb(120, 120, 120);
+}
+
+.stat_box {
+  border-radius: 10px;
+  width: 50px;
+  margin: 50px;
+  height: 50%;
+  background-color: rgb(95, 122, 95);
+}
