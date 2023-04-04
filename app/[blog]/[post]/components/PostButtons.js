@@ -1,7 +1,6 @@
 import { useState } from "react";
 
 import styles from "./PostButtons.module.css";
-import TextButton from "./TextButton";
 
 const PostButtons = ({ slug, isAuthor, replyCount, onReply }) => {
   const [saved, setSaved] = useState(false);
@@ -18,18 +17,18 @@ const PostButtons = ({ slug, isAuthor, replyCount, onReply }) => {
   return (
     <div className={styles.buttons}>
       <a href={slug}>{`${replyCount} comments`}</a>
-      <TextButton onClick={onReply}>reply</TextButton>
-      <TextButton onClick={() => {}}>share</TextButton>
-      <TextButton onClick={toggleSavePost} onMouseOver={hoverSave} onMouseLeave={leaveSave}>
+      <a onClick={onReply}>reply</a>
+      <a onClick={() => {}}>share</a>
+      <a onClick={toggleSavePost} onMouseOver={hoverSave} onMouseLeave={leaveSave}>
         {saved ? "saved" : "save"}
-      </TextButton>
+      </a>
       {isAuthor ? (
         <>
-          <TextButton onClick={() => {}}>edit</TextButton>
-          <TextButton onClick={() => {}}>delete</TextButton>
+          <a onClick={() => {}}>edit</a>
+          <a onClick={() => {}}>delete</a>
         </>
       ) : (
-        <TextButton onClick={report}>report</TextButton>
+        <a onClick={report}>report</a>
       )}
     </div>
   );

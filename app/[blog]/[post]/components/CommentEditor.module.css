@@ -7,8 +7,10 @@
 
 .submit {
   width: fit-content;
-  padding: 0 1rem;
+  padding: 0.5rem 1rem;
   margin: 0 1rem;
+  border-radius: var(--border-radius);
+  border: 1px solid rgb(var(--foreground-rgb));
 }
 
 .preview {
@@ -21,4 +23,8 @@
   border-radius: var(--border-radius);
   padding: 1rem;
   overflow-x: scroll;
+}
+
+.text a {
+  cursor: pointer;
 }

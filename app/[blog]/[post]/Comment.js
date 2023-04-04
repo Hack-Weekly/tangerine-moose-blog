@@ -6,7 +6,6 @@ import Markdown from "marked-react";
 import moment from "moment";
 
 import styles from "./Comment.module.css";
-import TextButton from "./components/TextButton";
 
 const fetchMockData = ({ id, user, text }) => ({
   commentId: id,
@@ -20,8 +19,8 @@ const getAuthorName = (id) => `Test User (${id})`;
 const useCurrentUser = () => ({ name: useSearchParams().get("user") });
 const CommentButtons = () => (
   <div className={styles.buttons}>
-    <TextButton onClick={() => {}}>edit</TextButton>
-    <TextButton onClick={() => {}}>delete</TextButton>
+    <a onClick={() => {}}>edit</a>
+    <a onClick={() => {}}>delete</a>
   </div>
 );
 
