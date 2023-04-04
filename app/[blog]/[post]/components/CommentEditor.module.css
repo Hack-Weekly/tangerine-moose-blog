@@ -10,7 +10,11 @@
   padding: 0.5rem 1rem;
   margin: 0 1rem;
   border-radius: var(--border-radius);
-  border: 1px solid rgb(var(--foreground-rgb));
+  border: 2px solid rgb(var(--foreground-rgb));
+}
+
+.submit:hover {
+  background-color: rgb(var(--callout-rgb));
 }
 
 .preview {

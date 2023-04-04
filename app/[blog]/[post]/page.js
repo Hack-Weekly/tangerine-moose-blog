@@ -142,30 +142,27 @@ const BlogPost = () => {
     const isAuthor = currentUser.name === authorUsername;
 
     return (
-      <>
-        <a href="/">{/* replace with Header/Navbar component */}← Back to Home</a>
-        <div className={styles.container}>
-          <h1 className={styles.title}>{title}</h1>
-          <div className={styles.text}>
-            <Markdown value={text} />
-            <div className={styles.reacts}>
-              <Reactions reactions={reactions} />
-            </div>
+      <div className={styles.container}>
+        <h1 className={styles.title}>{title}</h1>
+        <div className={styles.text}>
+          <Markdown value={text} />
+          <div className={styles.reacts}>
+            <Reactions reactions={reactions} />
           </div>
-          <p>
-            {`submitted ${created.toLocaleString()} (last edited ${updated.toLocaleString()}) by `}{" "}
-            <a href={`/user/${authorUsername}`}>{authorName}</a>
-          </p>
-          <PostButtons
-            postSlug={postSlug}
-            isAuthor={isAuthor}
-            replyCount={comments.length}
-            onReply={() => setReplying(true)}
-          />
-          {replying && <CommentEditor onReplySubmit={handleCommentSubmit} />}
-          <CommentList comments={comments} />
         </div>
-      </>
+        <p>
+          {`submitted ${created.toLocaleString()} (last edited ${updated.toLocaleString()}) by `}{" "}
+          <a href={`/user/${authorUsername}`}>{authorName}</a>
+        </p>
+        <PostButtons
+          postSlug={postSlug}
+          isAuthor={isAuthor}
+          replyCount={comments.length}
+          onReply={() => setReplying(true)}
+        />
+        {replying && <CommentEditor onReplySubmit={handleCommentSubmit} />}
+        <CommentList comments={comments} />
+      </div>
     );
   }
 };
