@@ -1,5 +1,13 @@
 # Tangerine Moose Blog App
 
+## How to run locally
+
+1. Pull the repository
+2. Run `npm install`
+3. Configure Firebase
+   - [Follow these instructions through creating a .env file](https://www.freecodecamp.org/news/create-full-stack-app-with-nextjs13-and-firebase/)
+4. Run `npm run dev`
+
 ## Architecture:
 
 ### Front end:
