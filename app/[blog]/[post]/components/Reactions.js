@@ -2,8 +2,8 @@ import { useState } from "react";
 import EmojiPicker from "emoji-picker-react";
 import { VscReactions as AddReactionIcon } from "react-icons/vsc";
 
+import styles from "../page.module.css";
 import TextButton from "./TextButton";
-import styles from "./page.module.css";
 
 const Reactions = ({ reactions }) => {
   const addReaction = (emoji) => (emoji in reactions ? (reactions[emoji] += 1) : (reactions[emoji] = 1));

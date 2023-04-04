@@ -1,0 +1,32 @@
+.commentBox {
+  max-width: var(--max-width);
+  border: 1px solid rgb(var(--callout-border-rgb));
+  border-radius: var(--border-radius);
+  padding: 1rem;
+  margin: 1rem;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.text {
+  overflow-x: scroll;
+}
+
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.commentBox a {
+  font-weight: bold;
+}
+
+.commentBox a:hover {
+  opacity: 70%;
+}

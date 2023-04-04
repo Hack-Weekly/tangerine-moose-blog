@@ -4,8 +4,9 @@ import { useEffect, useState } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import Markdown from "marked-react";
 
-import PostButtons from "./PostButtons";
-import Reactions from "./Reactions";
+import CommentList from "./CommentList";
+import PostButtons from "./components/PostButtons";
+import Reactions from "./components/Reactions";
 import styles from "./page.module.css";
 
 // mock data + api: ignore for now
@@ -63,20 +64,22 @@ const getAuthorName = (_id) => "Test User";
 const useCurrentUser = () => ({ name: useSearchParams().get("user") }); // `?user=TestUser` in URL to test author view
 // mock end
 
-const Blog = () => {
+const BlogPost = () => {
   const path = usePathname();
-  var slug = path.match(/.*\/([-a-z0-9]+)/i)[1];
-  const [data, setData] = useState(null);
+  var postSlug = path.match(/.*\/([-a-z0-9]+)/i)[1];
   const currentUser = useCurrentUser();
+  const [data, setData] = useState(null);
+  const [replying, setReplying] = useState(false);
+  const [commentText, setCommentText] = useState("");
 
   useEffect(() => {
-    const data = fetchMockData(slug);
+    const data = fetchMockData(postSlug);
     setData(data);
-  }, [slug]);
+  }, [postSlug]);
 
   if (!data) return <div>loading...</div>;
   if (data) {
-    const { title, text, authorUsername, slug, created, updated, reactions } = data;
+    const { title, text, authorUsername, postSlug, created, updated, reactions } = data;
     const authorName = getAuthorName(authorUsername);
     const isAuthor = currentUser.name === authorUsername;
 
@@ -95,11 +98,28 @@ const Blog = () => {
             {`submitted ${created.toLocaleString()} (last edited ${updated.toLocaleString()}) by `}{" "}
             <a href={`/user/${authorUsername}`}>{authorName}</a>
           </p>
-          <PostButtons slug={slug} isAuthor={isAuthor} />
+          <PostButtons postSlug={postSlug} isAuthor={isAuthor} onReply={() => setReplying(true)} />
+          {replying && (
+            <>
+              {/* TODO: replace with actual markdown editor */}
+              <textarea className={styles.input} value={commentText} onChange={(e) => setCommentText(e.target.value)} />
+              <button className={styles.submit} type="submit" onClick={() => setReplying(false)}>
+                send
+              </button>
+              {commentText && (
+                <div className={styles.preview}>
+                  <div className={styles.text}>
+                    <Markdown value={commentText} />
+                  </div>
+                </div>
+              )}
+            </>
+          )}
+          <CommentList />
         </div>
       </>
     );
   }
 };
 
-export default Blog;
+export default BlogPost;
