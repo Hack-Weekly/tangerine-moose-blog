@@ -1,0 +1,28 @@
+.root {
+  color: rgb(var(--background-end-rgb));
+  background: rgb(var(--foreground-rgb));
+  border-radius: var(--border-radius);
+  padding: 0;
+  font-size: 1rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  width: max-content;
+}
+
+.header {
+  padding: 1rem;
+  border-bottom: 1px solid #e2e8f0;
+  font-weight: 600;
+}
+
+.body {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.link {
+  padding: 0.5rem 1rem;
+  display: block;
+  text-decoration: none;
+}

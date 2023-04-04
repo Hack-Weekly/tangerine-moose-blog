@@ -5,13 +5,13 @@
   "scripts": {
     "build": "next build",
     "dev": "next dev",
-    "format": "prettier --write \"**/*.{js,cjs,mjs,ts,tsx,md,json}\" --ignore-path .gitignore",
+    "format": "prettier --write \"**/*.{js,jsx,cjs,mjs,ts,tsx,css,md,json}\" --ignore-path .gitignore",
     "lint": "next lint",
     "start": "next start",
     "prepare": "husky install && chmod ug+x ./.husky/*"
   },
   "lint-staged": {
-    "*.{js,cjs,mjs,ts,tsx,md,json}": "prettier --write"
+    "*.{js,jsx,cjs,mjs,ts,tsx,css,md,json}": "prettier --write"
   },
   "dependencies": {
     "@uiw/react-md-editor": "^3.20.6",
@@ -27,14 +27,11 @@
   "devDependencies": {
     "@ianvs/prettier-plugin-sort-imports": "^3.7.2",
     "@types/prettier": "^2.7.2",
-    "@types/react": "^18.0.32",
-    "@types/styled-components": "^5.1.26",
-    "babel-plugin-styled-components": "^2.0.7",
     "eslint": "8.37.0",
     "eslint-config-next": "13.2.4",
     "eslint-config-prettier": "^8.8.0",
     "husky": "^8.0.3",
     "lint-staged": "^13.2.0",
-    "prettier": "^2.8.5"
+    "prettier": "^2.8.7"
   }
 }
