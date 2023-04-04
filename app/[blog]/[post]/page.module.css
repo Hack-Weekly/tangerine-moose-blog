@@ -36,21 +36,3 @@
 .container a:hover {
   opacity: 70%;
 }
-
-.input {
-  padding: 1rem;
-  margin: 1rem;
-  border-radius: var(--border-radius);
-  background-color: rgb(var(--background-end-rgb));
-  color: rgb(var(--foreground-rgb));
-}
-
-.submit {
-  width: fit-content;
-  padding: 0 1rem;
-  margin: 0 1rem;
-}
-
-.preview {
-  padding: 1rem;
-}

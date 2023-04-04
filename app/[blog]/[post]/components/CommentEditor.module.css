@@ -4,3 +4,21 @@
   background-color: rgb(var(--background-end-rgb));
   color: rgb(var(--foreground-rgb));
 }
+
+.submit {
+  width: fit-content;
+  padding: 0 1rem;
+  margin: 0 1rem;
+}
+
+.preview {
+  padding: 1rem;
+}
+
+.text {
+  width: 100%;
+  background-color: rgb(var(--callout-rgb));
+  border-radius: var(--border-radius);
+  padding: 1rem;
+  overflow-x: scroll;
+}
