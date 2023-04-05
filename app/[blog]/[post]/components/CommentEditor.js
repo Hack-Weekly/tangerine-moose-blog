@@ -31,6 +31,7 @@ const editorOptions = {
   ].map((k) => commands[k]),
   extraCommands: [],
 };
+
 const CommentEditor = ({ onReplySubmit }) => {
   const [commentText, setCommentText] = useState("");
 
