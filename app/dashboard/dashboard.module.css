@@ -1,19 +1,28 @@
+.container {
+  align-items: center;
+}
+
 .chart {
   font-size: 1rem;
   font-family: monospace;
 }
 
 .stats {
+  align-items: center;
   margin-top: 100px;
   height: 100px;
   display: flex;
-  background-color: rgb(120, 120, 120);
+  background-color: rgb(255, 255, 255);
 }
 
 .stat_box {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  padding: 5px;
+  border-style: solid;
+  box-shadow: 1px black;
   border-radius: 10px;
-  width: 50px;
+  width: auto;
   margin: 50px;
-  height: 50%;
-  background-color: rgb(95, 122, 95);
+  height: auto;
+  background-color: rgb(255, 255, 255);
 }
