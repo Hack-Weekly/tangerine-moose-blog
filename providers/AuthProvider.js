@@ -17,7 +17,7 @@ export const AuthProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setLoading(true);
       if (user) {
-        setUser(user.providerData[0]);
+        setUser(user);
       } else {
         setUser(null);
       }
