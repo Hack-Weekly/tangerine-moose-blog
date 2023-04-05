@@ -36,3 +36,14 @@ yarn-error.log*
 
 # VS Code
 .vscode
+
+# firebase files
+.firebaserc
+.env
+firebase-debug.log
+firebase.json
+firestore-debug.log
+firestore.indexes.json
+firestore.rules
+storage.rules
+ui-debug.log

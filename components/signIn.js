@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { GoogleAuthProvider, getAuth, signInWithPopup, updateCurrentUser } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 
-import firebase_app from "../config";
+import firebase_app from "@/firebase/firebase";
 
 export default function SignIn() {
   const auth = getAuth(firebase_app);
