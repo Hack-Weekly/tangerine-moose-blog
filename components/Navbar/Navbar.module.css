@@ -67,4 +67,5 @@
   border: 2px solid rgb(var(--foreground-rgb));
   padding: 0.25rem 1rem;
   border-radius: 0.25rem;
+  font-size: 1rem;
 }
