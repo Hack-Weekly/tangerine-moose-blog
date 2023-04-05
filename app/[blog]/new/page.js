@@ -40,7 +40,7 @@ const editorOptions = {
 let blogPost = {};
 const useCurrentUser = () => ({ name: useSearchParams().get("user") }); // `?user=TestUser` in URL to test author view
 const submitBlogPost = (name, title, slug, text) =>
-  (blogPost = { postId: text.length, authorUsername: name, title: title, slug: slug, text: text });
+  (blogPost = { postId: text.length, authorUsername: name, title: title, slug: `${slug}-2`, text: text });
 // end mock
 
 const NewBlogPost = () => {
@@ -53,9 +53,9 @@ const NewBlogPost = () => {
 
   const handleSubmit = () => {
     const slug = getSlugFromTitle(title);
-    submitBlogPost(authorUsername, title, slug, text);
-    console.log("blogPost: ", blogPost);
-    router.push(`/${authorUsername}/${slug}`);
+    const response = submitBlogPost(authorUsername, title, slug, text);
+    console.log("response: ", response);
+    router.push(`/${authorUsername}/${response.slug}`);
   };
 
   return (
