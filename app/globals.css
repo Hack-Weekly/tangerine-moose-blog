@@ -183,3 +183,22 @@ sup {
   line-height: 0;
 }
 /* sets superscript and subscript text so that it doesn't throw off leading for elements in which they are included */
+
+iframe,
+img,
+input,
+video,
+select,
+textarea {
+  height: auto;
+  max-width: 100%;
+}
+
+audio,
+canvas,
+iframe,
+img,
+svg,
+video {
+  vertical-align: middle;
+}
