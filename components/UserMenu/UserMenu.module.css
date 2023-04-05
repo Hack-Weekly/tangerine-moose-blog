@@ -26,3 +26,9 @@
   display: block;
   text-decoration: none;
 }
+
+.email {
+  font-weight: 400;
+  opacity: 0.5;
+  font-size: 0.875rem;
+}
