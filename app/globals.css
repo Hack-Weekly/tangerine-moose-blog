@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Teko&display=swap");
 :root {
   --max-width: 1100px;
   --border-radius: 12px;
@@ -57,6 +59,8 @@ body {
   min-height: 100%;
   color: rgb(var(--foreground-rgb));
   background-color: rgb(var(--background-end-rgb));
+	font-family: 'Roboto';
+	font-size: 62.5%;
 }
 
 /* sets the body height of the browser, so that backgrounds and div heights work correctly. Color and background will almost certainly be altered; they are just placeholders */
@@ -88,6 +92,11 @@ video {
 
 h1 {
   font-size: 1.4rem;
+}
+
+h2 {
+	/* font-size: 1.2rem; */
+	font-family: 'Teko';
 }
 /* begins to set up font sizes relative to base rem – h1 has been used as an example */
 
@@ -183,22 +192,3 @@ sup {
   line-height: 0;
 }
 /* sets superscript and subscript text so that it doesn't throw off leading for elements in which they are included */
-
-iframe,
-img,
-input,
-video,
-select,
-textarea {
-  height: auto;
-  max-width: 100%;
-}
-
-audio,
-canvas,
-iframe,
-img,
-svg,
-video {
-  vertical-align: middle;
-}

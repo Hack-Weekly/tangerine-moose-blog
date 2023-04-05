@@ -1,5 +1,5 @@
 # Tangerine Moose Blog App
-# Test
+
 ## How to run locally
 
 1. Pull the repository

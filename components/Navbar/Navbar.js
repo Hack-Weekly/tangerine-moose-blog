@@ -5,11 +5,12 @@ import Link from "next/link";
 
 import Avatar from "@/components/Avatar/Avatar";
 import UserMenu from "@/components/UserMenu/UserMenu";
-import { useAuth } from "@/providers/AuthProvider";
+import users from "@/data/users";
 import styles from "./Navbar.module.css";
 
 export default function Navbar() {
-  const { user, loading, signIn } = useAuth();
+  // TODO: Get the current user from the session
+  const user = users[9];
   const [showDropdown, setShowDropdown] = useState(false);
   const dropdown = useRef(null);
 
@@ -38,24 +39,19 @@ export default function Navbar() {
             </Link>
           </div>
           <div className={styles.menu}>
-            {loading && <Avatar loading />}
-            {!loading && !user && (
-              <button onClick={signIn} className={styles.login}>
-                Login
+            <Link href={"/login"} className={styles.login}>
+              Login
+            </Link>
+            <div className={styles.dropdown} ref={dropdown}>
+              <button className={styles.button} type={"button"} onClick={() => setShowDropdown(true)}>
+                <Avatar avatar={user.avatar} name={user.name} />
               </button>
-            )}
-            {!loading && user && (
-              <div className={styles.dropdown} ref={dropdown}>
-                <button className={styles.button} type={"button"} onClick={() => setShowDropdown(true)}>
-                  <Avatar avatar={user.photoURL} name={user.displayName} />
-                </button>
-                {showDropdown && (
-                  <div className={styles.dropdownMenu}>
-                    <UserMenu user={user} />
-                  </div>
-                )}
-              </div>
-            )}
+              {showDropdown && (
+                <div className={styles.dropdownMenu}>
+                  <UserMenu user={user} />
+                </div>
+              )}
+            </div>
           </div>
         </nav>
       </div>

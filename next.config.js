@@ -7,7 +7,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "**.googleusercontent.com",
+        hostname: "robohash.org",
       },
     ],
   },

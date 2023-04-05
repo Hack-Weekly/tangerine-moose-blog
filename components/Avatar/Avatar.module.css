@@ -5,19 +5,3 @@
   height: 40px;
   overflow: hidden;
 }
-
-.loading {
-  height: 100%;
-  width: 100%;
-  background: var(--primary-glow);
-  animation: rotate 1s linear infinite;
-}
-
-@keyframes rotate {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}

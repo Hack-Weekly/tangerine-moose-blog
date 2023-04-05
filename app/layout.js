@@ -2,7 +2,6 @@ import "./globals.css";
 import { Cabin } from "next/font/google";
 
 import Navbar from "@/components/Navbar/Navbar";
-import { AuthProvider } from "@/providers/AuthProvider";
 
 export const metadata = {
   title: "Tangerine Moose Blog App",
@@ -17,10 +16,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={cabin.className}>
-        <AuthProvider>
-          <Navbar />
-          {children}
-        </AuthProvider>
+        <Navbar />
+        {children}
       </body>
     </html>
   );
