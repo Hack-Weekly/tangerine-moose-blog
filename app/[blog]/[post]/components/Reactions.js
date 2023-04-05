@@ -2,8 +2,7 @@ import { useState } from "react";
 import EmojiPicker from "emoji-picker-react";
 import { VscReactions as AddReactionIcon } from "react-icons/vsc";
 
-import TextButton from "./TextButton";
-import styles from "./page.module.css";
+import styles from "./Reactions.module.css";
 
 const Reactions = ({ reactions }) => {
   const addReaction = (emoji) => (emoji in reactions ? (reactions[emoji] += 1) : (reactions[emoji] = 1));
@@ -18,11 +17,11 @@ const Reactions = ({ reactions }) => {
         </div>
       ))}
       <div key="new-react">
-        <TextButton onClick={togglePicker}>
+        <a onClick={togglePicker}>
           <AddReactionIcon size={22} />
-        </TextButton>
+        </a>
         {showPicker && (
-          // TODO: fix weird positioning/size
+          // TODO: fix weird positioning/size of emoji select window
           <div style={{ position: "absolute" }}>
             <EmojiPicker
               theme="auto"

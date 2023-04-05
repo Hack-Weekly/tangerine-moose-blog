@@ -12,6 +12,7 @@
 }
 
 .text {
+  width: 100%;
   background-color: rgb(var(--callout-rgb));
   border-radius: var(--border-radius);
   padding: 1rem;

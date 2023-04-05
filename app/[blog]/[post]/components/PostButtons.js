@@ -1,9 +1,8 @@
 import { useState } from "react";
 
-import TextButton from "./TextButton";
-import styles from "./page.module.css";
+import styles from "./PostButtons.module.css";
 
-const PostButtons = ({ slug, isAuthor }) => {
+const PostButtons = ({ slug, isAuthor, replyCount, onReply }) => {
   const [saved, setSaved] = useState(false);
   const toggleSavePost = () => setSaved(!saved);
   const hoverSave = ({ target: saveButton }) => saved && (saveButton.innerHTML = "unsave");
@@ -17,19 +16,19 @@ const PostButtons = ({ slug, isAuthor }) => {
 
   return (
     <div className={styles.buttons}>
-      <a href={slug}>3 comments</a>
-      <TextButton onClick={() => {}}>reply</TextButton>
-      <TextButton onClick={() => {}}>share</TextButton>
-      <TextButton onClick={toggleSavePost} onMouseOver={hoverSave} onMouseLeave={leaveSave}>
+      <a href={slug}>{`${replyCount} comments`}</a>
+      <a onClick={onReply}>reply</a>
+      <a onClick={() => {}}>share</a>
+      <a onClick={toggleSavePost} onMouseOver={hoverSave} onMouseLeave={leaveSave}>
         {saved ? "saved" : "save"}
-      </TextButton>
+      </a>
       {isAuthor ? (
         <>
-          <TextButton onClick={() => {}}>edit</TextButton>
-          <TextButton onClick={() => {}}>delete</TextButton>
+          <a onClick={() => {}}>edit</a>
+          <a onClick={() => {}}>delete</a>
         </>
       ) : (
-        <TextButton onClick={report}>report</TextButton>
+        <a onClick={report}>report</a>
       )}
     </div>
   );
