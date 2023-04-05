@@ -2,15 +2,10 @@ import Image from "next/image";
 
 import styles from "./Avatar.module.css";
 
-export default function Avatar({ avatar, name, loading = false }) {
-  // TODO: Upload a default avatar image
+export default function Avatar({ avatar, name }) {
   return (
     <div className={styles.root}>
-      {loading ? (
-        <div className={styles.loading}></div>
-      ) : (
-        <Image src={avatar || "/default_avatar.svg"} alt={name || ""} width={40} height={40} />
-      )}
+      <Image src={avatar} alt={name} width={40} height={40} />
     </div>
   );
 }

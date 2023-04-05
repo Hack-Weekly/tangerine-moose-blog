@@ -1,7 +1,47 @@
-.container {
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
-  margin-left: auto;
-  margin-right: auto;
-  max-width: var(--max-width);
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    margin: auto;
+}
+
+/* alter first blog post */
+.blog:first-child{
+    width: 100%;
+    margin-top: 20px;
+    max-width: 66%;
+    flex-grow: 2;
+    padding: 0 20px;
+}
+/* alter entire blog post div */
+.blogs{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+/* alter all blog posts */
+.blog{
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    flex: 1 0 calc(33.33% - 1rem);
+    align-items: center;
+    margin: .5rem;
+    max-width: 50%;
+    max-height: 50%;
+    padding: 0 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    position: relative;
+}
+/* For fade effect on each blog post */
+.blog::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100px;
+    background: linear-gradient(transparent, #fff);
 }

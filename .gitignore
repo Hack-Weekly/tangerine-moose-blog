@@ -47,3 +47,6 @@ firestore.indexes.json
 firestore.rules
 storage.rules
 ui-debug.log
+
+# Extra
+.git_old/
