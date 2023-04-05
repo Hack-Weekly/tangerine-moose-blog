@@ -1,0 +1,56 @@
+.container {
+  background-color: rgb(var(--background-end-rgb));
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+}
+
+.input {
+  margin: 1rem;
+  border-radius: var(--border-radius);
+  background-color: rgb(var(--background-end-rgb));
+  color: rgb(var(--foreground-rgb));
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.blogInput {
+  background-color: rgb(var(--background-end-rgb));
+  color: rgb(var(--foreground-rgb));
+  border: 1px solid rgb(var(--callout-border-rgb));
+  border-radius: var(--border-radius);
+  padding: 0.5rem 1rem;
+  margin-left: 1rem;
+  font-size: medium;
+}
+
+.submit {
+  width: fit-content;
+  padding: 0.5rem 1rem;
+  margin: 0 1rem;
+  border-radius: var(--border-radius);
+  border: 2px solid rgb(var(--foreground-rgb));
+}
+
+.submit:hover {
+  background-color: rgb(var(--callout-rgb));
+}
+
+.preview {
+  padding: 1rem;
+}
+
+.text {
+  width: 100%;
+  background-color: rgb(var(--callout-rgb));
+  border-radius: var(--border-radius);
+  padding: 1rem;
+  overflow-x: scroll;
+}
+
+.text a {
+  cursor: pointer;
+}
