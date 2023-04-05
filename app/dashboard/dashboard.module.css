@@ -1,28 +1,35 @@
+.heading {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .container {
   align-items: center;
 }
 
 .chart {
   font-size: 1rem;
-  font-family: monospace;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .stats {
   align-items: center;
-  margin-top: 100px;
   height: 100px;
   display: flex;
-  background-color: rgb(255, 255, 255);
 }
 
 .stat_box {
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-  padding: 5px;
-  border-style: solid;
-  box-shadow: 1px black;
+  text-align: center;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  padding: 10px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   border-radius: 10px;
   width: auto;
   margin: 50px;
   height: auto;
+
   background-color: rgb(255, 255, 255);
 }

@@ -5,6 +5,7 @@ export default function DashboardPage() {
   return (
     <>
       <div className={styles.container}>
+        <h1 className={styles.heading}>Dashboard</h1>
         <div className={styles.stats}>
           <div className={styles.stat_box}>Total Posts: {0}</div>
           <div className={styles.stat_box}>Total Views: {0}</div>
