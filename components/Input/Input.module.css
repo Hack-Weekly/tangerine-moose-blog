@@ -1,0 +1,15 @@
+.input {
+  font-family: var(--font-moos);
+  background-color: rgb(var(--background-start-rgb));
+  color: rgb(var(--foreground-rgb));
+  border: none;
+  border-radius: var(--border-radius);
+  padding: 0.5rem 1rem;
+  background-repeat: no-repeat;
+  background-position: left 0.1rem center;
+  background-size: auto 45%;
+}
+
+.input::placeholder {
+  text-indent: 0.3rem;
+}
