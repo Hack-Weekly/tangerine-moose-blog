@@ -5,9 +5,8 @@
     "Ubuntu Monospace", "Source Code Pro", "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
   --font-moos: Georgia, "Times New Roman", Times, serif;
   --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
+  --background-start-rgb: 242, 245, 245;
   --background-end-rgb: 255, 255, 255;
-
   --background-tan: #e3a569;
 
   --primary-glow: conic-gradient(
@@ -35,8 +34,8 @@
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
-
     --background-tan: #f1a56e;
+
     --primary-glow: radial-gradient(rgba(1, 65, 255, 0.4), rgba(1, 65, 255, 0));
     --secondary-glow: linear-gradient(to bottom right, rgba(1, 65, 255, 0), rgba(1, 65, 255, 0), rgba(1, 65, 255, 0.3));
 

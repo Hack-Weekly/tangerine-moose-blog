@@ -4,7 +4,11 @@
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   border-bottom: 1px solid rgb(var(--foreground-rgb));
-  background-color: rgb(var(--background-start-rgb));
+  background-color: rgb(var(--background-end-rgb));
+}
+
+.root.scrolled {
+  box-shadow: 0 1px 2px 0 rgb(var(--foreground-rgb)), 0 1px 3px 1px rgb(var(--foreground-rgb));
 }
 
 .container {
@@ -89,7 +93,7 @@
   .pages {
     position: absolute;
     top: 2rem;
-    right: 6rem;
+    right: 8rem;
     border: none;
     padding: 0;
     gap: 3rem;

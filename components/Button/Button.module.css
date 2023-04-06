@@ -1,0 +1,19 @@
+.button {
+  font-family: var(--font-moos);
+  text-align: center;
+  background-color: rgb(var(--background-end-rgb));
+  color: rgb(var(--foreground-rgb));
+  border: 2px solid rgb(var(--foreground-rgb));
+  border-radius: 7px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: rgb(var(--callout-rgb));
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
