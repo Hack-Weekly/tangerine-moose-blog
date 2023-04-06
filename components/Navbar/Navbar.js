@@ -1,11 +1,13 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 
 import Avatar from "@/components/Avatar/Avatar";
 import UserMenu from "@/components/UserMenu/UserMenu";
 import { useAuth } from "@/providers/AuthProvider";
+import Moose from "../../public/moose.png";
 import styles from "./Navbar.module.css";
 
 export default function Navbar() {
@@ -30,11 +32,9 @@ export default function Navbar() {
       <div className={styles.container}>
         <nav className={styles.nav}>
           <div className={styles.menu}>
+            <Image src={Moose} alt="Moos logo" width={35} height={35} />
             <Link href="/" className={styles.link}>
-              Logo
-            </Link>
-            <Link href="/" className={styles.link}>
-              Home
+              Moos
             </Link>
           </div>
           <div className={styles.menu}>
@@ -58,6 +58,20 @@ export default function Navbar() {
             )}
           </div>
         </nav>
+      </div>
+      <div className={styles.pages}>
+        <Link href="/about" className={styles.link}>
+          About
+        </Link>
+        <Link href="/new" className={styles.link}>
+          Blog
+        </Link>
+        <Link href="/" className={styles.link}>
+          Contact
+        </Link>
+        <Link href="/" className={styles.link}>
+          Sign in
+        </Link>
       </div>
     </div>
   );

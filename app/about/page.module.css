@@ -1,0 +1,134 @@
+.container {
+  background-color: rgb(var(--background-end-rgb));
+  margin: 0 auto;
+
+  --h1-size: 30px;
+  --h1-media: 6.3vw;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+}
+
+.title h1 {
+  font-family: var(--font-moos);
+  letter-spacing: -0.25vw;
+  font-size: var(--h1-size);
+  font-weight: 200;
+  padding: 3 rem 1.5rem 1.5rem;
+  max-width: 222px;
+  text-align: center;
+}
+
+.title span {
+  font-weight: 600;
+}
+
+@media screen and (min-width: 600px) {
+  .title {
+    border-bottom: 1px solid rgb(var(--foreground-rgb));
+    padding: 3rem 1.5rem;
+    display: block;
+  }
+
+  .title h1 {
+    white-space: nowrap;
+    font-size: var(--h1-media);
+    max-width: none;
+  }
+}
+
+.about {
+  display: flex;
+  flex-direction: column-reverse;
+  border-bottom: 1px solid rgb(var(--foreground-rgb));
+}
+
+.aboutUs {
+  padding: 1.5rem 1.5rem;
+}
+
+.tangerineBox {
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgb(var(--foreground-rgb));
+  display: flex;
+  justify-content: center;
+}
+
+.tangerine {
+  width: calc(100% - 5rem);
+  max-width: 400px;
+  padding: 0.5rem 0;
+}
+
+@media screen and (min-width: 600px) {
+  .about {
+    flex-direction: row;
+  }
+
+  .aboutUs {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid rgb(var(--foreground-rgb));
+  }
+
+  .tangerineBox {
+    width: 45%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: none;
+  }
+}
+
+.team {
+  background-color: var(--background-tan);
+  border-bottom: 1px solid rgb(var(--foreground-rgb));
+  padding: 1.5rem 0;
+}
+
+.team h2 {
+  font-family: var(--font-moos);
+  font-size: var(--h1-size);
+  margin-top: 0;
+  padding: 0 1.5rem;
+}
+
+.teamP {
+  border-left: 5rem;
+  padding: 0 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+.membersContainer {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.teamMember {
+  padding: 1rem 1rem;
+}
+
+.memberAvatar {
+  margin-right: 1rem;
+}
+
+@media screen and (min-width: 600px) {
+  .team {
+    padding: 4rem 0;
+  }
+  .team h2 {
+    font-size: var(--h1-media);
+    text-align: center;
+    margin-bottom: 0;
+  }
+  .teamP {
+    padding: 0 10rem;
+    text-align: center;
+  }
+  .membersContainer {
+    justify-content: center;
+  }
+}
