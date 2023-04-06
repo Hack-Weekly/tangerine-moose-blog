@@ -13,6 +13,7 @@ import styles from "./Navbar.module.css";
 export default function Navbar() {
   const { user, loading, signIn } = useAuth();
   const [showDropdown, setShowDropdown] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const dropdown = useRef(null);
 
   useEffect(() => {
@@ -27,8 +28,22 @@ export default function Navbar() {
     };
   }, []);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.pageYOffset > 0) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
-    <div className={styles.root}>
+    <div className={`${styles.root} ${isScrolled && styles.scrolled}`}>
       <div className={styles.container}>
         <nav className={styles.nav}>
           <div className={styles.menu}>
