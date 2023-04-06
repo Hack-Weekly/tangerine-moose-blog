@@ -1,10 +1,22 @@
 import Image from "next/image";
 
-import Tangerine from "./drawn.jpg";
-import kid from "./kid.png";
+import Tangerine from "../../public/drawn.jpg";
+import kid from "../../public/kid.png";
 import styles from "./page.module.css";
 
 export default function about() {
+  const tangerine_team = () => {
+    const usernames = ["thebeatlesphan", "ba", "hmansour", "JoseAE", "Kahlin", "Manye (Manny)", "7ordan", "krod518"];
+    return usernames.map((user) => (
+      <div key={user} className={styles.members}>
+        <div className={styles.teamMember}>
+          <Image src={kid} alt="kid avatar" width={25} />
+          {user}
+        </div>
+      </div>
+    ));
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.title}>
@@ -41,69 +53,13 @@ export default function about() {
         </div>
       </div>
       <div className={styles.team}>
-        <h2>Fresh and Juicy</h2>
+        <h2>Meet The Team</h2>
         <p className={styles.teamP}>
           Our platform is open to anyone who wants to write, whether you&#39;re a thought-leader, journalist, expert, or
           simply an individual with a unique perspective. You&#39;ll discover content from independent writers around
           the world, as well as stories handpicked by our team of editors and contributions from leading authors.
         </p>
-        <div className={styles.membersContainer}>
-          <div className={styles.members}>
-            <div className={styles.teamMember}>
-              <Image src={kid} alt="kid avatar" width={25} className={styles.memberAvatar} />
-              thebeatlesphan
-            </div>
-          </div>
-          <div className={styles.members}>
-            <div className={styles.teamMember}>
-              <Image src={kid} alt="kid avatar" width={25} className={styles.memberAvatar} />
-              ba
-            </div>
-          </div>
-          <div className={styles.members}>
-            <div className={styles.teamMember}>
-              <Image src={kid} alt="kid avatar" width={25} className={styles.memberAvatar} />
-              hmansour
-            </div>
-          </div>
-          <div className={styles.members}>
-            <div className={styles.teamMember}>
-              <Image src={kid} alt="kid avatar" width={25} className={styles.memberAvatar} />
-              Joe B
-            </div>
-          </div>
-          <div className={styles.members}>
-            <div className={styles.teamMember}>
-              <Image src={kid} alt="kid avatar" width={25} className={styles.memberAvatar} />
-              7ordan
-            </div>
-          </div>
-          <div className={styles.members}>
-            <div className={styles.teamMember}>
-              <Image src={kid} alt="kid avatar" width={25} className={styles.memberAvatar} />
-              JoseAE
-            </div>
-          </div>
-          <div className={styles.members}>
-            <div className={styles.teamMember}>
-              <Image src={kid} alt="kid avatar" width={25} className={styles.memberAvatar} />
-              Krod518
-            </div>
-          </div>
-          <div className={styles.members}>
-            <div className={styles.teamMember}>
-              <Image src={kid} alt="kid avatar" width={25} className={styles.memberAvatar} />
-              Manye (Manny)
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className={styles.reviews}>
-        <h2>An Active International Community</h2>
-        <div className={styles.carouselReview}>
-          <h3>Anonymous</h3>
-          <p>&quot;I love getting my &apos;Moos&apos; here&quot; hahah hihi hoho</p>
-        </div>
+        <div className={styles.membersContainer}>{tangerine_team()}</div>
       </div>
     </div>
   );

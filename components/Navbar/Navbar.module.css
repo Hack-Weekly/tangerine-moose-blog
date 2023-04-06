@@ -1,11 +1,14 @@
 .root {
+  position: sticky;
+  top: 0;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid rgb(var(--foreground-rgb));
+  background-color: rgb(var(--background-start-rgb));
 }
 
 .container {
-  padding: 0.7rem 1.5rem;
+  padding: 0.8rem 1.5rem;
   margin-left: auto;
   margin-right: auto;
 }
@@ -69,4 +72,26 @@
   padding: 0.25rem 1rem;
   border-radius: 0.25rem;
   font-size: 1rem;
+}
+
+.pages {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid rgb(var(--foreground-rgb));
+  padding: 0.5rem 1.5rem 0;
+}
+
+.pages p {
+  margin: 0;
+}
+
+@media screen and (min-width: 765px) {
+  .pages {
+    position: absolute;
+    top: 2rem;
+    right: 6rem;
+    border: none;
+    padding: 0;
+    gap: 3rem;
+  }
 }

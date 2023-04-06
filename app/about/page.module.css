@@ -16,9 +16,7 @@
   letter-spacing: -0.25vw;
   font-size: var(--h1-size);
   font-weight: 200;
-  padding: 0 1.5rem;
-  padding-top: 3rem;
-  padding-bottom: 1.5rem;
+  padding: 3 rem 1.5rem 1.5rem;
   max-width: 222px;
   text-align: center;
 }
@@ -29,7 +27,7 @@
 
 @media screen and (min-width: 600px) {
   .title {
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid rgb(var(--foreground-rgb));
     padding: 3rem 1.5rem;
     display: block;
   }
@@ -44,7 +42,7 @@
 .about {
   display: flex;
   flex-direction: column-reverse;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid rgb(var(--foreground-rgb));
 }
 
 .aboutUs {
@@ -53,7 +51,7 @@
 
 .tangerineBox {
   padding-bottom: 1.5rem;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid rgb(var(--foreground-rgb));
   display: flex;
   justify-content: center;
 }
@@ -73,7 +71,7 @@
     width: 50%;
     display: flex;
     flex-direction: column;
-    border-right: 1px solid black;
+    border-right: 1px solid rgb(var(--foreground-rgb));
   }
 
   .tangerineBox {
@@ -86,12 +84,13 @@
 }
 
 .team {
-  background-color: orange;
-  border-bottom: 1px solid black;
+  background-color: var(--background-tan);
+  border-bottom: 1px solid rgb(var(--foreground-rgb));
   padding: 1.5rem 0;
 }
 
 .team h2 {
+  font-family: var(--font-moos);
   font-size: var(--h1-size);
   margin-top: 0;
   padding: 0 1.5rem;
@@ -132,12 +131,4 @@
   .membersContainer {
     justify-content: center;
   }
-}
-
-.reviews h2 {
-  text-align: center;
-}
-
-.reviews {
-  padding: 0 1.5rem;
 }
