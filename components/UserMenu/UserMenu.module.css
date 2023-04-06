@@ -1,7 +1,8 @@
 .root {
-  color: rgb(var(--background-end-rgb));
-  background: rgb(var(--foreground-rgb));
+  color: rgb(var(--foreground-rgb));
+  background: rgb(var(--background-end-rgb));
   border-radius: var(--border-radius);
+  border: 1px solid rgb(var(--card-border-rgb));
   padding: 0;
   font-size: 1rem;
   overflow: hidden;
@@ -12,7 +13,7 @@
 
 .header {
   padding: 1rem;
-  border-bottom: 1px solid #e2e8f0;
+  border-bottom: 1px solid rgb(var(--card-rgb));
   font-weight: 600;
 }
 
@@ -27,8 +28,13 @@
   text-decoration: none;
 }
 
+.link:hover,
+.link:focus {
+  text-decoration: underline dotted;
+}
+
 .email {
   font-weight: 400;
-  opacity: 0.5;
+  opacity: 0.8;
   font-size: 0.875rem;
 }

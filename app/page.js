@@ -42,7 +42,7 @@ export default async function Home() {
                 paddingBottom: "1rem",
               }}
             >
-              <code>{JSON.stringify(blog)}</code>
+              <code>{JSON.stringify(blog, null, 2)}</code>
             </pre>
           </div>
         );

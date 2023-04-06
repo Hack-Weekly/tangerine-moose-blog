@@ -9,6 +9,8 @@
 
 .root.scrolled {
   box-shadow: 0 1px 2px 0 rgb(var(--foreground-rgb)), 0 1px 3px 1px rgb(var(--foreground-rgb));
+  background-color: rgba(var(--background-start-rgb), 0.8);
+  backdrop-filter: blur(var(--border-radius));
 }
 
 .container {

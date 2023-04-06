@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
 
 import styles from "./page.module.css";
 
@@ -19,7 +19,7 @@ const useCreateBlog = () => {
         body: JSON.stringify(formData),
       });
       const data = await response.json();
-      console.log("datafetchdata: ", data);
+      console.log("data in fetchData: ", data);
       setData(data);
       setStatus("loaded");
     } catch (err) {
@@ -34,7 +34,7 @@ const useCreateBlog = () => {
 const NewBlog = () => {
   const [blogName, setBlogName] = useState("");
   const [fetchData, status, data] = useCreateBlog();
-  const router = useRouter();
+  // const router = useRouter();
 
   const handleSubmit = () => {
     fetchData({ blog: blogName, author: "TestUser", title: blogName });
@@ -63,9 +63,8 @@ const NewBlog = () => {
     case "loading":
       return <div>LOADING ...</div>;
     case "loaded":
-      console.log("data loaded", data);
-      router.push(`/${data.blog}`);
-      break;
+      console.log("data once loaded", data);
+      redirect(`/${data.blog}`);
     case "error":
       return <div>ERROR, RETRY</div>;
     default:
