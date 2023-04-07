@@ -11,6 +11,7 @@ import "@uiw/react-md-editor/markdown-editor.css";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
 
+import Input from "@/components/Input/Input";
 import styles from "./page.module.css";
 
 const MDEditor = dynamic(() => import("@uiw/react-md-editor"), { ssr: false });
@@ -63,7 +64,7 @@ const NewBlogPost = () => {
       <div className={styles.input}>
         <div>
           <label htmlFor="titleInput">Title </label>
-          <input
+          <Input
             required
             type="text"
             className={styles.titleInput}
