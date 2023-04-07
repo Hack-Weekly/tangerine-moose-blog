@@ -1,0 +1,76 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+}
+
+.banner {
+  background-color: var(--background-tan);
+  background-image: url("../../public/moose.png");
+  height: 32rem;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.article {
+  max-width: var(--max-width);
+}
+
+.title {
+  font-family: var(--font-moos);
+  font-size: 2rem;
+  text-align: center;
+}
+
+.author {
+  font-family: var(--font-moos);
+  text-align: center;
+  color: rgb(var(--middleground-rgb));
+}
+
+.tags {
+  font-family: var(--font-moos);
+  text-align: center;
+  color: rgb(var(--middleground-rgb));
+}
+
+.content p {
+  padding: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.authorInfoContainer {
+  margin: 3rem 0;
+}
+
+.authorInfoContainer h3 {
+  color: rgb(var(--middleground-rgb));
+  font-size: 1rem;
+  margin-bottom: 0;
+}
+
+.authorInfo {
+  display: flex;
+}
+
+.authorAvatar {
+  padding: 0.5rem;
+  margin-right: 2rem;
+}
+
+.authorName {
+  font-family: var(--font-moos);
+  font-size: 1.5rem;
+}
+
+.authorHandle {
+  font-family: var(--font-moos);
+}
+
+.authorDescription {
+  max-width: calc(var(--max-width) / 2);
+  padding-right: 1.5rem;
+}

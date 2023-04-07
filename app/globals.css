@@ -5,6 +5,7 @@
     "Ubuntu Monospace", "Source Code Pro", "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
   --font-moos: Georgia, "Times New Roman", Times, serif;
   --foreground-rgb: 0, 0, 0;
+  --middleground-rgb: 103, 106, 110;
   --background-start-rgb: 242, 245, 245;
   --background-end-rgb: 255, 255, 255;
   --background-tan: #e3a569;
@@ -32,6 +33,7 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
+    --middleground-rgb: 163, 165, 168;
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
     --background-tan: #f1a56e;

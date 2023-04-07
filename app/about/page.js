@@ -6,7 +6,17 @@ import styles from "./page.module.css";
 
 export default function about() {
   const tangerine_team = () => {
-    const usernames = ["thebeatlesphan", "ba", "hmansour", "JoseAE", "Kahlin", "Manye (Manny)", "7ordan", "krod518"];
+    const usernames = [
+      "thebeatlesphan",
+      "ba",
+      "hmansour",
+      "Joe B",
+      "JoseAE",
+      "Kahlin",
+      "Manye (Manny)",
+      "7ordan",
+      "krod518",
+    ];
     return usernames.map((user) => (
       <div key={user} className={styles.members}>
         <div className={styles.teamMember}>
