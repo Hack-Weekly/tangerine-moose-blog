@@ -4,7 +4,7 @@
   background-color: rgb(var(--background-end-rgb));
   color: rgb(var(--foreground-rgb));
   border: 2px solid rgb(var(--foreground-rgb));
-  border-radius: 7px;
+  border-radius: var(--border-radius);
   padding: 0.5rem 1rem;
   cursor: pointer;
 }
