@@ -11,12 +11,18 @@
   max-width: calc(var(--max-width) / 3);
 }
 
-.username {
+.displayName {
   font-size: 2rem;
   letter-spacing: 0.3rem;
 }
 
-.handle {
+.blog {
+  position: relative;
+  bottom: -1.2rem;
+  color: rgb(var(--middleground-rgb));
+}
+
+.email {
   position: relative;
   top: -0.3rem;
   color: rgb(var(--middleground-rgb));
