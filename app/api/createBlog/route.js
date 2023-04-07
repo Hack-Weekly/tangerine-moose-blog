@@ -1,26 +1,51 @@
-// Pulling mock mongodb
+import { addDoc, collection, doc, getDoc, getDocs, query, updateDoc, where } from "firebase/firestore";
 
-import mockCollection from "@/data/mockBlogs";
+import { firestore as db } from "@/firebase/firebase";
 
 export async function POST(request) {
-  //console.log(request);
-  const data = await request.json();
+  const { uid, blogName } = await request.json();
+  const userRef = doc(db, "users", uid);
+  const userSnap = await getDoc(userRef);
 
-  console.log(data);
-  // TODO: update _id with actual _id being used in database
-  const _id = mockCollection.length + 1;
+  if (userSnap.exists()) {
+    const user = userSnap.data();
+    console.log("user: ", user);
 
-  // // TODO: update newBlog to actual attributes
-  const newBlog = {
-    _id,
-    title: data.title,
-    author: data.author,
-    blog: data.blog,
-    publishedDate: new Date().toISOString(),
-  };
+    // check if user already has a blog
+    if (user.blog) {
+      return new Response(JSON.stringify({ status: "error", message: "user already has blog" }));
+    } else {
+      const q = query(collection(db, "blogs"), where("blogName", "==", blogName));
 
-  // // TODO: get connection to MongoDb and insert new document
-  mockCollection.push(newBlog);
+      const querySnapshot = await getDocs(q);
+      console.log("querySnapshot.empty: ", querySnapshot.empty);
+      // check if blog by that name already exists
+      if (querySnapshot.empty) {
+        // generate blogId
+        const blogId = doc(collection(db, "blogs")).id;
+        console.log("blogId: ", blogId);
 
-  return new Response(JSON.stringify(newBlog));
+        // add new blog to blogs collection
+        await addDoc(collection(db, "blogs"), {
+          id: blogId,
+          blogName: blogName,
+          authorName: user.displayName,
+          dateCreated: new Date().toISOString(),
+        });
+
+        // add name of new blog to user
+        await updateDoc(userRef, {
+          blog: blogName,
+        });
+
+        return new Response(JSON.stringify({ status: "success", blogId: blogId }));
+      } else {
+        // return error if blogName is already taken
+        return new Response(JSON.stringify({ status: "error", message: "blog already exists" }));
+      }
+    }
+  } else {
+    console.log("user doesn't exist");
+    return new Response(JSON.stringify({ status: "error", message: "user not found" }));
+  }
 }

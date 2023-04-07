@@ -14,7 +14,7 @@ export default function UserMenu({ user, toggleDropdown }) {
         <div className={styles.email}>{user.email}</div>
       </div>
       <div className={styles.body}>
-        {user.blogName ? (
+        {user.blog ? (
           <Link className={styles.link} href={`/${user.blogName}/new`}>
             <NavButton>Write a Post</NavButton>
           </Link>
