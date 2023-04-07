@@ -1,0 +1,54 @@
+.root {
+  background-color: var(--background-tan);
+  padding: 0 1.5rem 3rem;
+}
+
+.blog {
+  background-color: rgb(var(--background-end-rgb));
+  font-family: var(--font-moos);
+  padding: 2.5rem;
+  max-width: calc(var(--max-width) / 3);
+}
+
+.authorName {
+  color: rgb(var(--middleground-rgb));
+}
+
+.blogName {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.created {
+  color: rgb(var(--middleground-rgb));
+  font-size: 0.8rem;
+  padding: 0.4rem 0;
+}
+
+.description {
+  font-family: var(--font-mono);
+}
+
+.author {
+  display: none;
+}
+
+@media screen and (min-width: 768px) {
+  .author {
+    display: block;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .root {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .blog {
+    max-width: calc(var(--max-width) / 2);
+  }
+
+  .author {
+    align-self: center;
+  }
+}
