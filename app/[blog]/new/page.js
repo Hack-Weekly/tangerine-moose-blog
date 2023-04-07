@@ -12,6 +12,7 @@ import dynamic from "next/dynamic";
 
 import { useAuth } from "@/providers/AuthProvider";
 import useCreateBlogPost from "./hooks/useCreateBlogPost";
+import Input from "@/components/Input/Input";
 import styles from "./page.module.css";
 
 const MDEditor = dynamic(() => import("@uiw/react-md-editor"), { ssr: false });
@@ -48,50 +49,34 @@ const NewBlogPost = () => {
     fetchData({ blogName: user?.blog || "TestBlog", title, slug, text });
   };
 
-  if (loading) {
-    return <div>LOADING ...</div>;
-  } else if (user) {
-    switch (status) {
-      case "not_started":
-        return (
-          <div className={styles.container}>
-            <div className={styles.input}>
-              <div>
-                <label htmlFor="titleInput">Title </label>
-                <input
-                  required
-                  type="text"
-                  className={styles.titleInput}
-                  name="titleInput"
-                  value={title}
-                  onChange={(e) => setTitle(e.target.value)}
-                />
-              </div>
-              <MDEditor value={text} onChange={setText} {...editorOptions} />
-            </div>
-            <button className={styles.submit} type="submit" onClick={handleSubmit}>
-              post
-            </button>
-            {text && (
-              <div className={styles.preview}>
-                <div className={styles.text}>
-                  <Markdown value={text} />
-                </div>
-              </div>
-            )}
+  return (
+    <div className={styles.container}>
+      <div className={styles.input}>
+        <div>
+          <label htmlFor="titleInput">Title </label>
+          <input
+            required
+            type="text"
+            className={styles.titleInput}
+            name="titleInput"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+        </div>
+        <MDEditor value={text} onChange={setText} {...editorOptions} />
+      </div>
+      <button className={styles.submit} type="submit" onClick={handleSubmit}>
+        post
+      </button>
+      {text && (
+        <div className={styles.preview}>
+          <div className={styles.text}>
+            <Markdown value={text} />
           </div>
-        );
-      case "loading":
-        return <div>POSTING ...</div>;
-      case "loaded":
-        console.log("data once loaded", data);
-        redirect(`/${user.blog || "TestBlog"}/${data.postSlug}`);
-      case "error":
-        return <div>ERROR, RETRY</div>;
-      default:
-        break;
-    }
-  }
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default NewBlogPost;

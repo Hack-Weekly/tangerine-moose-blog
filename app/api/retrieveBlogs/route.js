@@ -1,11 +1,17 @@
-// Pulling mock mongodb
-import mockCollection from "@/data/mockBlogs";
+import { collection, getDocs } from "firebase/firestore";
+
+import { firestore as db } from "@/firebase/firebase";
 
 export async function GET(request) {
-  // TODO: get a connection to MongoDb and return from proper collection
-  const mockCursor = { toArray: () => Promise.resolve(mockCollection) };
-  const mockCollectionObject = { find: () => mockCursor };
-  const documents = await mockCollectionObject.find().toArray();
+  const querySnapshot = await getDocs(collection(db, "blogs"));
 
-  return new Response(JSON.stringify(documents));
+  // TODO: we are pulling all blogs for now
+  // TODO: may need to set up different endpoints for filters?
+  const blogs = [];
+  querySnapshot.forEach((doc) => {
+    const data = doc.data();
+    blogs.push(data.id, data.authorName, data.blogName, data.dateCreated);
+  });
+
+  return new Response(JSON.stringify({ status: "success", result: blogs }));
 }
