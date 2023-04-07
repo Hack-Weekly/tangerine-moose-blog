@@ -36,3 +36,7 @@
 .container a:hover {
   opacity: 70%;
 }
+
+.byline {
+  display: inline;
+}
