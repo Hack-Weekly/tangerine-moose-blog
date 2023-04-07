@@ -3,8 +3,9 @@ import Link from "next/link";
 import { useAuth } from "@/providers/AuthProvider";
 import styles from "./UserMenu.module.css";
 
-export default function UserMenu({ user }) {
+export default function UserMenu({ user, toggleDropdown }) {
   const { signOut } = useAuth();
+  const NavButton = ({ children }) => <div onClick={toggleDropdown}>{children}</div>;
 
   return (
     <div className={styles.root}>
@@ -13,12 +14,18 @@ export default function UserMenu({ user }) {
         <div className={styles.email}>{user.email}</div>
       </div>
       <div className={styles.body}>
-        <Link className={styles.link} href={"/create"}>
-          Write a Post
+        {user.blogName ? (
+          <Link className={styles.link} href={`/${user.blogName}/new`}>
+            <NavButton>Write a Post</NavButton>
+          </Link>
+        ) : (
+          <Link className={styles.link} href={`/new`}>
+            <NavButton>Create a Blog</NavButton>
+          </Link>
+        )}
+        <Link className={styles.link} href="/" onClick={signOut}>
+          <NavButton>Logout</NavButton>
         </Link>
-        <a className={styles.link} href={"#"} onClick={signOut} role={"button"}>
-          Logout
-        </a>
       </div>
     </div>
   );
