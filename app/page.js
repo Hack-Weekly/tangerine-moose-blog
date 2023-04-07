@@ -1,5 +1,6 @@
 import { getDocs, orderBy, query } from "firebase/firestore";
 
+import BlogCard from "@/components/BlogCard/BlogCard";
 import { Collections, getCollection } from "@/firebase/firestore";
 
 const fetchData = async () => {
@@ -44,6 +45,8 @@ export default async function Home() {
             >
               <code>{JSON.stringify(blog, null, 2)}</code>
             </pre>
+
+            <BlogCard />
           </div>
         );
       })}
