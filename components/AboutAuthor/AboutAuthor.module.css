@@ -1,0 +1,31 @@
+.root {
+  display: flex;
+}
+
+.avatar {
+  margin-right: 1rem;
+}
+
+.info {
+  font-family: var(--font-moos);
+  max-width: calc(var(--max-width) / 3);
+}
+
+.username {
+  font-size: 2rem;
+  letter-spacing: 0.3rem;
+}
+
+.handle {
+  position: relative;
+  top: -0.3rem;
+  color: rgb(var(--middleground-rgb));
+}
+
+.links {
+  text-align: right;
+}
+
+.link {
+  padding: 0 0.5rem;
+}
