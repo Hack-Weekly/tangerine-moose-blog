@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { redirect } from "next/navigation";
 
+import Button from "@/components/Button/Button";
 import { useAuth } from "@/providers/AuthProvider";
 import useCreateBlog from "./hooks/useCreateBlog";
 import styles from "./page.module.css";
@@ -32,9 +33,9 @@ const NewBlog = () => {
                 onChange={(e) => setBlogName(e.target.value)}
               />
             </div>
-            <button className={styles.submit} type="submit" onClick={handleSubmit}>
+            <Button className={styles.submit} type="submit" onClick={handleSubmit}>
               create
-            </button>
+            </Button>
           </div>
         );
       case "loading":
