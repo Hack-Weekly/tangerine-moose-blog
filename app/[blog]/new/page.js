@@ -10,9 +10,9 @@ import * as commands from "@uiw/react-md-editor/lib/commands";
 import "@uiw/react-md-editor/markdown-editor.css";
 import dynamic from "next/dynamic";
 
+import Input from "@/components/Input/Input";
 import { useAuth } from "@/providers/AuthProvider";
 import useCreateBlogPost from "./hooks/useCreateBlogPost";
-import Input from "@/components/Input/Input";
 import styles from "./page.module.css";
 
 const MDEditor = dynamic(() => import("@uiw/react-md-editor"), { ssr: false });
@@ -54,7 +54,7 @@ const NewBlogPost = () => {
       <div className={styles.input}>
         <div>
           <label htmlFor="titleInput">Title </label>
-          <input
+          <Input
             required
             type="text"
             className={styles.titleInput}

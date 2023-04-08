@@ -9,7 +9,7 @@ export default async function Home() {
       {/* TODO: replace with BlogCard component */}
       {blogs.map((blog) => {
         return (
-          <div key={blog.mid}>
+          <div key={blog.id}>
             <pre
               style={{
                 whiteSpace: "pre-wrap",
