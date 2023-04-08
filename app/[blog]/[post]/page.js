@@ -37,15 +37,18 @@ const BlogPost = () => {
   if (data) {
     const { title, text, authorName, postSlug, createdAt, updatedAt, reactions, comments } = data;
     const isAuthor = blogName === currentUser.blog;
-    const commentList = JSON.parse(comments);
-    const [created, updated] = [createdAt, updatedAt].map((t) => ({
-      short: moment(new Date(t.seconds * 1000)).fromNow(),
-      long: new Date(t.seconds * 1000).toLocaleTimeString([], {
-        month: "short",
-        day: "numeric",
-        year: "numeric",
-      }),
-    }));
+    const commentList = comments ? JSON.parse(comments) : [];
+    const [created, updated] = [createdAt, updatedAt].map(
+      (t) =>
+        t && {
+          short: moment(new Date(t.seconds * 1000)).fromNow(),
+          long: new Date(t.seconds * 1000).toLocaleTimeString([], {
+            month: "short",
+            day: "numeric",
+            year: "numeric",
+          }),
+        },
+    );
 
     return (
       <div className={styles.container}>
@@ -53,7 +56,7 @@ const BlogPost = () => {
         <div className={styles.text}>
           <Markdown value={text} />
           <div className={styles.reacts}>
-            <Reactions reactions={JSON.parse(reactions)} />
+            <Reactions reactions={reactions} />
           </div>
         </div>
         <p className={styles.byline}>
@@ -61,11 +64,16 @@ const BlogPost = () => {
           <div className={styles.byline} title={created.long}>
             {created.short}
           </div>
-          {` (last edited `}
-          <div className={styles.byline} title={updated.long}>
-            {updated.short}
-          </div>{" "}
-          {`) by `} <a href={`/${blogName}`}>{authorName}</a>
+          {updated && (
+            <div className={styles.byline}>
+              {` (last edited `}
+              <div className={styles.byline} title={updated.long}>
+                {updated.short}
+              </div>
+              {`)`}
+            </div>
+          )}
+          {` by `} <a href={`/${blogName}`}>{authorName}</a>
         </p>
         <PostButtons
           postSlug={postSlug}
