@@ -4,7 +4,8 @@ import { VscReactions as AddReactionIcon } from "react-icons/vsc";
 
 import styles from "./Reactions.module.css";
 
-const Reactions = ({ reactions }) => {
+const Reactions = ({ inputReactions }) => {
+  const reactions = inputReactions ? JSON.parse(inputReactions) : {};
   const addReaction = (emoji) => (emoji in reactions ? (reactions[emoji] += 1) : (reactions[emoji] = 1));
   const [showPicker, setShowPicker] = useState(false);
   const togglePicker = () => setShowPicker(!showPicker);

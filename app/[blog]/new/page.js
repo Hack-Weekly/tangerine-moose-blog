@@ -46,7 +46,7 @@ const NewBlogPost = () => {
 
   const handleSubmit = () => {
     const slug = title.trim().replaceAll(" ", "-");
-    fetchData({ blogName: user?.blog || "TestBlog", title, slug, text });
+    fetchData({ blogName: user?.blog || "TestBlog", authorName: user.displayName, title, slug, text });
   };
 
   return (
