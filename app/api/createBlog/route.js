@@ -1,9 +1,22 @@
+import { NextResponse } from "next/server";
 import { addDoc, collection, doc, getDoc, getDocs, query, updateDoc, where } from "firebase/firestore";
 
 import { firestore as db } from "@/firebase/firebase";
+import { verifyAuthSSR } from "@/lib/authSSR";
 
+// TODO: use db utils when PR is merged
+// TODO: rename field names and use serverTimestamp for timestamps
+
+// POST create new blog
 export async function POST(request) {
+  const verifiedUid = await verifyAuthSSR(request);
   const { uid, blogName } = await request.json();
+
+  if (uid !== verifiedUid) {
+    console.log("not auth");
+    return NextResponse.json({ status: "error", message: "Not authenticated." }, { status: 401 });
+  }
+
   const userRef = doc(db, "users", uid);
   const userSnap = await getDoc(userRef);
 
