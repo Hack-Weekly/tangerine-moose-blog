@@ -18,12 +18,6 @@
 
 .blog {
   position: relative;
-  bottom: -1.2rem;
-  color: rgb(var(--middleground-rgb));
-}
-
-.email {
-  position: relative;
   top: -0.3rem;
   color: rgb(var(--middleground-rgb));
 }
