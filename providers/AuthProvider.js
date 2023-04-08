@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useEffect, useState } from "react";
 import { GoogleAuthProvider, onIdTokenChanged, signInWithPopup } from "firebase/auth";
+import { removeCookie, setCookie } from "tiny-cookie";
 
 import { auth } from "@/firebase/firebase";
 import { createUser, isExistingUser, updateUser } from "@/firebase/utils/userUtils";
@@ -19,8 +20,11 @@ export const AuthProvider = ({ children }) => {
       setLoading(true);
       if (user) {
         setUser(user);
+        const token = await user.getIdToken();
+        setCookie("token", token, { secure: true });
       } else {
         setUser(null);
+        removeCookie("token");
       }
       setLoading(false);
     });
