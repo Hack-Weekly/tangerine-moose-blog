@@ -1,19 +1,81 @@
 import Image from "next/image";
 
+import AuthorCard from "@/components/AuthorCard/AuthorCard";
 import Tangerine from "../../public/drawn.jpg";
 import kid from "../../public/kid.png";
 import styles from "./page.module.css";
 
 export default function about() {
-  const tangerine_team = () => {
-    const usernames = ["thebeatlesphan", "ba", "hmansour", "JoseAE", "Kahlin", "Manye (Manny)", "7ordan", "krod518"];
-    return usernames.map((user) => (
-      <div key={user} className={styles.members}>
-        <div className={styles.teamMember}>
-          <Image src={kid} alt="kid avatar" width={25} />
-          {user}
-        </div>
-      </div>
+  const team = [
+    {
+      authorAvatar: kid,
+      displayName: "thebeatlesphan",
+      blog: "Bob's Law Blog",
+      authorDescription: "Im da bes",
+      authorLinks: ["x", "y", "z"],
+    },
+    {
+      authorAvatar: kid,
+      displayName: "hmansour",
+      blog: "I don't write blogs",
+      authorDescription: "I don't write blogs",
+      authorLinks: ["x", "y", "z"],
+    },
+    {
+      authorAvatar: kid,
+      displayName: "ba",
+      blog: "ba ba ba bad",
+      authorDescription: "I don't write stories. I write epic tales.",
+      authorLinks: ["x", "y", "z"],
+    },
+    {
+      authorAvatar: kid,
+      displayName: "Joe B",
+      blog: "This is my Blog",
+      authorDescription: "When you run, make sure you run",
+      authorLinks: ["x", "y", "z"],
+    },
+    {
+      authorAvatar: kid,
+      displayName: "Manye (Manny)",
+      blog: "wuz up blog",
+      authorDescription: "I don't write stories. I write epic tales.",
+      authorLinks: ["x", "y", "z"],
+    },
+    {
+      authorAvatar: kid,
+      displayName: "JoseAE",
+      blog: "Blog Blog",
+      authorDescription: "My favorite nocturne is Op. 9 No. 2",
+      authorLinks: ["x", "y", "z"],
+    },
+    {
+      authorAvatar: kid,
+      displayName: "Kahlin",
+      blog: "Kahlin",
+      authorDescription: "I don't have a favorite nocturne",
+      authorLinks: ["x", "y", "z"],
+    },
+    {
+      authorAvatar: kid,
+      displayName: "7ordan",
+      blog: "Kahlin's Real Blog",
+      authorDescription: "Go listen to Andantino by Khacturian.",
+      authorLinks: ["x", "y", "z"],
+    },
+  ];
+
+  const handleTeam = () => {
+    return team.map((member) => (
+      <AuthorCard
+        authorAvatar={member.authorAvatar}
+        displayName={member.displayName}
+        blog={member.blog}
+        authorDescription={member.authorDescription}
+        authorLinks={member.authorLinks}
+        key={member.displayName}
+        futureStyle={styles.member}
+      />
     ));
   };
 
@@ -59,7 +121,7 @@ export default function about() {
           simply an individual with a unique perspective. You&#39;ll discover content from independent writers around
           the world, as well as stories handpicked by our team of editors and contributions from leading authors.
         </p>
-        <div className={styles.membersContainer}>{tangerine_team()}</div>
+        <div className={styles.membersContainer}>{handleTeam()}</div>
       </div>
     </div>
   );
