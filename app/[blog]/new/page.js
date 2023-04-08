@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { redirect } from "next/navigation";
 import Markdown from "marked-react";
 
 import "@uiw/react-markdown-preview/markdown.css";
@@ -9,9 +9,10 @@ import * as commands from "@uiw/react-md-editor/lib/commands";
 
 import "@uiw/react-md-editor/markdown-editor.css";
 import dynamic from "next/dynamic";
-import { useRouter } from "next/navigation";
 
 import Input from "@/components/Input/Input";
+import { useAuth } from "@/providers/AuthProvider";
+import useCreateBlogPost from "./hooks/useCreateBlogPost";
 import styles from "./page.module.css";
 
 const MDEditor = dynamic(() => import("@uiw/react-md-editor"), { ssr: false });
@@ -37,26 +38,15 @@ const editorOptions = {
   extraCommands: [],
 };
 
-// mock data/api
-let blogPost = {};
-const useCurrentUser = () => ({ name: useSearchParams().get("user") }); // `?user=TestUser` in URL to test author view
-const submitBlogPost = (name, title, slug, text) =>
-  (blogPost = { postId: text.length, authorUsername: name, title: title, slug: `${slug}-2`, text: text });
-// end mock
-
 const NewBlogPost = () => {
-  const router = useRouter();
-  const { name: authorUsername } = useCurrentUser();
+  const { user, loading } = useAuth();
   const [text, setText] = useState("");
   const [title, setTitle] = useState("");
-
-  const getSlugFromTitle = (title) => title.trim().replaceAll(" ", "-");
+  const [fetchData, status, data] = useCreateBlogPost();
 
   const handleSubmit = () => {
-    const slug = getSlugFromTitle(title);
-    const response = submitBlogPost(authorUsername, title, slug, text);
-    console.log("response: ", response);
-    router.push(`/${authorUsername}/${response.slug}`);
+    const slug = title.trim().replaceAll(" ", "-");
+    fetchData({ blogName: user?.blog || "TestBlog", title, slug, text });
   };
 
   return (
@@ -64,7 +54,7 @@ const NewBlogPost = () => {
       <div className={styles.input}>
         <div>
           <label htmlFor="titleInput">Title </label>
-          <Input
+          <input
             required
             type="text"
             className={styles.titleInput}

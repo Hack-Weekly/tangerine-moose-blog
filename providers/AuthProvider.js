@@ -1,11 +1,11 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState } from "react";
-import { GoogleAuthProvider, onAuthStateChanged, signInWithPopup } from "firebase/auth";
-import { doc, getDoc, serverTimestamp, setDoc } from "firebase/firestore";
+import { GoogleAuthProvider, onIdTokenChanged, signInWithPopup } from "firebase/auth";
+import { removeCookie, setCookie } from "tiny-cookie";
 
 import { auth } from "@/firebase/firebase";
-import { Collections, getCollection } from "@/firebase/firestore";
+import { createUser, isExistingUser, updateUser } from "@/firebase/utils/userUtils";
 
 export const AuthContext = createContext({});
 
@@ -16,16 +16,17 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onIdTokenChanged(auth, async (user) => {
       setLoading(true);
       if (user) {
         setUser(user);
+        const token = await user.getIdToken();
+        setCookie("token", token, { secure: true });
       } else {
         setUser(null);
+        removeCookie("token");
       }
       setLoading(false);
-      // TODO: remove for prod
-      // console.log(user);
     });
 
     return () => unsubscribe();
@@ -35,27 +36,19 @@ export const AuthProvider = ({ children }) => {
     try {
       const provider = new GoogleAuthProvider();
       const credential = await signInWithPopup(auth, provider);
-      const userCollection = getCollection(Collections.Users);
-      const userDoc = doc(userCollection, credential.user.uid);
+      const isExists = await isExistingUser(credential.user.uid);
 
-      // TODO: move this to a function
-      // check if document exists
-      const docSnap = await getDoc(userDoc);
-      if (docSnap.exists()) {
-        await setDoc(
-          userDoc,
-          {
-            displayName: credential.user.displayName,
-            email: credential.user.email,
-          },
-          { merge: true },
-        );
+      if (isExists) {
+        await updateUser(credential.user.uid, {
+          email: credential.user.email,
+          photoURL: credential.user.photoURL,
+        });
       } else {
-        await setDoc(userDoc, {
-          uid: credential.user.uid,
+        await createUser(credential.user.uid, {
+          id: credential.user.uid,
           displayName: credential.user.displayName,
           email: credential.user.email,
-          createdAt: serverTimestamp(),
+          photoURL: credential.user.photoURL,
         });
       }
     } catch (e) {
