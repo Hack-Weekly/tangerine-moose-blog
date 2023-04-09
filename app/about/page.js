@@ -3,6 +3,7 @@ import Image from "next/image";
 import AuthorCard from "@/components/AuthorCard/AuthorCard";
 import Tangerine from "../../public/drawn.jpg";
 import kid from "../../public/kid.png";
+import moose from "../../public/moose.png";
 import styles from "./page.module.css";
 
 export default function about() {
@@ -11,56 +12,61 @@ export default function about() {
       authorAvatar: kid,
       displayName: "thebeatlesphan",
       blog: "Bob's Law Blog",
-      authorDescription: "Im da bes",
+      authorDescription: "Tangerine Moose is a whimsical children's book about a moose who loves tangerines.",
       authorLinks: ["x", "y", "z"],
     },
     {
       authorAvatar: kid,
       displayName: "hmansour",
       blog: "I don't write blogs",
-      authorDescription: "I don't write blogs",
+      authorDescription:
+        "When the other animals in the forest make fun of him, he sets out on a journey to find other tangerine-loving creatures.",
       authorLinks: ["x", "y", "z"],
     },
     {
       authorAvatar: kid,
       displayName: "ba",
       blog: "ba ba ba bad",
-      authorDescription: "I don't write stories. I write epic tales.",
+      authorDescription: "Along the way, he discovers that being different is something to celebrate, not hide.",
       authorLinks: ["x", "y", "z"],
     },
     {
       authorAvatar: kid,
       displayName: "Joe B",
       blog: "This is my Blog",
-      authorDescription: "When you run, make sure you run",
+      authorDescription:
+        "As the tangerine moose travels through the forest, he encounters a variety of animals who tease him for his unusual color.",
       authorLinks: ["x", "y", "z"],
     },
     {
       authorAvatar: kid,
       displayName: "Manye (Manny)",
       blog: "wuz up blog",
-      authorDescription: "I don't write stories. I write epic tales.",
+      authorDescription:
+        "But with the help of his new friend, a wise old owl, the moose learns to embrace his uniqueness and find confidence in himself.",
       authorLinks: ["x", "y", "z"],
     },
     {
       authorAvatar: kid,
       displayName: "JoseAE",
       blog: "Blog Blog",
-      authorDescription: "My favorite nocturne is Op. 9 No. 2",
+      authorDescription:
+        "Along the way, the tangerine moose and his companions have fun adventures and learn valuable lessons about self-acceptance and the importance of kindness towards others.",
       authorLinks: ["x", "y", "z"],
     },
     {
       authorAvatar: kid,
       displayName: "Kahlin",
       blog: "Kahlin",
-      authorDescription: "I don't have a favorite nocturne",
+      authorDescription:
+        "With colorful illustrations and a heartwarming story, 'Tangerine Moose' is a book that children and adults alike will love.",
       authorLinks: ["x", "y", "z"],
     },
     {
       authorAvatar: kid,
       displayName: "7ordan",
       blog: "Kahlin's Real Blog",
-      authorDescription: "Go listen to Andantino by Khacturian.",
+      authorDescription: "This has been a story by the Tangerine Moose Team!",
       authorLinks: ["x", "y", "z"],
     },
   ];
@@ -122,6 +128,15 @@ export default function about() {
           the world, as well as stories handpicked by our team of editors and contributions from leading authors.
         </p>
         <div className={styles.membersContainer}>{handleTeam()}</div>
+      </div>
+      <div className={styles.comments}>
+        <div className={styles.commentsHeader}>Over 100 million readers and growing.</div>
+        {/* TODO: use CommentCard */}
+        <div className={styles.randomComment}>random user comment - by randomUser</div>
+      </div>
+      <div className={styles.footer}>
+        <Image src={moose} width={250} alt="Moos Logo" />
+        <h3>Moos</h3>
       </div>
     </div>
   );
