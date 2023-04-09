@@ -1,17 +1,31 @@
-import { collection, doc, getDoc, serverTimestamp, setDoc, updateDoc } from "firebase/firestore";
+import { addDoc, collection, doc, getDoc, serverTimestamp, setDoc, updateDoc } from "firebase/firestore";
 
 import { firestore } from "@/firebase/firebase";
+
+// convert firebase doc to user object
+export const docToUser = (doc) => {
+  const data = doc.data();
+  return {
+    uid: doc.id,
+    displayName: data.name,
+    photoURL: data.photoURL,
+    description: data.description,
+    blogId: data.blogId,
+    createdAt: data.createdAt,
+    ...data,
+  };
+};
 
 export const userCollection = collection(firestore, "users");
 
 export const createUser = async (id, data) => {
-  const userRef = doc(userCollection, id);
-  await setDoc(userRef, { ...data, isOnboarded: false, createdAt: serverTimestamp() });
+  await addDoc(userCollection, { ...data, totalPosts: 0, createdAt: serverTimestamp() });
 };
 
 // update user by id
 export const updateUser = async (id, data) => {
   const userRef = doc(userCollection, id);
+  delete data.createdAt; // don't update createdAt
   await updateDoc(userRef, data);
 };
 
