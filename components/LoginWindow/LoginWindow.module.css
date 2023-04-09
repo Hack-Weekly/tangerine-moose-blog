@@ -5,7 +5,7 @@
   z-index: 1040;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(var(--foreground-rgb), 0.2);
   display: flex;
   justify-content: center;
 }
@@ -38,7 +38,7 @@
 
 .loginButton {
   border-radius: 25px;
-  border: 1px solid black;
+  border: 1px solid rgb(var(--foreground-rgb));
   height: 50px;
   padding-left: 40px;
   padding-right: 40px;
