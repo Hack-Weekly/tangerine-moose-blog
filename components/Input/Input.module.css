@@ -2,12 +2,14 @@
   font-family: var(--font-moos);
   background-color: rgb(var(--background-start-rgb));
   color: rgb(var(--foreground-rgb));
-  border: none;
+  border: 1px solid rgb(var(--foreground-rgb));
   border-radius: var(--border-radius);
   padding: 0.5rem 1rem;
   background-repeat: no-repeat;
   background-position: left 0.1rem center;
   background-size: auto 45%;
+  display: block;
+  width: 100%;
 }
 
 .input::placeholder {
