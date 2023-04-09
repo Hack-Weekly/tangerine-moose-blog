@@ -1,0 +1,39 @@
+.root {
+  display: flex;
+}
+
+.image {
+  border-radius: var(--border-radius);
+  padding: 0.5rem;
+  margin-right: 1rem;
+}
+
+.container {
+  max-width: calc(var(--max-width) / 4);
+  height: calc(var(--max-width) / 3);
+  box-shadow: rgb(var(--card-border-rgb)) 0px 1px 3px 0px, rgb(var(--card-border-rgb)) 0px 0.5px 0.5px 0px;
+  font-family: var(--font-moos);
+}
+
+.legend {
+  padding: 0 1rem;
+  letter-spacing: 0.3rem;
+  font-size: 1.2rem;
+  color: rgb(var(--middleground-rgb));
+}
+
+.tags {
+  color: rgb(var(--middleground-rgb));
+}
+
+.title {
+  font-size: 1.7rem;
+  padding: 0.3rem 0;
+}
+
+.info {
+  color: rgb(var(--middleground-rgb));
+  display: flex;
+  gap: 0.7rem;
+  padding-bottom: 0.5rem;
+}
