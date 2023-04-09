@@ -4,22 +4,31 @@ import { useState } from "react";
 import { redirect } from "next/navigation";
 
 import Button from "@/components/Button/Button";
+import useFetch from "@/hooks/useFetch";
 import { useAuth } from "@/providers/AuthProvider";
-import useCreateBlog from "./hooks/useCreateBlog";
 import styles from "./page.module.css";
 
 const NewBlog = () => {
   const { user, loading } = useAuth();
   const [blogName, setBlogName] = useState("");
-  const [fetchData, status, data] = useCreateBlog();
-
-  const handleSubmit = () => fetchData({ uid: user.uid, blogName: blogName });
+  const { post, status, data } = useFetch("/api/blog/", {
+    onSuccess: (data) => {
+      console.log("data in onSuccess: ", data);
+    },
+    onError: (error) => {
+      console.log("error in onError: ", error);
+    },
+  });
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await post({ body: JSON.stringify({ uid: user.uid, blogName: blogName }) });
+  };
 
   if (loading) {
     return <div>LOADING ...</div>;
   } else if (user) {
     switch (status) {
-      case "not_started":
+      case "idle":
         return (
           <div className={styles.container}>
             <div className={styles.input}>

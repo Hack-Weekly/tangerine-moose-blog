@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { redirect } from "next/navigation";
 import Markdown from "marked-react";
 
 import "@uiw/react-markdown-preview/markdown.css";
@@ -11,8 +10,8 @@ import "@uiw/react-md-editor/markdown-editor.css";
 import dynamic from "next/dynamic";
 
 import Input from "@/components/Input/Input";
+import useFetch from "@/hooks/useFetch";
 import { useAuth } from "@/providers/AuthProvider";
-import useCreateBlogPost from "./hooks/useCreateBlogPost";
 import styles from "./page.module.css";
 
 const MDEditor = dynamic(() => import("@uiw/react-md-editor"), { ssr: false });
@@ -42,11 +41,20 @@ const NewBlogPost = () => {
   const { user, loading } = useAuth();
   const [text, setText] = useState("");
   const [title, setTitle] = useState("");
-  const [fetchData, status, data] = useCreateBlogPost();
+  const { post, error, status, data } = useFetch("/api/createBlogPost/", {
+    onSuccess: (data) => {
+      console.log("data in onSuccess: ", data);
+    },
+    onError: (error) => {
+      console.log("error in onError: ", error);
+    },
+  });
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const slug = title.trim().replaceAll(" ", "-");
-    fetchData({ blogName: user?.blog || "TestBlog", authorName: user.displayName, title, slug, text });
+    await post({
+      body: JSON.stringify({ blogName: user?.blog || "TestBlog", authorName: user.displayName, title, slug, text }),
+    });
   };
 
   return (
