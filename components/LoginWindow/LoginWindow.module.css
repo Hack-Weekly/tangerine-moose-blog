@@ -1,0 +1,48 @@
+.blur {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1040;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+}
+
+.loginPopup {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(var(--background-end-rgb));
+  height: 100vh;
+  width: 400px;
+}
+
+.exitButtonFlex {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  padding: 2px 16px 0 0;
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-around;
+  width: 80%;
+  height: 100%;
+}
+
+.loginButton {
+  border-radius: 25px;
+  border: 1px solid black;
+  height: 50px;
+  padding-left: 40px;
+  padding-right: 40px;
+  font-size: 16px;
+  font-weight: 400;
+  width: 80%;
+}
