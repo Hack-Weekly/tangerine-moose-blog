@@ -2,7 +2,7 @@ import "./globals.css";
 import { Cabin } from "next/font/google";
 
 import Navbar from "@/components/Navbar/Navbar";
-import UserOnBoardModal from "@/components/UserOnboardModal/UserOnBoardModal";
+import UserOnboardModal from "@/components/UserOnboardModal/UserOnboardModal";
 import { AuthProvider } from "@/providers/AuthProvider";
 
 export const metadata = {
@@ -19,7 +19,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={cabin.className}>
         <AuthProvider>
-          <UserOnBoardModal />
+          <UserOnboardModal />
           <Navbar />
           {children}
         </AuthProvider>
