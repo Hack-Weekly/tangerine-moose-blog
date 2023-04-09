@@ -1,0 +1,76 @@
+.root {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  z-index: var(--modal-z-index);
+}
+
+.root.open {
+  display: block;
+}
+
+.overlay {
+  background-color: rgba(var(--background-start-rgb), 0.8);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: var(--modal-overlay-z-index);
+}
+
+.dialog {
+  padding: 0.5rem;
+  margin: auto;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.content {
+  max-width: 500px;
+  width: 100%;
+  padding: 1.5rem;
+  background-color: rgb(var(--background-end-rgb));
+  border-radius: var(--border-radius);
+  border: 2px solid rgb(var(--foreground-rgb));
+  position: relative;
+  z-index: var(--modal-z-index);
+  box-shadow: 0 1px 2px 0 rgb(var(--foreground-rgb)), 0 1px 3px 1px rgb(var(--foreground-rgb));
+}
+
+.title {
+  margin-top: 0;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.error {
+  color: rgb(var(--error-rgb));
+}
+
+.separator {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  border: 2px solid rgb(var(--foreground-rgb));
+  border-radius: var(--border-radius);
+}
+
+.button {
+  font-size: 1.5rem;
+}

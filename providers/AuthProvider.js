@@ -2,10 +2,11 @@
 
 import { createContext, useContext, useEffect, useState } from "react";
 import { GoogleAuthProvider, onIdTokenChanged, signInWithPopup } from "firebase/auth";
+import { doc, getDoc } from "firebase/firestore";
 import { removeCookie, setCookie } from "tiny-cookie";
 
 import { auth } from "@/firebase/firebase";
-import { createUser, isExistingUser, updateUser } from "@/firebase/utils/userUtils";
+import { createUser, docToUser, isExistingUser, updateUser, userCollection } from "@/firebase/utils/userUtils";
 
 export const AuthContext = createContext({});
 
@@ -19,9 +20,15 @@ export const AuthProvider = ({ children }) => {
     const unsubscribe = onIdTokenChanged(auth, async (user) => {
       setLoading(true);
       if (user) {
-        setUser(user);
-        const token = await user.getIdToken();
-        setCookie("token", token, { secure: true });
+        try {
+          const userRef = doc(userCollection, user.uid);
+          const userSnap = await getDoc(userRef);
+          setUser(docToUser(userSnap));
+          const token = await user.getIdToken();
+          setCookie("token", token, { secure: true });
+        } catch (e) {
+          console.log(e);
+        }
       } else {
         setUser(null);
         removeCookie("token");
