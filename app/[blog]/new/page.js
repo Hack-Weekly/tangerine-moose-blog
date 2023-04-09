@@ -46,37 +46,53 @@ const NewBlogPost = () => {
 
   const handleSubmit = () => {
     const slug = title.trim().replaceAll(" ", "-");
-    fetchData({ blogName: user?.blog || "TestBlog", title, slug, text });
+    fetchData({ blogName: user?.blog || "TestBlog", authorName: user.displayName, title, slug, text });
   };
 
-  return (
-    <div className={styles.container}>
-      <div className={styles.input}>
-        <div>
-          <label htmlFor="titleInput">Title </label>
-          <input
-            required
-            type="text"
-            className={styles.titleInput}
-            name="titleInput"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
-        </div>
-        <MDEditor value={text} onChange={setText} {...editorOptions} />
-      </div>
-      <button className={styles.submit} type="submit" onClick={handleSubmit}>
-        post
-      </button>
-      {text && (
-        <div className={styles.preview}>
-          <div className={styles.text}>
-            <Markdown value={text} />
+  if (loading) {
+    return <div>LOADING ...</div>;
+  } else if (user) {
+    switch (status) {
+      case "not_started":
+        return (
+          <div className={styles.container}>
+            <div className={styles.input}>
+              <div>
+                <label htmlFor="titleInput">Title </label>
+                <input
+                  required
+                  type="text"
+                  className={styles.titleInput}
+                  name="titleInput"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                />
+              </div>
+              <MDEditor value={text} onChange={setText} {...editorOptions} />
+            </div>
+            <button className={styles.submit} type="submit" onClick={handleSubmit}>
+              post
+            </button>
+            {text && (
+              <div className={styles.preview}>
+                <div className={styles.text}>
+                  <Markdown value={text} />
+                </div>
+              </div>
+            )}
           </div>
-        </div>
-      )}
-    </div>
-  );
+        );
+      case "loading":
+        return <div>POSTING ...</div>;
+      case "loaded":
+        console.log("data once loaded", data);
+        redirect(`/${user.blog || "TestBlog"}/${data.postSlug}`);
+      case "error":
+        return <div>ERROR, RETRY</div>;
+      default:
+        break;
+    }
+  }
 };
 
 export default NewBlogPost;

@@ -16,7 +16,7 @@
   letter-spacing: -0.25vw;
   font-size: var(--h1-size);
   font-weight: 200;
-  padding: 3 rem 1.5rem 1.5rem;
+  padding: 3rem 1.5rem 1.5rem;
   max-width: 222px;
   text-align: center;
 }
@@ -31,7 +31,6 @@
     padding: 3rem 1.5rem;
     display: block;
   }
-
   .title h1 {
     white-space: nowrap;
     font-size: var(--h1-media);
@@ -66,14 +65,12 @@
   .about {
     flex-direction: row;
   }
-
   .aboutUs {
     width: 50%;
     display: flex;
     flex-direction: column;
     border-right: 1px solid rgb(var(--foreground-rgb));
   }
-
   .tangerineBox {
     width: 45%;
     display: flex;
@@ -91,8 +88,9 @@
 
 .team h2 {
   font-family: var(--font-moos);
+  letter-spacing: -0.25vw;
   font-size: var(--h1-size);
-  margin-top: 0;
+  font-weight: 200;
   padding: 0 1.5rem;
 }
 
@@ -109,7 +107,58 @@
 
 .member {
   padding: 0.5rem;
-  width: 22rem;
+  width: 25rem;
   block-size: 12rem;
   transform: scale(0.8);
+  block-size: auto;
+}
+
+@media screen and (min-width: 600px) {
+  .team h2 {
+    font-size: var(--h1-media);
+    text-align: center;
+  }
+}
+
+.commentsHeader {
+  font-family: var(--font-moos);
+  font-size: var(--h1-media);
+  text-align: center;
+  padding: 3rem 0;
+  border-bottom: 1px solid rgb(var(--foreground-rgb));
+}
+
+.randomComment {
+  padding: 3rem 0;
+  text-align: center;
+  border-bottom: 1px solid rgb(var(--foreground-rgb));
+}
+
+@media screen and (min-width: 600px) {
+  .comments {
+    display: flex;
+  }
+  .commentsHeader {
+    border-right: 1px solid rgb(var(--foreground-rgb));
+    min-width: 50%;
+  }
+  .randomComment {
+    min-width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid rgb(var(--foreground-rgb));
+  }
+}
+
+.footer {
+  padding: 3rem;
+  font-family: var(--font-moos);
+  font-size: var(--h1-media);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: rgb(var(--background-end-rgb));
+  background-color: rgb(var(--foreground-rgb));
 }

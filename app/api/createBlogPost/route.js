@@ -1,12 +1,10 @@
-import { addDoc, collection, doc, getDocs, query, where } from "firebase/firestore";
+import { addDoc, collection, doc, getDocs, query, serverTimestamp, where } from "firebase/firestore";
 
 import { firestore as db } from "@/firebase/firebase";
 
 export async function POST(request) {
-  const { blogName, title, slug, text } = await request.json();
-  // console.log("blogName, title, slug, text: ", blogName, title, slug, text);
+  const { blogName, authorName, title, slug, text } = await request.json();
 
-  console.log("blogName: ", blogName);
   const q = query(collection(db, "blogs"), where("blogName", "==", blogName));
   const querySnapshot = await getDocs(q);
 
@@ -18,15 +16,17 @@ export async function POST(request) {
 
     // generate postId
     const postId = doc(collection(db, "posts")).id;
-    console.log("postId: ", postId);
 
+    // TODO: use db blogUtils
     // add new blog post to posts collection
     await addDoc(collection(db, "posts"), {
       id: postId,
       blogName: blogName,
+      authorName: authorName,
       title: title,
       slug: slug,
       text: text,
+      createdAt: serverTimestamp(),
     });
 
     return new Response(JSON.stringify({ status: "success", postSlug: slug }));
