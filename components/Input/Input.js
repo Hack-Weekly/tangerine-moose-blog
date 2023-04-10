@@ -1,7 +1,9 @@
+import clsx from "clsx";
+
 import styles from "./Input.module.css";
 
-const Input = (props) => {
-  return <input className={styles.input} {...props} />;
+const Input = ({ className, ...props }) => {
+  return <input className={clsx(styles.input, className)} {...props} />;
 };
 
 export default Input;
