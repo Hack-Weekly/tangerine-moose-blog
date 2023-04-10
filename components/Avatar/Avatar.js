@@ -4,7 +4,6 @@ import mooseLogo from "../../public/moose.png";
 import styles from "./Avatar.module.css";
 
 export default function Avatar({ avatar, name, loading = false }) {
-  // TODO: Upload a default avatar image
   return (
     <div className={styles.root}>
       {loading ? (
