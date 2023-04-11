@@ -65,7 +65,7 @@ export const AuthProvider = ({ children }) => {
     });
 
     return () => unsubscribeUser();
-  }, [user, user.uid]);
+  }, [user, user?.uid]);
 
   const signIn = async () => {
     try {
