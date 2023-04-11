@@ -1,9 +1,16 @@
+.root {
+  display: block;
+  text-decoration: none;
+  padding: 0.5rem 1.5rem 1.5rem;
+  max-width: calc(var(--max-width) / 2);
+  width: 100%;
+}
+
 .container {
   background-color: rgb(var(--background-start-rgb));
-  max-width: calc(var(--max-width) / 2);
+
   box-shadow: rgb(var(--card-border-rgb)) 0px 1px 3px 0px, rgb(var(--card-border-rgb)) 0px 0.5px 0.5px 0px;
   font-family: var(--font-moos);
-  padding: 0.5rem 1.5rem 1.5rem;
   text-align: center;
   position: relative;
 }
