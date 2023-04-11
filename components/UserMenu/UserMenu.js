@@ -14,14 +14,15 @@ export default function UserMenu({ user, toggleDropdown }) {
         <div className={styles.email}>{user.email}</div>
       </div>
       <div className={styles.body}>
-        {user.blog ? (
-          <Link className={styles.link} href={`/${user.blogName}/new`}>
-            <NavButton>Write a Post</NavButton>
-          </Link>
-        ) : (
-          <Link className={styles.link} href={`/new`}>
-            <NavButton>Create a Blog</NavButton>
-          </Link>
+        {user && user.blogSlug && (
+          <>
+            <Link className={styles.link} href={`/${user.blogSlug}`}>
+              <NavButton>My Blog</NavButton>
+            </Link>
+            <Link className={styles.link} href={`/${user.blogSlug}/new`}>
+              <NavButton>Write a Post</NavButton>
+            </Link>
+          </>
         )}
         <Link className={styles.link} href="/" onClick={signOut}>
           <NavButton>Logout</NavButton>
