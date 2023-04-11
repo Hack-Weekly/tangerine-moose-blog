@@ -1,6 +1,7 @@
-import BlogCard from "@/components/BlogCard/BlogCard";
 import { doc, getDoc, getDocs, orderBy, query } from "firebase/firestore";
 
+import BlogCard from "@/components/BlogCard/BlogCard";
+import Featured from "@/components/Featured/Featured";
 import { blogCollection, docToBlog } from "@/firebase/utils/blogUtils";
 import { docToUser, userCollection } from "@/firebase/utils/userUtils";
 
