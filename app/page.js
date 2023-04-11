@@ -4,6 +4,7 @@ import BlogCard from "@/components/BlogCard/BlogCard";
 import Featured from "@/components/Featured/Featured";
 import { blogCollection, docToBlog } from "@/firebase/utils/blogUtils";
 import { docToUser, userCollection } from "@/firebase/utils/userUtils";
+import styles from "./page.module.css";
 
 const fetchBlogs = async () => {
   // get all blogs ordered by createdAt
@@ -30,32 +31,20 @@ const fetchBlogs = async () => {
 };
 
 export default async function Home() {
-  const blogs = await fetchBlogs();
+  const blogsWithUser = await fetchBlogs();
 
-  return blogs.length ? (
+  return blogsWithUser.length ? (
     <div>
       <Featured />
-      Blogs:
-      {/* TODO: replace with BlogCard component */}
-      {blogs.map((blog) => {
-        return (
-          <BlogCard key={blog.id} {...blog}>
-            <pre
-              style={{
-                whiteSpace: "pre-wrap",
-                display: "block",
-                overflow: "auto",
-                paddingBottom: "1rem",
-              }}
-            >
-              <code>{JSON.stringify(blog, null, 2)}</code>
-            </pre>
-          </BlogCard>
-        );
-      })}
-      <div style={{ height: "1000px" }}></div>
+      <div className={styles.container}>
+        {blogsWithUser.map((blog) => {
+          return <BlogCard key={blog.id} blogWithUser={blog} />;
+        })}
+      </div>
     </div>
   ) : (
-    <div>No blogs yet</div>
+    <div className={styles.container}>
+      <div>No blogs yet</div>
+    </div>
   );
 }
