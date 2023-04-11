@@ -1,5 +1,8 @@
+"use client";
+
 import { useState } from "react";
 
+import { useAuth } from "@/providers/AuthProvider";
 import styles from "./PostButtons.module.css";
 
 const PostButtons = ({ slug, isAuthor, replyCount, onReply }) => {
