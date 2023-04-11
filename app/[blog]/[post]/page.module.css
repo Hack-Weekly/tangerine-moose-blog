@@ -40,3 +40,38 @@
 .byline {
   display: inline;
 }
+
+.imageContainer {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--border-radius);
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: space-between;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.tag {
+  background-color: rgb(var(--callout-rgb));
+  padding: 0.25rem;
+  font-size: 0.8rem;
+}

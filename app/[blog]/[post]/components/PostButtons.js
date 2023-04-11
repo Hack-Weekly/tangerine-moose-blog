@@ -5,7 +5,8 @@ import { useState } from "react";
 import { useAuth } from "@/providers/AuthProvider";
 import styles from "./PostButtons.module.css";
 
-const PostButtons = ({ slug, isAuthor, replyCount, onReply }) => {
+const PostButtons = ({ slug, postAuthorId, replyCount, onReply }) => {
+  const { user } = useAuth();
   const [saved, setSaved] = useState(false);
   const toggleSavePost = () => setSaved(!saved);
   const hoverSave = ({ target: saveButton }) => saved && (saveButton.innerHTML = "unsave");
@@ -25,7 +26,7 @@ const PostButtons = ({ slug, isAuthor, replyCount, onReply }) => {
       <a onClick={toggleSavePost} onMouseOver={hoverSave} onMouseLeave={leaveSave}>
         {saved ? "saved" : "save"}
       </a>
-      {isAuthor ? (
+      {user && postAuthorId === user.uid ? (
         <>
           <a onClick={() => {}}>edit</a>
           <a onClick={() => {}}>delete</a>

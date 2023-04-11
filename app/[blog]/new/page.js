@@ -50,6 +50,7 @@ const NewBlogPost = () => {
   const [text, setText] = useState("");
   const [tags, setTags] = useState("");
   const [image, setImage] = useState("");
+  const [imageData, setImageData] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -73,7 +74,7 @@ const NewBlogPost = () => {
       await updatePost(postRef.id, { slug: slug });
 
       if (image !== "") {
-        const storageRef = ref(storage, `images/${postRef.id}`);
+        const storageRef = ref(storage, `images/${postRef.id}/${image.name}`);
         const uploadTask = await uploadBytes(storageRef, image);
         const downloadURL = await getDownloadURL(uploadTask.ref);
         await updatePost(postRef.id, { imageURL: downloadURL });
@@ -89,9 +90,10 @@ const NewBlogPost = () => {
 
   const handleImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {
+      setImage(event.target.files[0]);
       let reader = new FileReader();
       reader.onload = (e) => {
-        setImage(e.target.result);
+        setImageData(e.target.result);
       };
       reader.readAsDataURL(event.target.files[0]);
     }
@@ -139,7 +141,7 @@ const NewBlogPost = () => {
             </div>
           </div>
           <div className={styles.imagePreview}>
-            <img className={styles.image} alt="Preview" src={image} />
+            <img className={styles.image} alt="Preview" src={imageData} />
           </div>
         </div>
         <MDEditor value={text} onChange={setText} {...editorOptions} />
