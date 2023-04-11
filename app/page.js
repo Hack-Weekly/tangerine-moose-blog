@@ -1,3 +1,4 @@
+import BlogCard from "@/components/BlogCard/BlogCard";
 import { doc, getDoc, getDocs, orderBy, query } from "firebase/firestore";
 
 import { blogCollection, docToBlog } from "@/firebase/utils/blogUtils";
@@ -49,6 +50,7 @@ export default async function Home() {
           </div>
         );
       })}
+      <BlogCard />
       <div style={{ height: "1000px" }}></div>
     </div>
   ) : (
