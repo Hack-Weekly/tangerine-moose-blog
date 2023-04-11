@@ -1,9 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import slugify from "@sindresorhus/slugify";
 
 import Button from "@/components/Button/Button";
 import Input from "@/components/Input/Input";
+import { createBlog, updateBlog } from "@/firebase/utils/blogUtils";
+import { updateUser } from "@/firebase/utils/userUtils";
 import { useAuth } from "@/providers/AuthProvider";
 import styles from "./EditBlogForm.module.css";
 
@@ -13,20 +16,56 @@ export default function EditBlogForm({ onSuccess }) {
   const [description, setDescription] = useState("");
 
   useEffect(() => {
-    if (user) {
-      if (user.blogName) {
-        setName(`${user.displayName}'s Blog`);
-      }
-      if (user.blogDescription) {
-        setDescription("This is my blog");
-      }
+    if (user.blog) {
+      setName(user.blog);
+    } else {
+      setName(`${user.displayName}'s Blog`);
     }
-  }, [user]);
+
+    if (user.blogDescription) {
+      setDescription(user.blogDescription);
+    }
+  }, [user.blog, user.blogDescription, user.displayName]);
 
   const handleSubmit = async (e) => {
-    // TODO: write the logic to update the blog
     e.preventDefault();
-    onSuccess && onSuccess();
+    if (!user) return;
+
+    try {
+      // if user already has a blog, update it
+      if (user.blogId) {
+        await updateBlog(user.blogId, {
+          name: name.trim(),
+          description: description.trim(),
+        });
+        await updateUser(user.uid, {
+          blog: name.trim(),
+          blogDescription: description.trim(),
+        });
+        onSuccess && onSuccess();
+      } else {
+        // if user doesn't have a blog, create one
+        const blogRef = await createBlog({
+          name: name.trim(),
+          description: description.trim(),
+          userId: user.uid,
+        });
+
+        // add slug to blog
+        const slug = slugify(`${name}-${blogRef.id.substring(0, 5)}`);
+        await updateBlog(blogRef.id, { slug: slug });
+        // add blog id to user
+        await updateUser(user.uid, {
+          blog: name.trim(),
+          blogId: blogRef.id,
+          blogSlug: slug,
+          blogDescription: description.trim(),
+        });
+        onSuccess && onSuccess();
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
