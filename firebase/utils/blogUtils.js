@@ -1,17 +1,31 @@
-import { collection, doc, getDoc, serverTimestamp, setDoc, updateDoc } from "firebase/firestore";
+import { addDoc, collection, doc, getDoc, serverTimestamp, updateDoc } from "firebase/firestore";
 
 import { firestore } from "@/firebase/firebase";
+
+export const docToBlog = (doc) => {
+  const data = doc.data();
+  return {
+    id: doc.id,
+    slug: data.slug,
+    name: data.name,
+    description: data.description,
+    totalPosts: data.totalPosts,
+    userId: data.user,
+    createdAt: data.createdAt,
+    ...data,
+  };
+};
 
 export const blogCollection = collection(firestore, "blogs");
 
 export const createBlog = async (data) => {
-  const blogRef = doc(blogCollection);
-  await setDoc(blogRef, { ...data, createdAt: serverTimestamp() });
+  return await addDoc(blogCollection, { ...data, totalPost: 0, createdAt: serverTimestamp() });
 };
 
 // update blog by id
 export const updateBlog = async (id, data) => {
   const blogRef = doc(blogCollection, id);
+  delete data.createdAt; // don't allow createdAt to be updated
   await updateDoc(blogRef, data);
 };
 

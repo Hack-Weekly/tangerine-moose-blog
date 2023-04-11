@@ -1,12 +1,20 @@
-import { collection, doc, getDoc, serverTimestamp, setDoc, updateDoc } from "firebase/firestore";
+import { addDoc, collection, doc, getDoc, serverTimestamp, updateDoc } from "firebase/firestore";
 
 import { firestore } from "@/firebase/firebase";
+
+export const docToTag = (doc) => {
+  const data = doc.data();
+  return {
+    id: doc.id,
+    name: data.name,
+    ...data,
+  };
+};
 
 export const tagCollection = collection(firestore, "tags");
 
 export const createTag = async (data) => {
-  const tagRef = doc(tagCollection);
-  await setDoc(tagRef, { ...data, createdAt: serverTimestamp() });
+  await addDoc(tagCollection, { ...data });
 };
 
 // update tag by id
