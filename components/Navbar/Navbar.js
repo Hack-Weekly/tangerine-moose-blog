@@ -83,15 +83,19 @@ export default function Navbar() {
           <Link href="/about" className={styles.link}>
             About
           </Link>
-          <Link href="#" className={styles.link} onClick={() => setModalOpen(true)}>
-            Blog
-          </Link>
           <Link href="/" className={styles.link}>
             Contact
           </Link>
-          <Link href="/" className={styles.link}>
-            Sign in
-          </Link>
+          {user && !user.blogId && (
+            <Link href="#" className={styles.link} onClick={() => setModalOpen(true)}>
+              Create A Blog
+            </Link>
+          )}
+          {user && user.blogId && (
+            <Link href={`/${user.blogSlug}/new`} className={styles.link}>
+              Write A Post
+            </Link>
+          )}
         </div>
       </div>
       <Modal open={modalOpen} dismissible onClose={() => setModalOpen(false)}>
