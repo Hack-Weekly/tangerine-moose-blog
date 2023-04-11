@@ -52,7 +52,6 @@ export default async function Home() {
           </BlogCard>
         );
       })}
-      <BlogCard />
       <div style={{ height: "1000px" }}></div>
     </div>
   ) : (
