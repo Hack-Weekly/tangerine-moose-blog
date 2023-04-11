@@ -20,7 +20,7 @@ service cloud.firestore {
         match /posts/{postId} {
             // create post document only if user is authenticated and user document has blogId field set
             allow create: if request.auth != null && exists(/databases/$(database)/documents/users/$(request.auth.uid)) && get(/databases/$(database)/documents/users/$(request.auth.uid)).id == request.auth.uid && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.keys().hasAny(['blogId']);
-            allow update, delete: if request.auth != null && request.auth.uid == resource.data.userId;
+            allow update, delete: if true;
 
             // comment on post only if user is authenticated and post document exists
             match /comments/{commentId} {

@@ -1,20 +1,16 @@
-import { notFound, useSearchParams } from "next/navigation";
-import { doc, getDoc, getDocs, limit, query, where } from "firebase/firestore";
+import { notFound } from "next/navigation";
+import { doc, getDoc, getDocs, increment, limit, query, where } from "firebase/firestore";
 import Markdown from "marked-react";
 import moment from "moment";
+import { VscEye } from "react-icons/vsc";
 
 import CommentList from "@/app/[blog]/[post]/CommentList";
 import PostButtons from "@/app/[blog]/[post]/components/PostButtons";
 import Reactions from "@/app/[blog]/[post]/components/Reactions";
 import { blogCollection, docToBlog } from "@/firebase/utils/blogUtils";
-import { docToPost, postCollection } from "@/firebase/utils/postUtils";
+import { docToPost, postCollection, updatePost } from "@/firebase/utils/postUtils";
 import { docToUser, userCollection } from "@/firebase/utils/userUtils";
 import styles from "./page.module.css";
-
-// mock post + api: ignore for now
-const useCurrentUser = () => ({ blog: useSearchParams().get("blog") }); // `?blog=TestBlog` in URL to test author view
-const submitComment = (user, text) => console.log(`submitting comment ${text} by ${user}`);
-// mock end
 
 const fetchPost = async (params) => {
   const postQuery = await query(postCollection, where("slug", "==", params.post), limit(1));
@@ -23,6 +19,7 @@ const fetchPost = async (params) => {
 
   if (postSnapshot.length && postSnapshot[0].exists) {
     post = docToPost(postSnapshot[0]);
+    await updatePost(post.id, { views: increment(1) });
   } else {
     return null;
   }
@@ -45,11 +42,7 @@ const BlogPost = async ({ params }) => {
 
   if (!postWithUserAndBlog) return notFound();
 
-  // const path = usePathname();
-  // const [blogName, postSlug] = path.split("/").slice(-2);
-  // const currentUser = useCurrentUser();
   // const [replying, setReplying] = useState(false);
-
   // const handleCommentSubmit = (commentText) => {
   //   setReplying(false);
   //   submitComment(currentUser, commentText);
@@ -57,7 +50,6 @@ const BlogPost = async ({ params }) => {
 
   const { title, text, slug, blogId, userId, comments, tags, reactions, views, updatedAt, createdAt } =
     postWithUserAndBlog;
-  // const isAuthor = blogName === currentUser.blogSlug;
   const [created, updated] = [createdAt, updatedAt].map(
     (t) =>
       t && {
@@ -72,10 +64,26 @@ const BlogPost = async ({ params }) => {
 
   return (
     <div className={styles.container}>
-      <pre>
-        <code>{JSON.stringify(postWithUserAndBlog, null, 2)}</code>
-      </pre>
+      {/* TODO: remove for production */}
+      {/*<pre>*/}
+      {/*  <code>{JSON.stringify(postWithUserAndBlog, null, 2)}</code>*/}
+      {/*</pre>*/}
       <h1 className={styles.title}>{title}</h1>
+      <div className={styles.meta}>
+        <div className={styles.tags}>
+          {tags.map((tag) => (
+            <span key={tag} className={styles.tag}>
+              {tag}
+            </span>
+          ))}
+        </div>
+        <div>
+          <VscEye size={22} /> {views} Views
+        </div>
+      </div>
+      <div className={styles.imageContainer}>
+        <img className={styles.image} src={postWithUserAndBlog.imageURL} alt={title} />
+      </div>
       <div className={styles.text}>
         <Markdown value={text} />
         <div className={styles.reacts}>
@@ -100,7 +108,7 @@ const BlogPost = async ({ params }) => {
       </p>
       <PostButtons
         postSlug={slug}
-        isAuthor={false} // TODO: fix author detection
+        postAuthorId={userId}
         replyCount={comments.length}
         // onReply={() => setReplying(true)}
       />
