@@ -24,8 +24,8 @@ export default function UserMenu({ user, toggleDropdown }) {
             </Link>
           </>
         )}
-        <Link className={styles.link} href="/" onClick={signOut}>
-          <NavButton>Logout</NavButton>
+        <Link className={styles.link} href="#" onClick={signOut}>
+          Logout
         </Link>
       </div>
     </div>

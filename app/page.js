@@ -21,6 +21,7 @@ const fetchBlogs = async () => {
     if (userSnap.exists()) {
       // add user data to blog object
       const user = docToUser(userSnap);
+      delete user.email; // don't send email to client
       blogs.push({ ...blog, user });
     }
   }

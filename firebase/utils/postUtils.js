@@ -11,6 +11,7 @@ export const docToPost = (doc) => {
     title: data.title,
     text: data.text,
     slug: data.slug,
+    imageURL: data.imageURL,
     blogId: data.blog,
     userId: data.userId,
     comments: data.comments,

@@ -1,14 +1,13 @@
 .container {
   background-color: rgb(var(--background-end-rgb));
   max-width: var(--max-width);
-  margin: 0 auto;
+  margin: 2rem auto;
   padding: 5px;
   display: flex;
   flex-direction: column;
 }
 
 .input {
-  margin: 1rem;
   border-radius: var(--border-radius);
   background-color: rgb(var(--background-end-rgb));
   color: rgb(var(--foreground-rgb));
@@ -23,14 +22,12 @@
   border: 1px solid rgb(var(--callout-border-rgb));
   border-radius: var(--border-radius);
   padding: 0.5rem 1rem;
-  margin-left: 1rem;
   font-size: medium;
 }
 
 .submit {
   width: fit-content;
   padding: 0.5rem 1rem;
-  margin: 0 1rem;
   border-radius: var(--border-radius);
   border: 2px solid rgb(var(--foreground-rgb));
 }
@@ -53,4 +50,28 @@
 
 .text a {
   cursor: pointer;
+}
+
+.imagePreview {
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  height: 300px;
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.meta {
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+  gap: 1rem;
+}
+
+.meta > * {
+  flex: 1;
 }
