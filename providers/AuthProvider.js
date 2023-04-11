@@ -55,7 +55,8 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     if (!user) return;
 
-    const unsubscribeUser = onSnapshot(doc(userCollection, user.uid), (doc) => {
+    const { uid } = user;
+    const unsubscribeUser = onSnapshot(doc(userCollection, uid), (doc) => {
       if (doc.exists()) {
         setUser(docToUser(doc));
       } else {
@@ -64,7 +65,7 @@ export const AuthProvider = ({ children }) => {
     });
 
     return () => unsubscribeUser();
-  }, [user]);
+  }, [user, user.uid]);
 
   const signIn = async () => {
     try {
