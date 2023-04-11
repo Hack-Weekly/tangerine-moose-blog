@@ -20,7 +20,7 @@ export const auth = getAuth(firebase_app);
 export const firestore = getFirestore(firebase_app);
 export const storage = getStorage(firebase_app);
 
-// // use emulator in development
+// use emulator in development
 // if (process.env.NODE_ENV === "development") {
 //   connectAuthEmulator(auth, "http://localhost:9099");
 //   connectFirestoreEmulator(firestore, "localhost", 8080);

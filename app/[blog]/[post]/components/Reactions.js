@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import EmojiPicker from "emoji-picker-react";
 import { VscReactions as AddReactionIcon } from "react-icons/vsc";
