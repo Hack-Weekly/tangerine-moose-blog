@@ -32,11 +32,12 @@ export default async function Home() {
 
   return blogs.length ? (
     <div>
+      <Featured />
       Blogs:
       {/* TODO: replace with BlogCard component */}
       {blogs.map((blog) => {
         return (
-          <div key={blog.id}>
+          <BlogCard key={blog.id} {...blog}>
             <pre
               style={{
                 whiteSpace: "pre-wrap",
@@ -47,10 +48,9 @@ export default async function Home() {
             >
               <code>{JSON.stringify(blog, null, 2)}</code>
             </pre>
-          </div>
+          </BlogCard>
         );
       })}
-      <BlogCard />
       <div style={{ height: "1000px" }}></div>
     </div>
   ) : (

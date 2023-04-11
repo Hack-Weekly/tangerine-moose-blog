@@ -1,18 +1,20 @@
 .root {
   display: flex;
+  flex-direction: column;
 }
 
 .image {
-  border-radius: var(--border-radius);
-  padding: 0.5rem;
-  margin-right: 1rem;
+  height: calc(var(--max-width) / 5);
+  object-fit: cover;
 }
 
 .container {
   max-width: calc(var(--max-width) / 4);
+  min-width: calc(var(--max-width) / 4);
   height: calc(var(--max-width) / 3);
   box-shadow: rgb(var(--card-border-rgb)) 0px 1px 3px 0px, rgb(var(--card-border-rgb)) 0px 0.5px 0.5px 0px;
   font-family: var(--font-moos);
+  background-color: rgb(var(--background-start-rgb));
 }
 
 .legend {
@@ -40,4 +42,16 @@
 
 .content {
   font-family: var(--font-mono);
+}
+
+@media screen and (min-width: 580px) {
+  .root {
+    flex-direction: row;
+  }
+  .image {
+    height: calc(var(--max-width) / 3);
+    border-radius: var(--border-radius);
+    padding: 0.5rem;
+    margin-right: 1rem;
+  }
 }

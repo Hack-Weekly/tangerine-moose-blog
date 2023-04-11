@@ -20,13 +20,13 @@ const PostCard = (props) => {
 
   // TODO: take a substring of text
   const handleText = () => {
-    const result = text.substring(0, 325);
+    const result = text.substring(0, 250);
     return result + "...";
   };
 
   return (
-    <div className={styles.root}>
-      <Image src={photo} alt="" width={275} className={styles.image} />
+    <div className={`${styles.root} ${styles.futureStyle}`}>
+      <Image src={photo} alt="" width={275} height={366} className={styles.image} />
       <fieldset className={styles.container}>
         <legend className={styles.legend}>article</legend>
         {/* TODO: implement tags */}
