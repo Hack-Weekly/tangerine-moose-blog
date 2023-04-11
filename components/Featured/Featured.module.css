@@ -1,0 +1,28 @@
+.root {
+  background-image: url("../../public/FeaturedPhotos/mountain.jpg");
+  background-repeat: no-repeat;
+  background-position: top right;
+  margin: 1.5rem;
+  padding: 4rem;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+}
+
+.root h2 {
+  position: absolute;
+  top: -0.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  letter-spacing: 0.8rem;
+}
+
+.author {
+  display: none;
+}
+
+@media screen and (min-width: 1246px) {
+  .author {
+    display: flex;
+  }
+}

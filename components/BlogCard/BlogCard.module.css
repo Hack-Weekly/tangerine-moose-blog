@@ -1,0 +1,47 @@
+.container {
+  background-color: rgb(var(--background-start-rgb));
+  max-width: calc(var(--max-width) / 2);
+  box-shadow: rgb(var(--card-border-rgb)) 0px 1px 3px 0px, rgb(var(--card-border-rgb)) 0px 0.5px 0.5px 0px;
+  font-family: var(--font-moos);
+  padding: 0.5rem 1.5rem 1.5rem;
+  text-align: center;
+  position: relative;
+}
+
+.legend {
+  padding: 0 1rem;
+  letter-spacing: 0.3rem;
+  font-size: 1.2rem;
+  color: rgb(var(--middleground-rgb));
+}
+
+.tags {
+  color: rgb(var(--middleground-rgb));
+  font-size: 0.8rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.blogName {
+  font-size: 2rem;
+  text-align: center;
+  padding: 0.5rem 0;
+}
+
+.authorName {
+  font-size: 1.2rem;
+}
+
+.description {
+  font-family: var(--font-mono);
+  padding: 0.5rem 0;
+}
+
+.posts {
+  color: rgb(var(--middleground-rgb));
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 0.5rem;
+}
