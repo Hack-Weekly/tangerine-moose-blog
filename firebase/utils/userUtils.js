@@ -5,6 +5,8 @@ import { firestore } from "@/firebase/firebase";
 // convert firebase doc to user object
 export const docToUser = (doc) => {
   const data = doc.data();
+  if (!data) return null;
+
   return {
     uid: doc.id,
     displayName: data.name,

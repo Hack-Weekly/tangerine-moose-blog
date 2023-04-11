@@ -4,6 +4,8 @@ import { firestore } from "@/firebase/firebase";
 
 export const docToTag = (doc) => {
   const data = doc.data();
+  if (!data) return null;
+
   return {
     id: doc.id,
     name: data.name,
