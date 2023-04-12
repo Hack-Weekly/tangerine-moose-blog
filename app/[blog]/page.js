@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getDocs, limit, orderBy, query, where } from "firebase/firestore";
 
@@ -24,7 +25,7 @@ const fetchBlogPosts = async (params) => {
   // get user data for each blog
   for (const postDoc of postsDocs) {
     const post = docToPost(postDoc);
-    posts.push({ post });
+    posts.push(post);
   }
 
   return { blog, posts };
@@ -50,22 +51,13 @@ const Blog = async ({ params }) => {
           paddingBottom: "1rem",
         }}
       >
-        <code>{JSON.stringify(blogWithPosts.blog, null, 2)}</code>
+        <code>{JSON.stringify(blogWithPosts, null, 2)}</code>
       </pre>
       <div>posts:</div>
       {blogWithPosts.posts.map((post) => {
         return (
           <div key={post.id}>
-            <pre
-              style={{
-                whiteSpace: "pre-wrap",
-                display: "block",
-                overflow: "auto",
-                paddingBottom: "1rem",
-              }}
-            >
-              <code>{JSON.stringify(post, null, 2)}</code>
-            </pre>
+            <Link href={`/${blogWithPosts.blog.slug}/${post.slug}`}>{post.slug}</Link>
           </div>
         );
       })}

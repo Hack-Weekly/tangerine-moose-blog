@@ -54,7 +54,7 @@ const NewBlogPost = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // return early if user is null or user id is null
+    // return early if user is null or user doesn't have a blog
     if (!user || !user.blogId) return;
 
     try {
