@@ -6,6 +6,8 @@ import { blogCollection, docToBlog } from "@/firebase/utils/blogUtils";
 import { docToUser, userCollection } from "@/firebase/utils/userUtils";
 import styles from "./page.module.css";
 
+export const dynamic = "force-dynamic";
+
 const fetchBlogs = async () => {
   // get all blogs ordered by createdAt
   const blogsQuery = await query(blogCollection, orderBy("createdAt"));
