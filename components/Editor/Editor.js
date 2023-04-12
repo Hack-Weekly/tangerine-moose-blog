@@ -49,7 +49,7 @@ const editorOptions = {
   extraCommands: [],
 };
 
-export function Editor({ onSubmit, initialText }) {
+export function Editor({ onSubmit, initialText, onCancel }) {
   const [text, setText] = useState(initialText || "");
 
   return (
@@ -58,6 +58,11 @@ export function Editor({ onSubmit, initialText }) {
       <button className={styles.submit} type="submit" onClick={() => onSubmit(text) && setText("")}>
         post
       </button>
+      {onCancel && (
+        <button className={styles.submit} type="reset" onClick={() => onCancel() && setText("")}>
+          cancel
+        </button>
+      )}
       {text && (
         <div className={styles.preview}>
           <MDRenderer text={text} />

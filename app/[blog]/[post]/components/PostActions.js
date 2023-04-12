@@ -63,7 +63,7 @@ const PostActions = ({ postId, postSlug, postAuthorId, comments }) => {
           <div>
             replying as <span className={styles.name}>{user.displayName}</span>
           </div>
-          <Editor onSubmit={handleCommentSubmit} />
+          <Editor onSubmit={handleCommentSubmit} onCancel={() => setReplying(false)} />
         </div>
       )}
       <CommentList comments={replies} />
