@@ -7,3 +7,20 @@
 .buttons a {
   cursor: pointer;
 }
+
+.commentForm {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.commentForm > * {
+  margin-bottom: 0.5rem;
+}
+
+.commentForm > *:last-child {
+  margin-bottom: 0;
+}
+
+.name {
+  font-weight: bold;
+}

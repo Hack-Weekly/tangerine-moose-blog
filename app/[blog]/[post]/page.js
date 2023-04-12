@@ -1,12 +1,12 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { doc, getDoc, getDocs, limit, orderBy, query, where } from "firebase/firestore";
-import Markdown from "marked-react";
 import moment from "moment";
 import { VscEye } from "react-icons/vsc";
 
 import PostActions from "@/app/[blog]/[post]/components/PostActions";
 import Reactions from "@/app/[blog]/[post]/components/Reactions";
+import { MDRenderer } from "@/components/Editor/Editor";
 import { blogCollection, docToBlog } from "@/firebase/utils/blogUtils";
 import { bumpViews, commentCollection, docToComment, docToPost, postCollection } from "@/firebase/utils/postUtils";
 import { docToUser, userCollection } from "@/firebase/utils/userUtils";
@@ -19,7 +19,6 @@ const fetchPost = async (params) => {
 
   if (postSnapshot.length && postSnapshot[0].exists) {
     post = docToPost(postSnapshot[0]);
-    await updatePost(post.id, { views: increment(1) });
   } else {
     return null;
   }
@@ -46,7 +45,6 @@ const fetchPost = async (params) => {
   return { ...post, comments, user, blog };
 };
 
-// TODO: add back comments, reactions, etc
 const BlogPost = async ({ params }) => {
   const postWithUserAndBlog = await fetchPost(params);
 
@@ -84,7 +82,7 @@ const BlogPost = async ({ params }) => {
         <Image width={1080} height={720} className={styles.image} src={postWithUserAndBlog.imageURL} alt={title} />
       </div>
       <div className={styles.text}>
-        <Markdown value={text} />
+        <MDRenderer text={text} />
         <div className={styles.reacts}>
           <Reactions reactions={reactions} />
         </div>

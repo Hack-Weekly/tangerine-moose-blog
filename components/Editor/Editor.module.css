@@ -1,5 +1,6 @@
-.input {
-  padding: 1rem;
+.container {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 
 .submit {
@@ -23,7 +24,7 @@
   background-color: rgb(var(--callout-rgb));
   border-radius: var(--border-radius);
   padding: 1rem;
-  overflow-x: scroll;
+  overflow-x: auto;
 }
 
 .text a {

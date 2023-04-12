@@ -1,7 +1,6 @@
 "use client";
 
 import * as commands from "@uiw/react-md-editor/lib/commands";
-import Markdown from "marked-react";
 
 import "@uiw/react-md-editor/markdown-editor.css";
 import { useState } from "react";
@@ -10,6 +9,14 @@ import dynamic from "next/dynamic";
 import styles from "./Editor.module.css";
 
 const MDEditor = dynamic(() => import("@uiw/react-md-editor"), { ssr: false });
+
+const Markdown = dynamic(
+  () =>
+    import("@uiw/react-md-editor").then((mod) => {
+      return mod.default.Markdown;
+    }),
+  { ssr: false },
+);
 
 const editorOptions = {
   preview: "edit",
@@ -42,11 +49,11 @@ const editorOptions = {
   extraCommands: [],
 };
 
-export default function Editor({ onSubmit, initialText }) {
+export function Editor({ onSubmit, initialText }) {
   const [text, setText] = useState(initialText || "");
 
   return (
-    <div className={styles.input}>
+    <div className={styles.container}>
       <MDEditor value={text} onChange={setText} {...editorOptions} />
       <button className={styles.submit} type="submit" onClick={() => onSubmit(text)}>
         post
@@ -60,4 +67,8 @@ export default function Editor({ onSubmit, initialText }) {
       )}
     </div>
   );
+}
+
+export function MDRenderer({ text }) {
+  return text && <Markdown source={text} className={styles.text} />;
 }

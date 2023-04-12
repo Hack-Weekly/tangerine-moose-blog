@@ -6,6 +6,14 @@
   margin: 1rem;
 }
 
+.commentBox > * {
+  margin-bottom: 0.5rem;
+}
+
+.commentBox > *:last-child {
+  margin-bottom: 0;
+}
+
 .header {
   display: flex;
   flex-direction: row;
@@ -13,8 +21,8 @@
   flex-wrap: wrap;
 }
 
-.text {
-  overflow-x: scroll;
+.name {
+  font-weight: bold;
 }
 
 .buttons {

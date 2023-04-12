@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { doc, getDoc } from "firebase/firestore";
-import Markdown from "marked-react";
 import moment from "moment";
 
+import { MDRenderer } from "@/components/Editor/Editor";
 import { docToUser, userCollection } from "@/firebase/utils/userUtils";
 import { useAuth } from "@/providers/AuthProvider";
 import styles from "./Comment.module.css";
@@ -33,11 +33,11 @@ const Comment = ({ createdAt, userId, text }) => {
   return (
     <div className={styles.commentBox}>
       <div className={styles.header}>
-        <div style={{ fontWeight: "bold" }}>{commentator ? commentator.displayName : ""}</div>
+        <div className={styles.name}>{commentator ? commentator.displayName : ""}</div>
         <div>{`posted ${moment.unix(createdAt.seconds).fromNow()}`}</div>
       </div>
-      <div className={styles.text}>
-        <Markdown value={text} />
+      <div>
+        <MDRenderer text={text} />
       </div>
       {user && userId === user.uid && <CommentButtons className={styles.buttons} />}
     </div>
