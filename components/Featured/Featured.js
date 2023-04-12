@@ -23,8 +23,7 @@ const fetchUser = async (userId) => {
 const Featured = async (props) => {
   const article = await fetchPost();
   const user = await fetchUser(article.userId);
-  console.log(user);
-  console.log(user.blogSlug);
+
   return (
     <div className={styles.root}>
       <h2>FEATURED ARTICLE</h2>

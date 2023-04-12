@@ -1,0 +1,50 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem;
+}
+
+.author {
+  min-width: 25rem;
+  padding: 3rem;
+}
+
+.h1 {
+  font-size: 2rem;
+  margin: 0;
+}
+
+.h2 {
+  margin: 0;
+  font-style: italic;
+}
+
+.h3 {
+  color: rgb(var(--middleground-rgb));
+}
+
+.article {
+  padding: 0.5rem;
+}
+
+@media screen and (min-width: 800px) {
+  .author {
+    transform: scale(1.5);
+    margin-bottom: 5rem;
+  }
+  .root .h1 {
+    font-size: 5rem;
+  }
+  .root .h2 {
+    font-size: 4rem;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .posts {
+    display: flex;
+    gap: 1.5rem;
+  }
+}
