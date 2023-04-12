@@ -13,7 +13,7 @@ import { docToUser, userCollection } from "@/firebase/utils/userUtils";
 import styles from "./page.module.css";
 
 const fetchPost = async (params) => {
-  const postQuery = await query(postCollection, where("slug", "==", params.post), limit(1));
+  const postQuery = query(postCollection, where("slug", "==", params.post), limit(1));
   const postSnapshot = (await getDocs(postQuery)).docs;
   let post = {};
 
@@ -41,12 +41,6 @@ const BlogPost = async ({ params }) => {
   const postWithUserAndBlog = await fetchPost(params);
 
   if (!postWithUserAndBlog) return notFound();
-
-  // const [replying, setReplying] = useState(false);
-  // const handleCommentSubmit = (commentText) => {
-  //   setReplying(false);
-  //   submitComment(currentUser, commentText);
-  // };
 
   const { title, text, slug, blogId, userId, comments, tags, reactions, views, updatedAt, createdAt } =
     postWithUserAndBlog;
@@ -106,13 +100,7 @@ const BlogPost = async ({ params }) => {
         )}
         {` by `} <a href={`/${postWithUserAndBlog.blog.slug}`}>{postWithUserAndBlog.user.displayName}</a>
       </p>
-      <PostButtons
-        postSlug={slug}
-        postAuthorId={userId}
-        replyCount={comments.length}
-        // onReply={() => setReplying(true)}
-      />
-      {/*{replying && <CommentEditor onReplySubmit={handleCommentSubmit} />}*/}
+      <PostButtons postSlug={slug} postAuthorId={userId} replyCount={comments.length} />
       <CommentList comments={comments} />
     </div>
   );
