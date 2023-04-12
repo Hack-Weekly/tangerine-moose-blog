@@ -1,0 +1,23 @@
+.root h1 {
+  text-align: center;
+  font-family: var(--font-moos);
+}
+
+.anon {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 0.3rem;
+}
+
+.anonButton {
+  width: 100%;
+  margin: 0.7rem 0;
+}
+
+.other {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+  gap: 1rem;
+}

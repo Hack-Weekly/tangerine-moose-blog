@@ -18,7 +18,7 @@ const AuthorCard = (props) => {
   // };
 
   return (
-    <div className={`${styles.root} ${props.futureStyle}`}>
+    <div className={`${styles.root} ${props.className}`}>
       <Image src={authorAvatar || mooseLogo} alt="avatar" width={125} className={styles.avatar} />
       <div className={styles.info}>
         <div className={styles.displayName}>{displayName}</div>

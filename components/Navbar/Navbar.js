@@ -10,15 +10,18 @@ import Modal from "@/components/Modal/Modal";
 import UserMenu from "@/components/UserMenu/UserMenu";
 import { useAuth } from "@/providers/AuthProvider";
 import Moose from "../../public/moose.png";
+import Button from "../Button/Button";
+import Login from "../Login/Login";
 import styles from "./Navbar.module.css";
 
 export default function Navbar() {
-  const { user, loading, signIn } = useAuth();
+  const { user, loading } = useAuth();
   const [showDropdown, setShowDropdown] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const dropdown = useRef(null);
   const toggleDropdown = useCallback(() => setShowDropdown(!showDropdown), [showDropdown]);
   const [modalOpen, setModalOpen] = useState(false);
+  const [showLoginModal, setShowLoginModal] = useState(false);
 
   useEffect(() => {
     const handleOutsideClick = (e) => {
@@ -46,6 +49,10 @@ export default function Navbar() {
     };
   }, []);
 
+  const handleLoginModal = (e) => {
+    setShowLoginModal((prevState) => !prevState);
+  };
+
   return (
     <>
       <div className={`${styles.root} ${isScrolled && styles.scrolled}`}>
@@ -60,9 +67,9 @@ export default function Navbar() {
             <div className={styles.menu}>
               {loading && <Avatar loading />}
               {!loading && !user && (
-                <button onClick={signIn} className={styles.login}>
+                <Button onClick={handleLoginModal} className={styles.login}>
                   Login
-                </button>
+                </Button>
               )}
               {!loading && user && (
                 <div className={styles.dropdown} ref={dropdown}>
@@ -98,6 +105,11 @@ export default function Navbar() {
       <Modal open={modalOpen} dismissible onClose={() => setModalOpen(false)}>
         <EditBlogForm onSuccess={() => setModalOpen(false)} />
       </Modal>
+      {!user && (
+        <Modal open={showLoginModal} dismissible onClose={() => setShowLoginModal()}>
+          <Login onSuccess={() => setShowLoginModal()} />
+        </Modal>
+      )}
     </>
   );
 }
