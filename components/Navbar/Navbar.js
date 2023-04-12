@@ -83,9 +83,6 @@ export default function Navbar() {
           <Link href="/about" className={styles.link}>
             About
           </Link>
-          <Link href="/" className={styles.link}>
-            Contact
-          </Link>
           {user && !user.blogId && (
             <Link href="#" className={styles.link} onClick={() => setModalOpen(true)}>
               Create A Blog

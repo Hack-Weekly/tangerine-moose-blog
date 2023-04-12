@@ -1,9 +1,13 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getDocs, limit, orderBy, query, where } from "firebase/firestore";
+import { doc, getDoc, getDocs, limit, orderBy, query, where } from "firebase/firestore";
 
+import AuthorCard from "@/components/AuthorCard/AuthorCard";
+import PostCard from "@/components/PostCard/PostCard";
 import { blogCollection, docToBlog } from "@/firebase/utils/blogUtils";
 import { docToPost, postCollection } from "@/firebase/utils/postUtils";
+import { docToUser, userCollection } from "@/firebase/utils/userUtils";
+import styles from "./page.module.css";
 
 const fetchBlogPosts = async (params) => {
   // get blog data
@@ -31,37 +35,36 @@ const fetchBlogPosts = async (params) => {
   return { blog, posts };
 };
 
+// get blog owner
+const fetchOwner = async (userId) => {
+  const userRef = await doc(userCollection, userId);
+  const userDoc = await getDoc(userRef);
+  return docToUser(userDoc);
+};
+
 const Blog = async ({ params }) => {
   const blogWithPosts = await fetchBlogPosts(params);
+  const user = await fetchOwner(blogWithPosts.blog.userId);
 
   if (!blogWithPosts) {
     return notFound();
   }
 
-  // TODO: style this page
+  const options = { month: "2-digit", day: "2-digit", year: "numeric" };
+  const formattedDate = new Date(blogWithPosts.blog.createdAt.seconds * 1000).toLocaleDateString(undefined, options);
+
   return (
-    <div>
-      <h1>{blogWithPosts.blog.name}</h1>
-      <h2>{blogWithPosts.blog.description}</h2>
-      <pre
-        style={{
-          whiteSpace: "pre-wrap",
-          display: "block",
-          overflow: "auto",
-          paddingBottom: "1rem",
-        }}
-      >
-        <code>{JSON.stringify(blogWithPosts, null, 2)}</code>
-      </pre>
-      <div>posts:</div>
-      {blogWithPosts.posts.map((post) => {
-        return (
-          <div key={post.id}>
-            <Link href={`/${blogWithPosts.blog.slug}/${post.slug}`}>{post.slug}</Link>
-          </div>
-        );
-      })}
-      <div style={{ height: "1000px" }}></div>
+    <div className={styles.root}>
+      <AuthorCard {...user} {...blogWithPosts.blog} futureStyle={styles.author} />
+      <h1 className={styles.h1}>{blogWithPosts.blog.name}</h1>
+      <h2 className={styles.h2}>{blogWithPosts.blog.description}</h2>
+      <h3 className={styles.h3}>Blogging since: {formattedDate}</h3>
+      <div className={styles.posts}>
+        {blogWithPosts.posts.map((post) => {
+          console.log(post.post);
+          return <PostCard key={post.post.id} {...post.post} {...user} futureStyle={styles.article} />;
+        })}
+      </div>
     </div>
   );
 };

@@ -22,7 +22,7 @@ const PostCard = (props) => {
   const formattedDate = new Date(props.createdAt.seconds * 1000).toLocaleDateString(undefined, options);
 
   return (
-    <Link href={`/${props.blogSlug}/${props.slug}`} className={`${styles.root} ${styles.futureStyle}`}>
+    <Link href={`/${props.blogSlug}/${props.slug}`} className={`${styles.root} ${props.futureStyle}`}>
       <Image src={photo} alt="" width={275} height={366} className={styles.image} />
       <fieldset className={styles.container}>
         <legend className={styles.legend}>article</legend>
