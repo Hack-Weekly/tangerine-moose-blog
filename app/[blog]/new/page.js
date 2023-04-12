@@ -25,8 +25,9 @@ const NewBlogPost = () => {
   const [image, setImage] = useState("");
   const [imageData, setImageData] = useState("");
 
-  const handleSubmit = async (text) => {
-    // return early if user is null or user id is null
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    // return early if user is null or user doesn't have a blog
     if (!user || !user.blogId) return;
 
     try {

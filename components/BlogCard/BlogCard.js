@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { VscAccount, VscArchive, VscGear } from "react-icons/all";
+import { VscArchive } from "react-icons/vsc";
 
 import styles from "./BlogCard.module.css";
 
