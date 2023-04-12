@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState } from "react";
-import { GoogleAuthProvider, onIdTokenChanged, signInWithPopup } from "firebase/auth";
+import { GoogleAuthProvider, onIdTokenChanged, signInAnonymously, signInWithPopup, updateProfile } from "firebase/auth";
 import { doc, getDoc, onSnapshot } from "firebase/firestore";
 import { removeCookie, setCookie } from "tiny-cookie";
 
@@ -84,5 +84,27 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  return <AuthContext.Provider value={{ user, loading, signIn, signOut }}>{children}</AuthContext.Provider>;
+  const googleSignIn = async (event) => {
+    try {
+      const provider = new GoogleAuthProvider();
+      signInWithPopup(auth, provider);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const anonymousSignIn = async (displayName) => {
+    try {
+      await signInAnonymously(auth);
+      await updateProfile(auth.currentUser, { displayName });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  return (
+    <AuthContext.Provider value={{ user, loading, signIn, signOut, googleSignIn, anonymousSignIn }}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
