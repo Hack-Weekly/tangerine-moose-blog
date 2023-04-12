@@ -1,20 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import dynamic from "next/dynamic";
 import { getDoc } from "firebase/firestore";
 
 import CommentList from "@/app/[blog]/[post]/CommentList";
-import Button from "@/components/Button/Button";
+import { Editor } from "@/components/Editor";
 import { addComment, docToComment } from "@/firebase/utils/postUtils";
 import { useAuth } from "@/providers/AuthProvider";
 import styles from "./PostActions.module.css";
 
-const MDEditor = dynamic(() => import("@uiw/react-md-editor"), { ssr: false });
-
 const PostActions = ({ postId, postSlug, postAuthorId, comments }) => {
   const { user } = useAuth();
-  const [commentText, setCommentText] = useState("");
   const [replies, setReplies] = useState(comments);
   const [saved, setSaved] = useState(false);
   const toggleSavePost = () => setSaved(!saved);
@@ -29,9 +25,8 @@ const PostActions = ({ postId, postSlug, postAuthorId, comments }) => {
 
   const [replying, setReplying] = useState(false);
 
-  const handleCommentSubmit = async (e) => {
-    e.preventDefault();
-    if (!user) return;
+  const handleCommentSubmit = async (commentText) => {
+    if (!user || !commentText) return;
 
     try {
       console.log(commentText);
@@ -39,7 +34,7 @@ const PostActions = ({ postId, postSlug, postAuthorId, comments }) => {
       const comment = await getDoc(commentRef);
       console.log(docToComment(comment));
       setReplies([docToComment(comment), ...replies]);
-      setCommentText("");
+      setReplying(false);
     } catch (err) {
       console.log(err);
     }
@@ -64,13 +59,12 @@ const PostActions = ({ postId, postSlug, postAuthorId, comments }) => {
         )}
       </div>
       {replying && (
-        <form onSubmit={handleCommentSubmit} className={styles.commentForm}>
+        <div className={styles.commentForm}>
           <div>
             replying as <span className={styles.name}>{user.displayName}</span>
           </div>
-          <MDEditor value={commentText} onChange={setCommentText} />
-          <Button type="submit">send</Button>
-        </form>
+          <Editor onSubmit={handleCommentSubmit} />
+        </div>
       )}
       <CommentList comments={replies} />
     </div>

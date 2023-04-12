@@ -6,7 +6,7 @@ import { VscEye } from "react-icons/vsc";
 
 import PostActions from "@/app/[blog]/[post]/components/PostActions";
 import Reactions from "@/app/[blog]/[post]/components/Reactions";
-import { MDRenderer } from "@/components/Editor/Editor";
+import { MDRenderer } from "@/components/Editor";
 import { blogCollection, docToBlog } from "@/firebase/utils/blogUtils";
 import { bumpViews, commentCollection, docToComment, docToPost, postCollection } from "@/firebase/utils/postUtils";
 import { docToUser, userCollection } from "@/firebase/utils/userUtils";

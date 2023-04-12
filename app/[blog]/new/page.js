@@ -11,7 +11,7 @@ import { useRouter } from "next/navigation";
 import { increment } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
-import Button from "@/components/Button/Button";
+import { Editor } from "@/components/Editor";
 import Input from "@/components/Input/Input";
 import { storage } from "@/firebase/firebase";
 import { updateBlog } from "@/firebase/utils/blogUtils";
@@ -25,15 +25,13 @@ const NewBlogPost = () => {
   const router = useRouter();
   const { user } = useAuth();
   const [title, setTitle] = useState("");
-  const [text, setText] = useState("");
   const [tags, setTags] = useState("");
   const [image, setImage] = useState(null);
   const [imageData, setImageData] = useState(null);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (text) => {
     // return early if user is null or user doesn't have a blog
-    if (!user || !user.blogId) return;
+    if (!user || !user.blogId || !text) return;
 
     try {
       const postRef = await createPost(user.blogId, user.uid, {
@@ -79,7 +77,7 @@ const NewBlogPost = () => {
 
   return (
     <div className={styles.container}>
-      <form onSubmit={handleSubmit}>
+      <div>
         <div className={styles.meta}>
           <div className={styles.input}>
             <div>
@@ -101,13 +99,8 @@ const NewBlogPost = () => {
             {imageData && <Image fill className={styles.image} alt="Preview" src={imageData} />}
           </div>
         </div>
-        <div className={styles.container}>
-          <MDEditor value={text} onChange={setText} />
-        </div>
-        <Button className={styles.submit} type="submit">
-          post
-        </Button>
-      </form>
+        <Editor onSubmit={handleSubmit} />
+      </div>
     </div>
   );
 };

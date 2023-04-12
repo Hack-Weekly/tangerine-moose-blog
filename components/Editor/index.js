@@ -1,3 +1,3 @@
-import Editor from "./Editor";
+import { Editor, MDRenderer } from "./Editor";
 
-export default Editor;
+export { Editor, MDRenderer };

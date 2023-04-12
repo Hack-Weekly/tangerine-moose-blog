@@ -55,14 +55,12 @@ export function Editor({ onSubmit, initialText }) {
   return (
     <div className={styles.container}>
       <MDEditor value={text} onChange={setText} {...editorOptions} />
-      <button className={styles.submit} type="submit" onClick={() => onSubmit(text)}>
+      <button className={styles.submit} type="submit" onClick={() => onSubmit(text) && setText("")}>
         post
       </button>
       {text && (
         <div className={styles.preview}>
-          <div className={styles.text}>
-            <Markdown value={text} />
-          </div>
+          <MDRenderer text={text} />
         </div>
       )}
     </div>
