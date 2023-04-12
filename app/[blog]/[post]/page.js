@@ -13,12 +13,13 @@ import { docToUser, userCollection } from "@/firebase/utils/userUtils";
 import styles from "./page.module.css";
 
 const fetchPost = async (params) => {
-  const postQuery = await query(postCollection, where("slug", "==", params.post), limit(1));
+  const postQuery = query(postCollection, where("slug", "==", params.post), limit(1));
   const postSnapshot = (await getDocs(postQuery)).docs;
   let post = {};
 
   if (postSnapshot.length && postSnapshot[0].exists) {
     post = docToPost(postSnapshot[0]);
+    await updatePost(post.id, { views: increment(1) });
   } else {
     return null;
   }
