@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { doc, getDoc, getDocs, limit, orderBy, query, where } from "firebase/firestore";
 
@@ -10,7 +11,7 @@ import styles from "./page.module.css";
 
 const fetchBlogPosts = async (params) => {
   // get blog data
-  const blogQuery = await query(blogCollection, where("slug", "==", params.blog), limit(1));
+  const blogQuery = query(blogCollection, where("slug", "==", params.blog), limit(1));
   const blogDoc = (await getDocs(blogQuery)).docs;
 
   let blog = null;
@@ -22,13 +23,13 @@ const fetchBlogPosts = async (params) => {
 
   // get all posts for blog ordered by createdAt
   let posts = [];
-  const postsQuery = await query(postCollection, where("blogId", "==", blog.id), orderBy("createdAt"));
+  const postsQuery = query(postCollection, where("blogId", "==", blog.id), orderBy("createdAt"));
   const postsDocs = (await getDocs(postsQuery)).docs;
 
   // get user data for each blog
   for (const postDoc of postsDocs) {
     const post = docToPost(postDoc);
-    posts.push({ post });
+    posts.push(post);
   }
 
   return { blog, posts };
