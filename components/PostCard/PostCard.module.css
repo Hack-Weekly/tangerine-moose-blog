@@ -26,6 +26,9 @@
 
 .tags {
   color: rgb(var(--middleground-rgb));
+  display: flex;
+  font-style: italic;
+  gap: 0.5rem;
 }
 
 .title {
