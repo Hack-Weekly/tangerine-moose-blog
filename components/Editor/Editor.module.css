@@ -1,14 +1,11 @@
 .input {
-  margin: 1rem;
-  border-radius: var(--border-radius);
-  background-color: rgb(var(--background-end-rgb));
-  color: rgb(var(--foreground-rgb));
+  padding: 1rem;
 }
 
 .submit {
   width: fit-content;
+  margin: 1rem;
   padding: 0.5rem 1rem;
-  margin: 0 1rem;
   border-radius: var(--border-radius);
   border: 2px solid rgb(var(--foreground-rgb));
 }

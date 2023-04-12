@@ -7,7 +7,7 @@ import { docToPost, postCollection } from "@/firebase/utils/postUtils";
 
 const fetchBlogPosts = async (params) => {
   // get blog data
-  const blogQuery = await query(blogCollection, where("slug", "==", params.blog), limit(1));
+  const blogQuery = query(blogCollection, where("slug", "==", params.blog), limit(1));
   const blogDoc = (await getDocs(blogQuery)).docs;
 
   let blog = null;
@@ -19,7 +19,7 @@ const fetchBlogPosts = async (params) => {
 
   // get all posts for blog ordered by createdAt
   let posts = [];
-  const postsQuery = await query(postCollection, where("blogId", "==", blog.id), orderBy("createdAt"));
+  const postsQuery = query(postCollection, where("blogId", "==", blog.id), orderBy("createdAt"));
   const postsDocs = (await getDocs(postsQuery)).docs;
 
   // get user data for each blog

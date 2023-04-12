@@ -1,18 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import Markdown from "marked-react";
+import slugify from "@sindresorhus/slugify";
 
 import "@uiw/react-markdown-preview/markdown.css";
-import * as commands from "@uiw/react-md-editor/lib/commands";
-
 import "@uiw/react-md-editor/markdown-editor.css";
-import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
-import slugify from "@sindresorhus/slugify";
 import { increment } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
+import Editor from "@/components/Editor";
 import Input from "@/components/Input/Input";
 import { storage } from "@/firebase/firebase";
 import { updateBlog } from "@/firebase/utils/blogUtils";
@@ -20,34 +17,10 @@ import { createPost, updatePost } from "@/firebase/utils/postUtils";
 import { useAuth } from "@/providers/AuthProvider";
 import styles from "./page.module.css";
 
-const MDEditor = dynamic(() => import("@uiw/react-md-editor"), { ssr: false });
-
-const editorOptions = {
-  preview: "edit",
-  commands: [
-    "bold",
-    "italic",
-    "strikethrough",
-    "hr",
-    "divider",
-    "link",
-    "quote",
-    "code",
-    "codeBlock",
-    "image",
-    "divider",
-    "unorderedListCommand",
-    "orderedListCommand",
-    "checkedListCommand",
-  ].map((k) => commands[k]),
-  extraCommands: [],
-};
-
 const NewBlogPost = () => {
   const router = useRouter();
   const { user } = useAuth();
   const [title, setTitle] = useState("");
-  const [text, setText] = useState("");
   const [tags, setTags] = useState("");
   const [image, setImage] = useState("");
   const [imageData, setImageData] = useState("");
@@ -144,18 +117,8 @@ const NewBlogPost = () => {
             <img className={styles.image} alt="Preview" src={imageData} />
           </div>
         </div>
-        <MDEditor value={text} onChange={setText} {...editorOptions} />
-        <button className={styles.submit} type="submit" onClick={handleSubmit}>
-          post
-        </button>
+        <Editor onSubmit={handleSubmit} />
       </div>
-      {text && (
-        <div className={styles.preview}>
-          <div className={styles.text}>
-            <Markdown value={text} />
-          </div>
-        </div>
-      )}
     </div>
   );
 };
