@@ -53,6 +53,12 @@ export default function Navbar() {
     setShowLoginModal((prevState) => !prevState);
   };
 
+  useEffect(() => {
+    if (!user) {
+      setShowLoginModal();
+    }
+  }, [user]);
+
   return (
     <>
       <div className={`${styles.root} ${isScrolled && styles.scrolled}`}>
@@ -105,7 +111,7 @@ export default function Navbar() {
       <Modal open={modalOpen} dismissible onClose={() => setModalOpen(false)}>
         <EditBlogForm onSuccess={() => setModalOpen(false)} />
       </Modal>
-      {!user && (
+      {!user && showLoginModal && (
         <Modal open={showLoginModal} dismissible onClose={() => setShowLoginModal()}>
           <Login onSuccess={() => setShowLoginModal()} />
         </Modal>
