@@ -80,7 +80,7 @@ export default function about() {
         authorDescription={member.authorDescription}
         authorLinks={member.authorLinks}
         key={member.displayName}
-        futureStyle={styles.member}
+        className={styles.member}
       />
     ));
   };
