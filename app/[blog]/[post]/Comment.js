@@ -1,22 +1,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { doc, getDoc } from "firebase/firestore";
 import Markdown from "marked-react";
 import moment from "moment";
 
+import { docToUser, userCollection } from "@/firebase/utils/userUtils";
+import { useAuth } from "@/providers/AuthProvider";
 import styles from "./Comment.module.css";
 
-const fetchMockData = ({ id, user, text }) => ({
-  commentId: id,
-  authorUsername: user,
-  postId: 1234, // parent blog post ID
-  updated: new Date(Date.now() - 60000),
-  created: new Date(2023, 1, 1, 12, 12, 12),
-  text: text,
-});
-const getAuthorName = (id) => `Test User (${id})`;
-const useCurrentUser = () => ({ name: useSearchParams().get("user") });
 const CommentButtons = () => (
   <div className={styles.buttons}>
     <a onClick={() => {}}>edit</a>
@@ -24,34 +16,32 @@ const CommentButtons = () => (
   </div>
 );
 
-const Comment = (commentId, user, text) => {
-  const [data, setData] = useState(null);
-  const currentUser = useCurrentUser();
+const Comment = ({ createdAt, userId, text }) => {
+  const [commentator, setCommentator] = useState(null);
+  const { user } = useAuth();
 
   useEffect(() => {
-    const data = fetchMockData(commentId, user, text);
-    setData(data);
-  }, [commentId, user, text]);
+    (async () => {
+      const userRef = doc(userCollection, userId);
+      const userDoc = await getDoc(userRef);
+      if (userDoc.exists()) {
+        setCommentator(docToUser(userDoc));
+      }
+    })();
+  }, [userId]);
 
-  if (!data) return <></>;
-  if (data) {
-    const { text, authorUsername, created, updated } = data;
-    const authorName = getAuthorName(authorUsername);
-    const isAuthor = currentUser.name === authorUsername;
-
-    return (
-      <div className={styles.commentBox}>
-        <div className={styles.header}>
-          <div style={{ fontWeight: "bold" }}>{authorName}</div>
-          <div>{`posted ${moment(created).fromNow()} (edited ${moment(updated).fromNow()})`}</div>
-        </div>
-        <div className={styles.text}>
-          <Markdown value={text} />
-        </div>
-        {isAuthor && <CommentButtons className={styles.buttons} />}
+  return (
+    <div className={styles.commentBox}>
+      <div className={styles.header}>
+        <div style={{ fontWeight: "bold" }}>{commentator ? commentator.displayName : ""}</div>
+        <div>{`posted ${moment.unix(createdAt.seconds).fromNow()}`}</div>
       </div>
-    );
-  }
+      <div className={styles.text}>
+        <Markdown value={text} />
+      </div>
+      {user && userId === user.uid && <CommentButtons className={styles.buttons} />}
+    </div>
+  );
 };
 
 export default Comment;

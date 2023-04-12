@@ -3,8 +3,8 @@ import Comment from "./Comment";
 const CommentList = ({ comments }) => {
   return (
     <>
-      {comments.map(({ id, user, text }) => (
-        <Comment key={id} id={id} user={user} text={text} />
+      {comments.map(({ id, userId, createdAt, text }) => (
+        <Comment key={id} userId={userId} createdAt={createdAt} text={text} />
       ))}
     </>
   );

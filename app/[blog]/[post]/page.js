@@ -1,14 +1,14 @@
+import Image from "next/image";
 import { notFound } from "next/navigation";
-import { doc, getDoc, getDocs, increment, limit, query, where } from "firebase/firestore";
+import { doc, getDoc, getDocs, limit, orderBy, query, where } from "firebase/firestore";
 import Markdown from "marked-react";
 import moment from "moment";
 import { VscEye } from "react-icons/vsc";
 
-import CommentList from "@/app/[blog]/[post]/CommentList";
-import PostButtons from "@/app/[blog]/[post]/components/PostButtons";
+import PostActions from "@/app/[blog]/[post]/components/PostActions";
 import Reactions from "@/app/[blog]/[post]/components/Reactions";
 import { blogCollection, docToBlog } from "@/firebase/utils/blogUtils";
-import { docToPost, postCollection, updatePost } from "@/firebase/utils/postUtils";
+import { bumpViews, commentCollection, docToComment, docToPost, postCollection } from "@/firebase/utils/postUtils";
 import { docToUser, userCollection } from "@/firebase/utils/userUtils";
 import styles from "./page.module.css";
 
@@ -19,7 +19,6 @@ const fetchPost = async (params) => {
 
   if (postSnapshot.length && postSnapshot[0].exists) {
     post = docToPost(postSnapshot[0]);
-    await updatePost(post.id, { views: increment(1) });
   } else {
     return null;
   }
@@ -33,7 +32,17 @@ const fetchPost = async (params) => {
   const blogSnapshot = await getDoc(blogRef);
   const blog = docToBlog(blogSnapshot);
 
-  return { ...post, user, blog };
+  const comments = [];
+  const commentQuery = query(commentCollection(post.id), orderBy("createdAt"));
+  const commentDocs = (await getDocs(commentQuery)).docs;
+  for (const commentDoc of commentDocs) {
+    const comment = docToComment(commentDoc);
+    comments.push(comment);
+  }
+
+  await bumpViews(post.id);
+
+  return { ...post, comments, user, blog };
 };
 
 // TODO: add back comments, reactions, etc
@@ -42,14 +51,7 @@ const BlogPost = async ({ params }) => {
 
   if (!postWithUserAndBlog) return notFound();
 
-  // const [replying, setReplying] = useState(false);
-  // const handleCommentSubmit = (commentText) => {
-  //   setReplying(false);
-  //   submitComment(currentUser, commentText);
-  // };
-
-  const { title, text, slug, blogId, userId, comments, tags, reactions, views, updatedAt, createdAt } =
-    postWithUserAndBlog;
+  const { id, title, text, slug, userId, comments, tags, reactions, views, updatedAt, createdAt } = postWithUserAndBlog;
   const [created, updated] = [createdAt, updatedAt].map(
     (t) =>
       t && {
@@ -64,10 +66,6 @@ const BlogPost = async ({ params }) => {
 
   return (
     <div className={styles.container}>
-      {/* TODO: remove for production */}
-      {/*<pre>*/}
-      {/*  <code>{JSON.stringify(postWithUserAndBlog, null, 2)}</code>*/}
-      {/*</pre>*/}
       <h1 className={styles.title}>{title}</h1>
       <div className={styles.meta}>
         <div className={styles.tags}>
@@ -82,7 +80,7 @@ const BlogPost = async ({ params }) => {
         </div>
       </div>
       <div className={styles.imageContainer}>
-        <img className={styles.image} src={postWithUserAndBlog.imageURL} alt={title} />
+        <Image width={1080} height={720} className={styles.image} src={postWithUserAndBlog.imageURL} alt={title} />
       </div>
       <div className={styles.text}>
         <Markdown value={text} />
@@ -106,14 +104,7 @@ const BlogPost = async ({ params }) => {
         )}
         {` by `} <a href={`/${postWithUserAndBlog.blog.slug}`}>{postWithUserAndBlog.user.displayName}</a>
       </p>
-      <PostButtons
-        postSlug={slug}
-        postAuthorId={userId}
-        replyCount={comments.length}
-        // onReply={() => setReplying(true)}
-      />
-      {/*{replying && <CommentEditor onReplySubmit={handleCommentSubmit} />}*/}
-      <CommentList comments={comments} />
+      <PostActions postId={id} postSlug={slug} postAuthorId={userId} comments={comments} />
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import { addDoc, collection, doc, getDoc, serverTimestamp, setDoc, updateDoc } from "firebase/firestore";
+import { addDoc, collection, doc, getDoc, increment, serverTimestamp, setDoc, updateDoc } from "firebase/firestore";
 
 import { firestore } from "@/firebase/firebase";
 
@@ -14,7 +14,6 @@ export const docToPost = (doc) => {
     imageURL: data.imageURL,
     blogId: data.blog,
     userId: data.userId,
-    comments: data.comments,
     tags: data.tags,
     reactions: data.reactions,
     views: data.views,
@@ -24,7 +23,21 @@ export const docToPost = (doc) => {
   };
 };
 
+export const docToComment = (doc) => {
+  const data = doc.data();
+  if (!data) return null;
+
+  return {
+    id: doc.id,
+    userId: data.userId,
+    text: data.text,
+    createdAt: data.createdAt,
+    ...data,
+  };
+};
+
 export const postCollection = collection(firestore, "posts");
+export const commentCollection = (postId) => collection(firestore, "posts", postId, "comments");
 
 export const createPost = async (blogId, userId, data) => {
   return await addDoc(postCollection, {
@@ -48,10 +61,23 @@ export const updatePost = async (id, data) => {
   await updateDoc(postRef, { ...data, updatedAt: serverTimestamp() });
 };
 
+export const bumpViews = async (id) => {
+  const postRef = doc(postCollection, id);
+  await updateDoc(postRef, { views: increment(1) });
+};
+
 // check whether post exists by id
 export const isExistingPost = async (id) => {
   const postRef = doc(postCollection, id);
   const post = await getDoc(postRef);
 
   return post.exists();
+};
+
+export const addComment = async (id, userId, text) => {
+  return await addDoc(commentCollection(id), {
+    userId: userId,
+    text: text.trim(),
+    createdAt: serverTimestamp(),
+  });
 };
