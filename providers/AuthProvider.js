@@ -84,19 +84,21 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const googleSignIn = async (event) => {
+  const googleSignIn = async (onSuccess) => {
     try {
       const provider = new GoogleAuthProvider();
-      signInWithPopup(auth, provider);
+      await signInWithPopup(auth, provider);
+      onSuccess && onSuccess();
     } catch (e) {
       console.log(e);
     }
   };
 
-  const anonymousSignIn = async (displayName) => {
+  const anonymousSignIn = async (displayName, onSuccess) => {
     try {
       await signInAnonymously(auth);
       await updateProfile(auth.currentUser, { displayName });
+      onSuccess && onSuccess();
     } catch (e) {
       console.log(e);
     }

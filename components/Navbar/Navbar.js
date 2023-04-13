@@ -111,11 +111,9 @@ export default function Navbar() {
       <Modal open={modalOpen} dismissible onClose={() => setModalOpen(false)}>
         <EditBlogForm onSuccess={() => setModalOpen(false)} />
       </Modal>
-      {!user && showLoginModal && (
-        <Modal open={showLoginModal} dismissible onClose={() => setShowLoginModal()}>
-          <Login onSuccess={() => setShowLoginModal()} />
-        </Modal>
-      )}
+      <Modal open={showLoginModal} dismissible onClose={() => setShowLoginModal(false)}>
+        <Login onSuccess={() => setShowLoginModal(false)} />
+      </Modal>
     </>
   );
 }
