@@ -2,21 +2,23 @@
 
 import { useEffect, useState } from "react";
 import { doc, getDoc } from "firebase/firestore";
-import moment from "moment";
 
 import { MDRenderer } from "@/components/Editor/Editor";
 import { docToUser, userCollection } from "@/firebase/utils/userUtils";
 import { useAuth } from "@/providers/AuthProvider";
 import styles from "./Comment.module.css";
 
-const CommentButtons = () => (
+const CommentButtons = ({ actions }) => (
   <div className={styles.buttons}>
-    <a onClick={() => {}}>edit</a>
-    <a onClick={() => {}}>delete</a>
+    {actions.map((action) => (
+      <a key={action.label} onClick={() => {}}>
+        {action.label}
+      </a>
+    ))}
   </div>
 );
 
-const Comment = ({ createdAt, userId, text }) => {
+const Comment = ({ createdAt, userId, text, actions }) => {
   const [commentator, setCommentator] = useState(null);
   const { user } = useAuth();
 
@@ -34,12 +36,12 @@ const Comment = ({ createdAt, userId, text }) => {
     <div className={styles.commentBox}>
       <div className={styles.header}>
         <div className={styles.name}>{commentator ? commentator.displayName : ""}</div>
-        <div>{`posted ${moment.unix(createdAt.seconds).fromNow()}`}</div>
+        <div>{createdAt}</div>
       </div>
       <div>
         <MDRenderer text={text} />
       </div>
-      {user && userId === user.uid && <CommentButtons className={styles.buttons} />}
+      {user && userId === user.uid && <CommentButtons className={styles.buttons} actions={actions} />}
     </div>
   );
 };

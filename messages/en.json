@@ -10,7 +10,39 @@
     "no_blogs": "No blogs yet",
     "articles": "Available Articles"
   },
+  "blog": {
+    "started": "Blogging since {startDate, date, long}"
+  },
+  "post": {
+    "views": " {viewCount, plural, =0 {No Views} =1 {# View} other {# Views}} ",
+    "byline": {
+      "submitted": "submitted <createdTag>{created}</createdTag>",
+      "updated": " (last edited <updatedTag>{updated}</updatedTag>)",
+      "author": " by <authorTag>{name}</authorTag>"
+    },
+    "new": {
+      "title": "Title",
+      "tags": "Tags (separated by <tag>,</tag>)",
+      "image": " Image ",
+      "post": "publish",
+      "post_empty": "Post content cannot be empty"
+    }
+  },
   "PostActions": {
-    "comments": "{commentCount, plural, =0 {no comments} =1 {# comment} other {# comments}}"
+    "save": "save",
+    "saved": "saved",
+    "unsave": "unsave",
+    "report": "report",
+    "reported": "reported",
+    "reply": "reply",
+    "share": "share",
+    "edit": "edit",
+    "delete": "delete",
+    "reply_author": "replying as <nameTag>{name}</nameTag>",
+    "post": "post",
+    "cancel": "cancel",
+    "comments": "{commentCount, plural, =0 {no comments} =1 {# comment} other {# comments}}",
+    "comment_empty": "Comment cannot be empty",
+    "posted": "posted {time}"
   }
 }
