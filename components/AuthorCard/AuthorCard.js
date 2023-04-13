@@ -1,11 +1,10 @@
-import Image from "next/image";
 import Link from "next/link";
 
-import mooseLogo from "../../public/moose.png";
+import Avatar from "@/components/Avatar/Avatar";
 import styles from "./AuthorCard.module.css";
 
 const AuthorCard = (props) => {
-  const { authorAvatar, displayName, blog, authorDescription, authorLinks } = props;
+  const { photoURL, displayName, blog, authorDescription, authorLinks } = props;
   // const handleLinks = () => {
   //   if (authorLinks == undefined) {
   //     return;
@@ -19,7 +18,7 @@ const AuthorCard = (props) => {
 
   return (
     <div className={`${styles.root} ${props.className}`}>
-      <Image src={authorAvatar || mooseLogo} alt="avatar" width={125} className={styles.avatar} />
+      <Avatar src={photoURL} alt="avatar" size={125} className={styles.avatar} />
       <div className={styles.info}>
         <div className={styles.displayName}>{displayName}</div>
         <Link href={`/${props.blogSlug}`} className={styles.blog}>
