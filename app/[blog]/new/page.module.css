@@ -40,10 +40,3 @@
 .meta > * {
   flex: 1;
 }
-
-.error {
-  background-color: rgb(var(--background-alert-rgb));
-  border-radius: var(--border-radius);
-  padding: 0.5rem;
-  margin: 0.5rem 0;
-}

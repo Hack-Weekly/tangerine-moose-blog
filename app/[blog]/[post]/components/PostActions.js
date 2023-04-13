@@ -6,6 +6,7 @@ import { getDoc } from "firebase/firestore";
 import CommentList from "@/app/[blog]/[post]/CommentList";
 import Button from "@/components/Button";
 import { Editor, MDRenderer } from "@/components/Editor";
+import FlashMessage from "@/components/FlashMessage";
 import { addComment, docToComment } from "@/firebase/utils/postUtils";
 import { useAuth } from "@/providers/AuthProvider";
 import styles from "./PostActions.module.css";
@@ -26,11 +27,11 @@ const PostActions = ({ postId, postSlug, postAuthorId, comments }) => {
 
   const [replying, setReplying] = useState(false);
   const [commentText, setCommentText] = useState("");
-  const [error, setError] = useState(null);
+  const [error, setError] = useState("");
 
   const handleTextChange = (text) => {
     setCommentText(text);
-    text && setError(null);
+    text && setError("");
   };
 
   const resetForm = () => {
@@ -42,7 +43,7 @@ const PostActions = ({ postId, postSlug, postAuthorId, comments }) => {
     e.preventDefault();
 
     if (!commentText) {
-      setError({ message: "Comment cannot be empty" });
+      setError("Comment cannot be empty");
       return;
     }
 
@@ -81,7 +82,7 @@ const PostActions = ({ postId, postSlug, postAuthorId, comments }) => {
       </div>
       {replying && (
         <form className={styles.commentForm} onSubmit={handleCommentSubmit}>
-          {error && <div className={styles.error}>{error.message}</div>}
+          {error && <FlashMessage message={error} />}
           <div>
             replying as <span className={styles.name}>{user.displayName}</span>
           </div>

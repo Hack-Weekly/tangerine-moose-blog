@@ -13,6 +13,7 @@ import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 import Button from "@/components/Button";
 import { Editor, MDRenderer } from "@/components/Editor";
+import FlashMessage from "@/components/FlashMessage";
 import Input from "@/components/Input/Input";
 import { storage } from "@/firebase/firebase";
 import { updateBlog } from "@/firebase/utils/blogUtils";
@@ -30,17 +31,17 @@ const NewBlogPost = () => {
   const [image, setImage] = useState(null);
   const [imageData, setImageData] = useState(null);
   const [text, setText] = useState("");
-  const [error, setError] = useState(null);
+  const [error, setError] = useState("");
 
   const handleTextChange = (text) => {
     setText(text);
-    text && setError(null);
+    text && setError("");
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!text) {
-      setError({ message: "Post content cannot be empty" });
+      setError("Post content cannot be empty");
       return;
     }
 
@@ -92,7 +93,7 @@ const NewBlogPost = () => {
   return (
     <div className={styles.container}>
       <form onSubmit={handleSubmit}>
-        {error && <div className={styles.error}>{error.message}</div>}
+        {error && <FlashMessage message={error} />}
         <div className={styles.meta}>
           <div className={styles.input}>
             <div>
