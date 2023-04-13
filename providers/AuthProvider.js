@@ -6,7 +6,7 @@ import { doc, getDoc, onSnapshot } from "firebase/firestore";
 import { removeCookie, setCookie } from "tiny-cookie";
 
 import { auth } from "@/firebase/firebase";
-import { createUserWithId, docToUser, updateUser, userCollection } from "@/firebase/utils/userUtils";
+import { createUserWithId, docToUser, isExistingUser, updateUser, userCollection } from "@/firebase/utils/userUtils";
 
 export const AuthContext = createContext({});
 
@@ -23,22 +23,23 @@ export const AuthProvider = ({ children }) => {
         try {
           const token = await user.getIdToken();
           setCookie("token", token, { secure: true });
-          const userRef = doc(userCollection, user.uid);
-          const userSnap = await getDoc(userRef);
-          if (userSnap.exists()) {
+          const isExist = await isExistingUser(user.uid);
+          if (isExist) {
             await updateUser(user.uid, {
+              displayName: user.displayName,
               email: user.email,
               photoURL: user.photoURL,
             });
-            setUser(docToUser(userSnap));
           } else {
             await createUserWithId(user.uid, {
               displayName: user.displayName,
               email: user.email,
               photoURL: user.photoURL,
             });
-            setUser({ uid: user.uid, displayName: user.displayName, email: user.email, photoURL: user.photoURL });
           }
+          const userRef = doc(userCollection, user.uid);
+          const userSnap = await getDoc(userRef);
+          setUser(docToUser(userSnap));
         } catch (e) {
           console.log(e);
         }
