@@ -56,7 +56,7 @@ const Blog = async ({ params }) => {
 
   return (
     <div className={styles.root}>
-      <AuthorCard {...user} {...blogWithPosts.blog} futureStyle={styles.author} />
+      <AuthorCard {...user} {...blogWithPosts.blog} className={styles.author} />
       <h1 className={styles.h1}>{blogWithPosts.blog.name}</h1>
       <h2 className={styles.h2}>{blogWithPosts.blog.description}</h2>
       <h3 className={styles.h3}>Blogging since: {formattedDate}</h3>

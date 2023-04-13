@@ -1,11 +1,11 @@
 {
   "indexes": [
     {
-      "collectionGroup": "users",
+      "collectionGroup": "posts",
       "queryScope": "COLLECTION",
       "fields": [
         {
-          "fieldPath": "posts",
+          "fieldPath": "blogId",
           "order": "ASCENDING"
         },
         {
