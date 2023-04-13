@@ -1,17 +1,25 @@
-import "../globals.css";
 import { Cabin } from "next/font/google";
 import { notFound } from "next/navigation";
-import { NextIntlClientProvider, useLocale } from "next-intl";
+import { NextIntlClientProvider, createTranslator, useLocale } from "next-intl";
 
 import Navbar from "@/components/Navbar/Navbar";
 import { AuthProvider } from "@/providers/AuthProvider";
+import "../globals.css";
 
-export const metadata = {
-  title: "Tangerine Moose Blog App",
-  description: "Blog app engineered by the Tangerine Moose team",
-  author: "Tangerine Moose Team",
-  charSet: "utf-8",
-};
+export async function generateMetadata({ params: { locale } }) {
+  const messages = (await import(`../../messages/${locale}.json`)).default;
+  const t = createTranslator({ locale, messages });
+
+  return {
+    title: t("metadata.title"),
+    description: t("metadata.description"),
+    author: t("metadata.author"),
+    charSet: t("metadata.charSet"),
+    icons: {
+      icon: "/favicon.ico",
+    },
+  };
+}
 
 const cabin = Cabin({ subsets: ["latin"] });
 
@@ -23,10 +31,6 @@ export default async function LocaleLayout({ children, params }) {
   } catch (error) {
     notFound();
   }
-
-  // if (params.locale !== locale) {
-  //   notFound();
-  // }
 
   return (
     <html lang={locale}>

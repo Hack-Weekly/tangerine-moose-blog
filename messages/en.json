@@ -1,4 +1,10 @@
 {
+  "metadata": {
+    "title": "Tangerine Moose Blog App",
+    "description": "Blog app engineered by the Tangerine Moose team",
+    "author": "Tangerine Moose Team",
+    "charSet": "utf-8"
+  },
   "home": {
     "blogs": "Available Blogs",
     "no_blogs": "No blogs yet",
