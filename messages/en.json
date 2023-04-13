@@ -5,6 +5,15 @@
     "author": "Tangerine Moose Team",
     "charSet": "utf-8"
   },
+  "navbar": {
+    "name": "Moos",
+    "login": "Login",
+    "logout": "Logout",
+    "about": "About",
+    "create_blog": "Create A Blog",
+    "write_post": "Write A Post",
+    "self_blog": "My Blog"
+  },
   "home": {
     "blogs": "Available Blogs",
     "no_blogs": "No blogs yet",

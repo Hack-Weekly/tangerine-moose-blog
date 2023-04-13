@@ -1,9 +1,10 @@
-import { Link } from "next-intl";
+import { Link, useTranslations } from "next-intl";
 
 import { useAuth } from "@/providers/AuthProvider";
 import styles from "./UserMenu.module.css";
 
 export default function UserMenu({ user, toggleDropdown }) {
+  const t = useTranslations("navbar");
   const { signOut } = useAuth();
   const NavButton = ({ children }) => <div onClick={toggleDropdown}>{children}</div>;
 
@@ -17,15 +18,15 @@ export default function UserMenu({ user, toggleDropdown }) {
         {user && user.blogSlug && (
           <>
             <Link className={styles.link} href={`/${user.blogSlug}`}>
-              <NavButton>My Blog</NavButton>
+              <NavButton>{t("self_blog")}</NavButton>
             </Link>
             <Link className={styles.link} href={`/${user.blogSlug}/new`}>
-              <NavButton>Write a Post</NavButton>
+              <NavButton>{t("write_post")}</NavButton>
             </Link>
           </>
         )}
         <Link className={styles.link} href="#" onClick={signOut}>
-          Logout
+          {t("logout")}
         </Link>
       </div>
     </div>
