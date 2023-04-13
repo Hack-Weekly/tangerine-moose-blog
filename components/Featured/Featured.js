@@ -10,6 +10,7 @@ import styles from "./Featured.module.css";
 const fetchPost = async () => {
   const postQuery = await query(postCollection, orderBy("createdAt"), limit(1));
   const postDoc = (await getDocs(postQuery)).docs;
+  if (postDoc[0] == null) return null;
   return docToPost(postDoc[0]);
 };
 
@@ -22,13 +23,14 @@ const fetchUser = async (userId) => {
 
 const Featured = async (props) => {
   const article = await fetchPost();
+  if (article == null) return <span></span>;
   const user = await fetchUser(article.userId);
 
   return (
     <div className={styles.root}>
       <h2>FEATURED ARTICLE</h2>
       <PostCard {...article} {...user} />
-      <AuthorCard futureStyle={styles.author} {...user} />
+      <AuthorCard className={styles.author} {...user} />
     </div>
   );
 };

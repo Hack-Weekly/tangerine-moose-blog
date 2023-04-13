@@ -1,8 +1,6 @@
 .root {
   border-radius: 999px;
   border: 2px solid rgb(var(--foreground-rgb));
-  width: 40px;
-  height: 40px;
   overflow: hidden;
 }
 

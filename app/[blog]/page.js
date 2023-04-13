@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { doc, getDoc, getDocs, limit, orderBy, query, where } from "firebase/firestore";
 
@@ -44,6 +43,8 @@ const fetchOwner = async (userId) => {
 
 const Blog = async ({ params }) => {
   const blogWithPosts = await fetchBlogPosts(params);
+  if (!blogWithPosts) return notFound();
+
   const user = await fetchOwner(blogWithPosts.blog.userId);
 
   if (!blogWithPosts) {
