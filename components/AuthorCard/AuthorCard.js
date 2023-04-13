@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "next-intl";
 
 import Avatar from "@/components/Avatar/Avatar";
 import styles from "./AuthorCard.module.css";

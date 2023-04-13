@@ -1,5 +1,7 @@
 /** @type {import("next").NextConfig} */
-const nextConfig = {
+const withNextIntl = require("next-intl/plugin")("./i18n.js");
+
+const nextConfig = withNextIntl({
   experimental: {
     appDir: true,
   },
@@ -19,6 +21,6 @@ const nextConfig = {
       },
     ],
   },
-};
+});
 
 module.exports = nextConfig;

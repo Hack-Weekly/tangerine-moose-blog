@@ -4,8 +4,8 @@ import { doc, getDoc, getDocs, limit, orderBy, query, where } from "firebase/fir
 import moment from "moment";
 import { VscEye } from "react-icons/vsc";
 
-import PostActions from "@/app/[blog]/[post]/components/PostActions";
-import Reactions from "@/app/[blog]/[post]/components/Reactions";
+import PostActions from "@/app/[locale]/[blog]/[post]/components/PostActions";
+import Reactions from "@/app/[locale]/[blog]/[post]/components/Reactions";
 import { MDRenderer } from "@/components/Editor";
 import { blogCollection, docToBlog } from "@/firebase/utils/blogUtils";
 import { bumpViews, commentCollection, docToComment, docToPost, postCollection } from "@/firebase/utils/postUtils";

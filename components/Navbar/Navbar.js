@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "next-intl";
 
 import Avatar from "@/components/Avatar/Avatar";
 import EditBlogForm from "@/components/EditBlogForm/EditBlogForm";

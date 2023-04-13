@@ -1,4 +1,5 @@
 import { doc, getDoc, getDocs, limit, orderBy, query } from "firebase/firestore";
+import { getTranslations } from "next-intl/server";
 
 import BlogCard from "@/components/BlogCard/BlogCard";
 import Featured from "@/components/Featured/Featured";
@@ -59,19 +60,21 @@ const fetchPosts = async () => {
 };
 
 export default async function Home() {
+  const t = await getTranslations("home");
+
   const blogsWithUser = await fetchBlogs();
   const postsWithUser = await fetchPosts();
 
   return blogsWithUser.length ? (
     <div>
       <Featured />
-      <h2 className={styles.h2}>AVAILABLE BLOGS</h2>
+      <h2 className={styles.h2}>{t("blogs").toUpperCase()}</h2>
       <div className={styles.container}>
         {blogsWithUser.map((blog) => {
           return <BlogCard key={blog.id} blogWithUser={blog} />;
         })}
       </div>
-      <h2 className={styles.h2}>AVAILABLE ARTICLES</h2>
+      <h2 className={styles.h2}>{t("articles").toUpperCase()}</h2>
       <div className={styles.container}>
         {postsWithUser.map((post) => {
           return <PostCard key={post.id} {...post} {...post.user} className={styles.post} />;
@@ -80,7 +83,7 @@ export default async function Home() {
     </div>
   ) : (
     <div className={styles.container}>
-      <div className={styles.h2}>No blogs yet</div>
+      <div className={styles.h2}>{t("no_blogs")}</div>
     </div>
   );
 }

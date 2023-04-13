@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 import { getDoc } from "firebase/firestore";
+import { useTranslations } from "next-intl";
 
-import CommentList from "@/app/[blog]/[post]/CommentList";
+import CommentList from "@/app/[locale]/[blog]/[post]/CommentList";
 import Button from "@/components/Button";
 import { Editor, MDRenderer } from "@/components/Editor";
 import FlashMessage from "@/components/FlashMessage";
@@ -12,6 +13,7 @@ import { useAuth } from "@/providers/AuthProvider";
 import styles from "./PostActions.module.css";
 
 const PostActions = ({ postId, postSlug, postAuthorId, comments }) => {
+  const t = useTranslations("PostActions");
   const { user } = useAuth();
   const [replies, setReplies] = useState(comments);
   const [saved, setSaved] = useState(false);
@@ -65,7 +67,8 @@ const PostActions = ({ postId, postSlug, postAuthorId, comments }) => {
   return (
     <div>
       <div className={styles.buttons}>
-        <a href={postSlug}>{`${replies.length} comments`}</a>
+        {/* <a href={postSlug}>{`${replies.length} comments`}</a> */}
+        <a href={postSlug}>{t("comments", { commentCount: replies.length })}</a>
         <a onClick={() => setReplying(!replying)}>reply</a>
         <a onClick={() => {}}>share</a>
         <a onClick={toggleSavePost} onMouseOver={hoverSave} onMouseLeave={leaveSave}>

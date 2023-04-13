@@ -1,0 +1,10 @@
+{
+  "home": {
+    "blogs": "Available Blogs",
+    "no_blogs": "No blogs yet",
+    "articles": "Available Articles"
+  },
+  "PostActions": {
+    "comments": "{commentCount, plural, =0 {no comments} =1 {# comment} other {# comments}}"
+  }
+}

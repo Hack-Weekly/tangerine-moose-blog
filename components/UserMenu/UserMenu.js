@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "next-intl";
 
 import { useAuth } from "@/providers/AuthProvider";
 import styles from "./UserMenu.module.css";

@@ -7,9 +7,9 @@ import "@uiw/react-markdown-preview/markdown.css";
 import "@uiw/react-md-editor/markdown-editor.css";
 import dynamic from "next/dynamic";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { increment } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { useRouter } from "next-intl/client";
 
 import Button from "@/components/Button";
 import { Editor, MDRenderer } from "@/components/Editor";
