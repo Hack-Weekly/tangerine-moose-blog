@@ -18,7 +18,7 @@ const AuthorCard = (props) => {
 
   return (
     <div className={`${styles.root} ${props.className}`}>
-      <Avatar src={photoURL} alt="avatar" size={125} className={styles.avatar} />
+      <Avatar avatar={photoURL} alt="avatar" size={125} className={styles.avatar} />
       <div className={styles.info}>
         <div className={styles.displayName}>{displayName}</div>
         <Link href={`/${props.blogSlug}`} className={styles.blog}>
