@@ -29,7 +29,7 @@ const Featured = async (props) => {
   return (
     <div className={styles.root}>
       <h2>FEATURED ARTICLE</h2>
-      <PostCard {...article} {...user} />
+      <PostCard {...article} {...user} className={styles.post} />
       <AuthorCard className={styles.author} {...user} />
     </div>
   );
