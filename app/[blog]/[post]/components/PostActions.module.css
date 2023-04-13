@@ -24,3 +24,7 @@
 .name {
   font-weight: bold;
 }
+
+.preview {
+  padding-top: 0.5rem;
+}

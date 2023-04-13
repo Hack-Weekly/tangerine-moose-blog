@@ -10,6 +10,7 @@
   --background-start-rgb: 242, 245, 245;
   --background-end-rgb: 255, 255, 255;
   --background-tan: #e3a569;
+  --background-alert-rgb: 251, 240, 218;
 
   --error-rgb: 255, 0, 0;
 
@@ -44,6 +45,7 @@
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
     --background-tan: #b04f00;
+    --background-alert-rgb: 198, 79, 15;
     --middleground-rgb: 163, 165, 168;
 
     --primary-glow: radial-gradient(rgba(1, 65, 255, 0.4), rgba(1, 65, 255, 0));

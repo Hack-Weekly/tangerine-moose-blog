@@ -1,20 +1,18 @@
 "use client";
 
 import { useState } from "react";
-import dynamic from "next/dynamic";
 import { getDoc } from "firebase/firestore";
 
 import CommentList from "@/app/[blog]/[post]/CommentList";
-import Button from "@/components/Button/Button";
+import Button from "@/components/Button";
+import { Editor, MDRenderer } from "@/components/Editor";
+import FlashMessage from "@/components/FlashMessage";
 import { addComment, docToComment } from "@/firebase/utils/postUtils";
 import { useAuth } from "@/providers/AuthProvider";
 import styles from "./PostActions.module.css";
 
-const MDEditor = dynamic(() => import("@uiw/react-md-editor"), { ssr: false });
-
 const PostActions = ({ postId, postSlug, postAuthorId, comments }) => {
   const { user } = useAuth();
-  const [commentText, setCommentText] = useState("");
   const [replies, setReplies] = useState(comments);
   const [saved, setSaved] = useState(false);
   const toggleSavePost = () => setSaved(!saved);
@@ -28,9 +26,27 @@ const PostActions = ({ postId, postSlug, postAuthorId, comments }) => {
   };
 
   const [replying, setReplying] = useState(false);
+  const [commentText, setCommentText] = useState("");
+  const [error, setError] = useState("");
+
+  const handleTextChange = (text) => {
+    setCommentText(text);
+    text && setError("");
+  };
+
+  const resetForm = () => {
+    setCommentText("");
+    setReplying(false);
+  };
 
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
+
+    if (!commentText) {
+      setError("Comment cannot be empty");
+      return;
+    }
+
     if (!user) return;
 
     try {
@@ -40,6 +56,7 @@ const PostActions = ({ postId, postSlug, postAuthorId, comments }) => {
       console.log(docToComment(comment));
       setReplies([docToComment(comment), ...replies]);
       setCommentText("");
+      setReplying(false);
     } catch (err) {
       console.log(err);
     }
@@ -64,12 +81,21 @@ const PostActions = ({ postId, postSlug, postAuthorId, comments }) => {
         )}
       </div>
       {replying && (
-        <form onSubmit={handleCommentSubmit} className={styles.commentForm}>
+        <form className={styles.commentForm} onSubmit={handleCommentSubmit}>
+          {error && <FlashMessage message={error} />}
           <div>
             replying as <span className={styles.name}>{user.displayName}</span>
           </div>
-          <MDEditor value={commentText} onChange={setCommentText} />
-          <Button type="submit">send</Button>
+          <Editor text={commentText} onChange={handleTextChange} />
+          <div className={styles.buttons}>
+            <Button type="submit">post</Button>
+            <Button type="reset" onClick={resetForm}>
+              cancel
+            </Button>
+          </div>
+          <div className={styles.preview}>
+            <MDRenderer text={commentText} />
+          </div>
         </form>
       )}
       <CommentList comments={replies} />

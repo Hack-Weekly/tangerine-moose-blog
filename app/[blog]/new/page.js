@@ -11,7 +11,9 @@ import { useRouter } from "next/navigation";
 import { increment } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
-import Button from "@/components/Button/Button";
+import Button from "@/components/Button";
+import { Editor, MDRenderer } from "@/components/Editor";
+import FlashMessage from "@/components/FlashMessage";
 import Input from "@/components/Input/Input";
 import { storage } from "@/firebase/firebase";
 import { updateBlog } from "@/firebase/utils/blogUtils";
@@ -25,13 +27,24 @@ const NewBlogPost = () => {
   const router = useRouter();
   const { user } = useAuth();
   const [title, setTitle] = useState("");
-  const [text, setText] = useState("");
   const [tags, setTags] = useState("");
   const [image, setImage] = useState(null);
   const [imageData, setImageData] = useState(null);
+  const [text, setText] = useState("");
+  const [error, setError] = useState("");
 
+  const handleTextChange = (text) => {
+    setText(text);
+    text && setError("");
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!text) {
+      setError("Post content cannot be empty");
+      return;
+    }
+
     // return early if user is null or user doesn't have a blog
     if (!user || !user.blogId) return;
 
@@ -80,6 +93,7 @@ const NewBlogPost = () => {
   return (
     <div className={styles.container}>
       <form onSubmit={handleSubmit}>
+        {error && <FlashMessage message={error} />}
         <div className={styles.meta}>
           <div className={styles.input}>
             <div>
@@ -101,12 +115,11 @@ const NewBlogPost = () => {
             {imageData && <Image fill className={styles.image} alt="Preview" src={imageData} />}
           </div>
         </div>
-        <div className={styles.container}>
-          <MDEditor value={text} onChange={setText} />
-        </div>
+        <Editor text={text} onChange={handleTextChange} />
         <Button className={styles.submit} type="submit">
           post
         </Button>
+        <MDRenderer text={text} />
       </form>
     </div>
   );
