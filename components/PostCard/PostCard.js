@@ -23,7 +23,7 @@ const PostCard = (props) => {
 
   return (
     <Link href={`/${props.blogSlug}/${props.slug}`} className={`${styles.root} ${props.futureStyle}`}>
-      <Image src={photo} alt="" width={275} height={366} className={styles.image} />
+      <Image src={props.imageURL} alt={props.title} width={275} height={366} className={styles.image} />
       <fieldset className={styles.container}>
         <legend className={styles.legend}>article</legend>
         {/* TODO: implement tags */}
