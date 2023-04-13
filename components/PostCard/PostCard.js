@@ -22,8 +22,8 @@ const PostCard = (props) => {
   const formattedDate = new Date(props.createdAt.seconds * 1000).toLocaleDateString(undefined, options);
 
   return (
-    <Link href={`/${props.blogSlug}/${props.slug}`} className={`${styles.root} ${props.futureStyle}`}>
-      <Image src={props.imageURL} alt={props.title} width={275} height={366} className={styles.image} />
+    <Link href={`/${props.blogSlug}/${props.slug}`} className={`${styles.root} ${props.className}`}>
+      <Image src={props.imageURL} alt={props.title} width={275} height={366} className={styles.image} unoptimized />
       <fieldset className={styles.container}>
         <legend className={styles.legend}>article</legend>
         {/* TODO: implement tags */}

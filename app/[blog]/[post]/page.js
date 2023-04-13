@@ -79,7 +79,14 @@ const BlogPost = async ({ params }) => {
         </div>
       </div>
       <div className={styles.imageContainer}>
-        <Image width={1080} height={720} className={styles.image} src={postWithUserAndBlog.imageURL} alt={title} />
+        <Image
+          width={1080}
+          height={720}
+          className={styles.image}
+          src={postWithUserAndBlog.imageURL}
+          alt={title}
+          unoptimized
+        />
       </div>
       <div className={styles.text}>
         <MDRenderer text={text} />
@@ -87,7 +94,7 @@ const BlogPost = async ({ params }) => {
           <Reactions reactions={reactions} />
         </div>
       </div>
-      <p className={styles.byline}>
+      <div className={styles.byline}>
         {`submitted `}
         <div className={styles.byline} title={created.long}>
           {created.short}
@@ -102,7 +109,7 @@ const BlogPost = async ({ params }) => {
           </div>
         )}
         {` by `} <a href={`/${postWithUserAndBlog.blog.slug}`}>{postWithUserAndBlog.user.displayName}</a>
-      </p>
+      </div>
       <PostActions postId={id} postSlug={slug} postAuthorId={userId} comments={comments} />
     </div>
   );

@@ -8,7 +8,7 @@ import styles from "./Featured.module.css";
 
 // get latest post
 const fetchPost = async () => {
-  const postQuery = await query(postCollection, orderBy("createdAt"), limit(1));
+  const postQuery = await query(postCollection, orderBy("createdAt", "desc"), limit(1));
   const postDoc = (await getDocs(postQuery)).docs;
   if (postDoc[0] == null) return null;
   return docToPost(postDoc[0]);

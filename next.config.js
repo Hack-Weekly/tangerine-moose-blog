@@ -13,6 +13,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "**.googleapis.com",
       },
+      {
+        protocol: "http",
+        hostname: "localhost",
+      },
     ],
   },
 };
