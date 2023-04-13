@@ -53,12 +53,6 @@ export default function Navbar() {
     setShowLoginModal((prevState) => !prevState);
   };
 
-  useEffect(() => {
-    if (!user) {
-      setShowLoginModal();
-    }
-  }, [user]);
-
   return (
     <>
       <div className={`${styles.root} ${isScrolled && styles.scrolled}`}>
