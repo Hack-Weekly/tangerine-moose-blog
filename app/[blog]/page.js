@@ -62,7 +62,7 @@ const Blog = async ({ params }) => {
       <h3 className={styles.h3}>Blogging since: {formattedDate}</h3>
       <div className={styles.posts}>
         {blogWithPosts.posts.map((post) => {
-          return <PostCard key={post.id} {...post} {...user} futureStyle={styles.article} />;
+          return <PostCard key={post.id} {...post} {...user} className={styles.article} />;
         })}
       </div>
     </div>

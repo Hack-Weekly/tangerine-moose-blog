@@ -18,11 +18,18 @@
   white-space: nowrap;
 }
 
+.post {
+  flex-direction: column;
+}
+
 .author {
   display: none;
 }
 
 @media screen and (min-width: 1246px) {
+  .post {
+    flex-direction: row;
+  }
   .author {
     display: flex;
   }
