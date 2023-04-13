@@ -94,7 +94,7 @@ const BlogPost = async ({ params }) => {
           <Reactions reactions={reactions} />
         </div>
       </div>
-      <p className={styles.byline}>
+      <div className={styles.byline}>
         {`submitted `}
         <div className={styles.byline} title={created.long}>
           {created.short}
@@ -109,7 +109,7 @@ const BlogPost = async ({ params }) => {
           </div>
         )}
         {` by `} <a href={`/${postWithUserAndBlog.blog.slug}`}>{postWithUserAndBlog.user.displayName}</a>
-      </p>
+      </div>
       <PostActions postId={id} postSlug={slug} postAuthorId={userId} comments={comments} />
     </div>
   );
