@@ -1,9 +1,9 @@
 import Image from "next/image";
 
 import AuthorCard from "@/components/AuthorCard/AuthorCard";
-import Tangerine from "../../public/drawn.jpg";
-import kid from "../../public/kid.png";
-import moose from "../../public/moose.png";
+import Tangerine from "@/public/drawn.jpg";
+import kid from "@/public/kid.png";
+import moose from "@/public/moose.png";
 import styles from "./page.module.css";
 
 export default function about() {
