@@ -2,5 +2,19 @@
   padding-left: 0.5rem;
   padding-right: 0.5rem;
   margin: 2rem auto;
-  max-width: var(--max-width);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.h2 {
+  padding: 0 1.5rem;
+  letter-spacing: 0.8rem;
+  white-space: nowrap;
+}
+
+.post {
+  padding: 0.5rem;
+  transform: scale(0.8);
+  width: 500px;
 }

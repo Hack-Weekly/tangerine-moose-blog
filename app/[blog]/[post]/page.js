@@ -79,7 +79,14 @@ const BlogPost = async ({ params }) => {
         </div>
       </div>
       <div className={styles.imageContainer}>
-        <Image width={1080} height={720} className={styles.image} src={postWithUserAndBlog.imageURL} alt={title} />
+        <Image
+          width={1080}
+          height={720}
+          className={styles.image}
+          src={postWithUserAndBlog.imageURL}
+          alt={title}
+          unoptimized
+        />
       </div>
       <div className={styles.text}>
         <MDRenderer text={text} />
