@@ -3,7 +3,6 @@
 import * as commands from "@uiw/react-md-editor/lib/commands";
 
 import "@uiw/react-md-editor/markdown-editor.css";
-import { useState } from "react";
 import dynamic from "next/dynamic";
 
 import styles from "./Editor.module.css";
@@ -49,25 +48,10 @@ const editorOptions = {
   extraCommands: [],
 };
 
-export function Editor({ onSubmit, initialText, onCancel }) {
-  const [text, setText] = useState(initialText || "");
-
+export function Editor({ text, onChange }) {
   return (
     <div className={styles.container}>
-      <MDEditor value={text} onChange={setText} {...editorOptions} />
-      <button className={styles.submit} type="submit" onClick={() => onSubmit(text) && setText("")}>
-        post
-      </button>
-      {onCancel && (
-        <button className={styles.submit} type="reset" onClick={() => onCancel() && setText("")}>
-          cancel
-        </button>
-      )}
-      {text && (
-        <div className={styles.preview}>
-          <MDRenderer text={text} />
-        </div>
-      )}
+      <MDEditor value={text} onChange={onChange} {...editorOptions} />
     </div>
   );
 }

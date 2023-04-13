@@ -4,7 +4,8 @@ import { useState } from "react";
 import { getDoc } from "firebase/firestore";
 
 import CommentList from "@/app/[blog]/[post]/CommentList";
-import { Editor } from "@/components/Editor";
+import Button from "@/components/Button";
+import { Editor, MDRenderer } from "@/components/Editor";
 import { addComment, docToComment } from "@/firebase/utils/postUtils";
 import { useAuth } from "@/providers/AuthProvider";
 import styles from "./PostActions.module.css";
@@ -24,9 +25,28 @@ const PostActions = ({ postId, postSlug, postAuthorId, comments }) => {
   };
 
   const [replying, setReplying] = useState(false);
+  const [commentText, setCommentText] = useState("");
+  const [error, setError] = useState(null);
 
-  const handleCommentSubmit = async (commentText) => {
-    if (!user || !commentText) return;
+  const handleTextChange = (text) => {
+    setCommentText(text);
+    text && setError(null);
+  };
+
+  const resetForm = () => {
+    setCommentText("");
+    setReplying(false);
+  };
+
+  const handleCommentSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!commentText) {
+      setError({ message: "Comment cannot be empty" });
+      return;
+    }
+
+    if (!user) return;
 
     try {
       console.log(commentText);
@@ -34,6 +54,7 @@ const PostActions = ({ postId, postSlug, postAuthorId, comments }) => {
       const comment = await getDoc(commentRef);
       console.log(docToComment(comment));
       setReplies([docToComment(comment), ...replies]);
+      setCommentText("");
       setReplying(false);
     } catch (err) {
       console.log(err);
@@ -59,12 +80,22 @@ const PostActions = ({ postId, postSlug, postAuthorId, comments }) => {
         )}
       </div>
       {replying && (
-        <div className={styles.commentForm}>
+        <form className={styles.commentForm} onSubmit={handleCommentSubmit}>
+          {error && <div className={styles.error}>{error.message}</div>}
           <div>
             replying as <span className={styles.name}>{user.displayName}</span>
           </div>
-          <Editor onSubmit={handleCommentSubmit} onCancel={() => setReplying(false)} />
-        </div>
+          <Editor text={commentText} onChange={handleTextChange} />
+          <div className={styles.buttons}>
+            <Button type="submit">post</Button>
+            <Button type="reset" onClick={resetForm}>
+              cancel
+            </Button>
+          </div>
+          <div className={styles.preview}>
+            <MDRenderer text={commentText} />
+          </div>
+        </form>
       )}
       <CommentList comments={replies} />
     </div>

@@ -11,7 +11,8 @@ import { useRouter } from "next/navigation";
 import { increment } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
-import { Editor } from "@/components/Editor";
+import Button from "@/components/Button";
+import { Editor, MDRenderer } from "@/components/Editor";
 import Input from "@/components/Input/Input";
 import { storage } from "@/firebase/firebase";
 import { updateBlog } from "@/firebase/utils/blogUtils";
@@ -28,10 +29,23 @@ const NewBlogPost = () => {
   const [tags, setTags] = useState("");
   const [image, setImage] = useState(null);
   const [imageData, setImageData] = useState(null);
+  const [text, setText] = useState("");
+  const [error, setError] = useState(null);
 
-  const handleSubmit = async (text) => {
+  const handleTextChange = (text) => {
+    setText(text);
+    text && setError(null);
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!text) {
+      setError({ message: "Post content cannot be empty" });
+      return;
+    }
+
     // return early if user is null or user doesn't have a blog
-    if (!user || !user.blogId || !text) return;
+    if (!user || !user.blogId) return;
 
     try {
       const postRef = await createPost(user.blogId, user.uid, {
@@ -77,7 +91,8 @@ const NewBlogPost = () => {
 
   return (
     <div className={styles.container}>
-      <div>
+      <form onSubmit={handleSubmit}>
+        {error && <div className={styles.error}>{error.message}</div>}
         <div className={styles.meta}>
           <div className={styles.input}>
             <div>
@@ -99,8 +114,12 @@ const NewBlogPost = () => {
             {imageData && <Image fill className={styles.image} alt="Preview" src={imageData} />}
           </div>
         </div>
-        <Editor onSubmit={handleSubmit} />
-      </div>
+        <Editor text={text} onChange={handleTextChange} />
+        <Button className={styles.submit} type="submit">
+          post
+        </Button>
+        <MDRenderer text={text} />
+      </form>
     </div>
   );
 };
