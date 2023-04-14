@@ -84,8 +84,8 @@ const BlogPost = async ({ params }) => {
       </div>
       <div className={styles.imageContainer}>
         <Image
-          width={1080}
-          height={720}
+          width={250}
+          height={250}
           className={styles.image}
           src={postWithUserAndBlog.imageURL}
           alt={title}

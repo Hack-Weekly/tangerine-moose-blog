@@ -1,20 +1,25 @@
 .root {
-  background-image: url("../../public/FeaturedPhotos/mountain.jpg");
-  background-repeat: no-repeat;
-  background-position: top right;
-  margin: 1.5rem;
-  padding: 4rem;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  position: relative;
+  max-width: var(--max-width);
+  background-color: var(--background-tan);
+  border-radius: var(--border-radius);
   display: flex;
   justify-content: space-between;
-  position: relative;
+  margin: 1.5rem 0;
+  padding: 2rem;
 }
 
 .root h2 {
   position: absolute;
-  top: -0.5rem;
+  top: -1rem;
   left: 50%;
   transform: translateX(-50%);
-  letter-spacing: 0.8rem;
   white-space: nowrap;
 }
 
@@ -26,10 +31,13 @@
   display: none;
 }
 
-@media screen and (min-width: 1246px) {
+@media screen and (min-width: 765px) {
   .post {
     flex-direction: row;
   }
+}
+
+@media screen and (min-width: 1000px) {
   .author {
     display: flex;
   }

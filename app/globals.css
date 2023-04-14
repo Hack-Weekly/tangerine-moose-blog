@@ -4,11 +4,11 @@
   --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono", "Roboto Mono", "Oxygen Mono",
     "Ubuntu Monospace", "Source Code Pro", "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
   --font-moos: Georgia, "Times New Roman", Times, serif;
-  --foreground-rgb: 0, 0, 0;
-  --middleground-rgb: 103, 106, 110;
+  --foreground-rgb: 38, 58, 41;
+  --middleground-rgb: 65, 100, 74;
 
-  --background-start-rgb: 242, 245, 245;
-  --background-end-rgb: 255, 255, 255;
+  --background-start-rgb: 242, 227, 219;
+  --background-end-rgb: 243, 222, 186;
   --background-tan: #e3a569;
   --background-alert-rgb: 251, 240, 218;
 
@@ -41,9 +41,9 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --foreground-rgb: 242, 227, 219;
+    --background-start-rgb: 65, 100, 74;
+    --background-end-rgb: 38, 58, 41;
     --background-tan: #b04f00;
     --background-alert-rgb: 198, 79, 15;
     --middleground-rgb: 163, 165, 168;

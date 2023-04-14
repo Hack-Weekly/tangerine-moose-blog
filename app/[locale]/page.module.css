@@ -1,20 +1,31 @@
 .container {
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
   margin: 2rem auto;
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
 }
 
-.h2 {
-  padding: 0 1.5rem;
-  letter-spacing: 0.8rem;
-  white-space: nowrap;
+.break {
+  border-bottom: 1px solid rgba(var(--foreground-rgb), 0.5);
+  margin: 1.5rem;
+}
+
+.blog {
+  flex-grow: 1;
+}
+
+.postContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .post {
-  padding: 0.5rem;
-  transform: scale(0.8);
-  width: 500px;
+  margin: 1.5rem;
+}
+
+@media screen and (min-width: 1000px) {
+  .postContainer {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
 }
