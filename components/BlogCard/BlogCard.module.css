@@ -1,16 +1,20 @@
 .root {
   display: block;
   text-decoration: none;
-  min-width: calc(var(--max-width) / 2.5);
   padding: 0.5rem 1.5rem 1.5rem;
 }
 
 .container {
   background-color: rgb(var(--background-start-rgb));
+  border-radius: var(--border-radius);
   box-shadow: rgb(var(--card-border-rgb)) 0px 1px 3px 0px, rgb(var(--card-border-rgb)) 0px 0.5px 0.5px 0px;
   font-family: var(--font-moos);
   text-align: center;
   position: relative;
+}
+
+.container:hover {
+  background-color: rgb(var(--callout-rgb));
 }
 
 .legend {

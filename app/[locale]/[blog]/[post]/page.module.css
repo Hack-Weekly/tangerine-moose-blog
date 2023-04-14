@@ -1,5 +1,5 @@
 .container {
-  background-color: rgb(var(--background-end-rgb));
+  background-color: rgb(var(--background-start-rgb));
   max-width: var(--max-width);
   margin: 2rem auto;
   padding: 5px;
@@ -43,9 +43,13 @@
 .imageContainer {
   position: relative;
   overflow: hidden;
+  background-color: rgb(var(--background-start-rgb));
   border-radius: var(--border-radius);
   margin-top: 1rem;
   margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .image {
