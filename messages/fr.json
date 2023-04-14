@@ -1,0 +1,57 @@
+{
+  "metadata": {
+    "title": "Tangerine Moose Blog App",
+    "description": "Une application de blog réalisé par l'équipe « Tangerine Moose »",
+    "author": "Tangerine Moose Team",
+    "charSet": "utf-8"
+  },
+  "navbar": {
+    "name": "Moos",
+    "login": "Connexion",
+    "logout": "Déconnexion",
+    "about": "À propos",
+    "create_blog": "Créer un nouveau blog",
+    "write_post": "Créer un billet",
+    "self_blog": "Mon Blog"
+  },
+  "home": {
+    "blogs": "Découvrez ces blogs",
+    "no_blogs": "Il n'y a pas des blogs",
+    "articles": "Découvrez ces billets"
+  },
+  "blog": {
+    "started": "Bloguer depuis {startDate, date, long}"
+  },
+  "post": {
+    "views": " {viewCount, plural, =0 {Pas de Vues} =1 {# Vue} other {# Vues}} ",
+    "byline": {
+      "submitted": "soumis <createdTag>{created}</createdTag>",
+      "updated": " (dernière édition <updatedTag>{updated}</updatedTag>)",
+      "author": " par <authorTag>{name}</authorTag>"
+    },
+    "new": {
+      "title": "Titre",
+      "tags": "Ajouter des tags (séparée par <tag>,</tag>)",
+      "image": " Photo ",
+      "post": "publier",
+      "post_empty": "Le teneur de blog ne peut pas être vide"
+    }
+  },
+  "PostActions": {
+    "save": "enregistrer",
+    "saved": "enregistré",
+    "unsave": "libérer",
+    "report": "signaler",
+    "reported": "signalé",
+    "reply": "répondre",
+    "share": "partager",
+    "edit": "modifier",
+    "delete": "effacer",
+    "reply_author": "répondent comme <nameTag>{name}</nameTag>",
+    "post": "commenter",
+    "cancel": "annuler",
+    "comments": "{commentCount, plural, =0 {commenter} =1 {# commentaire} other {# commentaires}}",
+    "comment_empty": "Le teneur de commentaire ne peut pas être vide",
+    "posted": "{time}"
+  }
+}
