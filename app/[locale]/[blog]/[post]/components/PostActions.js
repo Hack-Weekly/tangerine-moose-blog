@@ -71,7 +71,7 @@ const PostActions = ({ postId, postSlug, postAuthorId, comments }) => {
         <a onClick={() => setReplying(!replying)}>{t("reply")}</a>
         <a onClick={() => {}}>{t("share")}</a>
         <a onClick={toggleSavePost} onMouseOver={hoverSave} onMouseLeave={leaveSave}>
-          {saved ? "saved" : "save"}
+          {saved ? t("saved") : t("save")}
         </a>
         {user && postAuthorId === user.uid ? (
           <>

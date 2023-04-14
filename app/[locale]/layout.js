@@ -1,6 +1,7 @@
 import { Cabin } from "next/font/google";
 import { notFound } from "next/navigation";
 import { NextIntlClientProvider, createTranslator, useLocale } from "next-intl";
+import { getNow } from "next-intl/server";
 
 import Navbar from "@/components/Navbar/Navbar";
 import { AuthProvider } from "@/providers/AuthProvider";
@@ -25,6 +26,11 @@ const cabin = Cabin({ subsets: ["latin"] });
 
 export default async function LocaleLayout({ children, params }) {
   const locale = useLocale();
+  const now = await getNow({
+    // Update every 10 seconds
+    updateInterval: 1000 * 10,
+  });
+
   let messages;
   try {
     messages = (await import(`../../messages/${locale}.json`)).default;
@@ -35,7 +41,7 @@ export default async function LocaleLayout({ children, params }) {
   return (
     <html lang={locale}>
       <body className={cabin.className}>
-        <NextIntlClientProvider locale={locale} messages={messages}>
+        <NextIntlClientProvider locale={locale} messages={messages} now={now}>
           <AuthProvider>
             <Navbar />
             {children}

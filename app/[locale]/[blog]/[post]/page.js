@@ -1,8 +1,7 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { doc, getDoc, getDocs, limit, orderBy, query, where } from "firebase/firestore";
-import moment from "moment";
-import { getTranslations } from "next-intl/server";
+import { getFormatter, getTranslations } from "next-intl/server";
 import { VscEye } from "react-icons/vsc";
 
 import PostActions from "@/app/[locale]/[blog]/[post]/components/PostActions";
@@ -48,6 +47,7 @@ const fetchPost = async (params) => {
 
 const BlogPost = async ({ params }) => {
   const t = await getTranslations("post");
+  const format = await getFormatter();
 
   const postWithUserAndBlog = await fetchPost(params);
 
@@ -57,11 +57,14 @@ const BlogPost = async ({ params }) => {
   const [created, updated] = [createdAt, updatedAt].map(
     (t) =>
       t && {
-        short: moment.unix(t.seconds).fromNow(),
-        long: new Date(t.seconds * 1000).toLocaleTimeString([], {
-          month: "short",
-          day: "numeric",
+        short: format.relativeTime(new Date(createdAt.seconds * 1000)),
+        long: format.dateTime(new Date(createdAt.seconds * 1000), {
           year: "numeric",
+          month: "long",
+          day: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
         }),
       },
   );
