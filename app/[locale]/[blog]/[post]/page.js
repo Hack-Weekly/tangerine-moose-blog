@@ -2,10 +2,11 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { doc, getDoc, getDocs, limit, orderBy, query, where } from "firebase/firestore";
 import moment from "moment";
+import { getTranslations } from "next-intl/server";
 import { VscEye } from "react-icons/vsc";
 
-import PostActions from "@/app/[blog]/[post]/components/PostActions";
-import Reactions from "@/app/[blog]/[post]/components/Reactions";
+import PostActions from "@/app/[locale]/[blog]/[post]/components/PostActions";
+import Reactions from "@/app/[locale]/[blog]/[post]/components/Reactions";
 import { MDRenderer } from "@/components/Editor";
 import { blogCollection, docToBlog } from "@/firebase/utils/blogUtils";
 import { bumpViews, commentCollection, docToComment, docToPost, postCollection } from "@/firebase/utils/postUtils";
@@ -46,6 +47,8 @@ const fetchPost = async (params) => {
 };
 
 const BlogPost = async ({ params }) => {
+  const t = await getTranslations("post");
+
   const postWithUserAndBlog = await fetchPost(params);
 
   if (!postWithUserAndBlog) return notFound();
@@ -54,7 +57,7 @@ const BlogPost = async ({ params }) => {
   const [created, updated] = [createdAt, updatedAt].map(
     (t) =>
       t && {
-        short: moment(new Date(t.seconds * 1000)).fromNow(),
+        short: moment.unix(t.seconds).fromNow(),
         long: new Date(t.seconds * 1000).toLocaleTimeString([], {
           month: "short",
           day: "numeric",
@@ -75,7 +78,8 @@ const BlogPost = async ({ params }) => {
           ))}
         </div>
         <div>
-          <VscEye size={22} /> {views} Views
+          <VscEye size={22} />
+          {t("views", { viewCount: views })}
         </div>
       </div>
       <div className={styles.imageContainer}>
@@ -95,20 +99,27 @@ const BlogPost = async ({ params }) => {
         </div>
       </div>
       <div className={styles.byline}>
-        {`submitted `}
-        <div className={styles.byline} title={created.long}>
-          {created.short}
-        </div>
-        {updated && (
-          <div className={styles.byline}>
-            {` (last edited `}
-            <div className={styles.byline} title={updated.long}>
-              {updated.short}
+        {t.rich("byline.submitted", {
+          created: created.short,
+          createdTag: (c) => (
+            <div className={styles.byline} title={created.long}>
+              {c}
             </div>
-            {`)`}
-          </div>
-        )}
-        {` by `} <a href={`/${postWithUserAndBlog.blog.slug}`}>{postWithUserAndBlog.user.displayName}</a>
+          ),
+        })}
+        {updated &&
+          t.rich("byline.updated", {
+            updated: updated.short,
+            updatedTag: (c) => (
+              <div className={styles.byline} title={updated.long}>
+                {c}
+              </div>
+            ),
+          })}
+        {t.rich("byline.author", {
+          name: postWithUserAndBlog.user.displayName,
+          authorTag: (c) => <a href={`/${postWithUserAndBlog.blog.slug}`}>{c}</a>,
+        })}
       </div>
       <PostActions postId={id} postSlug={slug} postAuthorId={userId} comments={comments} />
     </div>

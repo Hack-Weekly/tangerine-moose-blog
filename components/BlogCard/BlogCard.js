@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "next-intl";
 import { VscArchive } from "react-icons/vsc";
 
 import styles from "./BlogCard.module.css";

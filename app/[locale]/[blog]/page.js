@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { doc, getDoc, getDocs, limit, orderBy, query, where } from "firebase/firestore";
+import { getTranslations } from "next-intl/server";
 
 import AuthorCard from "@/components/AuthorCard/AuthorCard";
 import PostCard from "@/components/PostCard/PostCard";
@@ -42,6 +43,7 @@ const fetchOwner = async (userId) => {
 };
 
 const Blog = async ({ params }) => {
+  const t = await getTranslations("blog");
   const blogWithPosts = await fetchBlogPosts(params);
   if (!blogWithPosts) return notFound();
 
@@ -51,15 +53,14 @@ const Blog = async ({ params }) => {
     return notFound();
   }
 
-  const options = { month: "2-digit", day: "2-digit", year: "numeric" };
-  const formattedDate = new Date(blogWithPosts.blog.createdAt.seconds * 1000).toLocaleDateString(undefined, options);
+  const startDate = new Date(blogWithPosts.blog.createdAt.seconds * 1000);
 
   return (
     <div className={styles.root}>
       <AuthorCard {...user} {...blogWithPosts.blog} className={styles.author} />
       <h1 className={styles.h1}>{blogWithPosts.blog.name}</h1>
       <h2 className={styles.h2}>{blogWithPosts.blog.description}</h2>
-      <h3 className={styles.h3}>Blogging since: {formattedDate}</h3>
+      <h3 className={styles.h3}>{t("started", { startDate })}</h3>
       <div className={styles.posts}>
         {blogWithPosts.posts.map((post) => {
           return <PostCard key={post.id} {...post} {...user} className={styles.article} />;

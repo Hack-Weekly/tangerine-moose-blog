@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
+import { Link, useTranslations } from "next-intl";
 
 import Avatar from "@/components/Avatar/Avatar";
 import EditBlogForm from "@/components/EditBlogForm/EditBlogForm";
@@ -15,6 +15,7 @@ import Login from "../Login/Login";
 import styles from "./Navbar.module.css";
 
 export default function Navbar() {
+  const t = useTranslations("navbar");
   const { user, loading } = useAuth();
   const [showDropdown, setShowDropdown] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -61,14 +62,14 @@ export default function Navbar() {
             <div className={styles.menu}>
               <Image src={Moose} alt="Moos logo" width={35} height={35} />
               <Link href="/" className={styles.link}>
-                Moos
+                {t("name")}
               </Link>
             </div>
             <div className={styles.menu}>
               {loading && <Avatar loading />}
               {!loading && !user && (
                 <Button onClick={handleLoginModal} className={styles.login}>
-                  Login
+                  {t("login")}
                 </Button>
               )}
               {!loading && user && (
@@ -88,16 +89,16 @@ export default function Navbar() {
         </div>
         <div className={styles.pages}>
           <Link href="/about" className={styles.link}>
-            About
+            {t("about")}
           </Link>
           {user && !user.blogId && (
             <Link href="#" className={styles.link} onClick={() => setModalOpen(true)}>
-              Create A Blog
+              {t("create_blog")}
             </Link>
           )}
           {user && user.blogId && (
             <Link href={`/${user.blogSlug}/new`} className={styles.link}>
-              Write A Post
+              {t("write_post")}
             </Link>
           )}
         </div>

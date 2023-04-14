@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "next-intl";
 
 import stockPhoto from "@/public/StockPhotos/stockPhoto";
 import styles from "./PostCard.module.css";

@@ -5,11 +5,11 @@ import slugify from "@sindresorhus/slugify";
 
 import "@uiw/react-markdown-preview/markdown.css";
 import "@uiw/react-md-editor/markdown-editor.css";
-import dynamic from "next/dynamic";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { increment } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { useTranslations } from "next-intl";
+import { useRouter } from "next-intl/client";
 
 import Button from "@/components/Button";
 import { Editor, MDRenderer } from "@/components/Editor";
@@ -21,9 +21,8 @@ import { createPost, updatePost } from "@/firebase/utils/postUtils";
 import { useAuth } from "@/providers/AuthProvider";
 import styles from "./page.module.css";
 
-const MDEditor = dynamic(() => import("@uiw/react-md-editor"), { ssr: false });
-
 const NewBlogPost = () => {
+  const t = useTranslations("post.new");
   const router = useRouter();
   const { user } = useAuth();
   const [title, setTitle] = useState("");
@@ -41,7 +40,7 @@ const NewBlogPost = () => {
     e.preventDefault();
 
     if (!text) {
-      setError("Post content cannot be empty");
+      setError(t("post_empty"));
       return;
     }
 
@@ -97,17 +96,19 @@ const NewBlogPost = () => {
         <div className={styles.meta}>
           <div className={styles.input}>
             <div>
-              <label htmlFor="titleInput">Title</label>
+              <label htmlFor="titleInput">{t("title")}</label>
               <Input required type="text" name="titleInput" value={title} onChange={(e) => setTitle(e.target.value)} />
             </div>
             <div>
               <label htmlFor="tags">
-                Tags (separate by <kbd>,</kbd>)
+                {t.rich("tags", {
+                  tag: (c) => <kbd>{c}</kbd>,
+                })}
               </label>
               <Input required type="text" name="tags" value={tags} onChange={(e) => setTags(e.target.value)} />
             </div>
             <div>
-              <label htmlFor="image"> Image </label>
+              <label htmlFor="image">{t("image")}</label>
               <Input required type="file" name="image" accept="image/*" onChange={handleImageChange} />
             </div>
           </div>
@@ -117,7 +118,7 @@ const NewBlogPost = () => {
         </div>
         <Editor text={text} onChange={handleTextChange} />
         <Button className={styles.submit} type="submit">
-          post
+          {t("post")}
         </Button>
         <MDRenderer text={text} />
       </form>

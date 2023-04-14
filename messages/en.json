@@ -1,0 +1,57 @@
+{
+  "metadata": {
+    "title": "Tangerine Moose Blog App",
+    "description": "Blog app engineered by the Tangerine Moose team",
+    "author": "Tangerine Moose Team",
+    "charSet": "utf-8"
+  },
+  "navbar": {
+    "name": "Moos",
+    "login": "Login",
+    "logout": "Logout",
+    "about": "About",
+    "create_blog": "Create A Blog",
+    "write_post": "Write A Post",
+    "self_blog": "My Blog"
+  },
+  "home": {
+    "blogs": "Available Blogs",
+    "no_blogs": "No blogs yet",
+    "articles": "Available Articles"
+  },
+  "blog": {
+    "started": "Blogging since {startDate, date, long}"
+  },
+  "post": {
+    "views": " {viewCount, plural, =0 {No Views} =1 {# View} other {# Views}} ",
+    "byline": {
+      "submitted": "submitted <createdTag>{created}</createdTag>",
+      "updated": " (last edited <updatedTag>{updated}</updatedTag>)",
+      "author": " by <authorTag>{name}</authorTag>"
+    },
+    "new": {
+      "title": "Title",
+      "tags": "Tags (separated by <tag>,</tag>)",
+      "image": " Image ",
+      "post": "publish",
+      "post_empty": "Post content cannot be empty"
+    }
+  },
+  "PostActions": {
+    "save": "save",
+    "saved": "saved",
+    "unsave": "unsave",
+    "report": "report",
+    "reported": "reported",
+    "reply": "reply",
+    "share": "share",
+    "edit": "edit",
+    "delete": "delete",
+    "reply_author": "replying as <nameTag>{name}</nameTag>",
+    "post": "post",
+    "cancel": "cancel",
+    "comments": "{commentCount, plural, =0 {no comments} =1 {# comment} other {# comments}}",
+    "comment_empty": "Comment cannot be empty",
+    "posted": "posted {time}"
+  }
+}
