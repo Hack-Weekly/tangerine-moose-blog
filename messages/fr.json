@@ -26,7 +26,7 @@
     "views": " {viewCount, plural, =0 {Pas de Vues} =1 {# Vue} other {# Vues}} ",
     "byline": {
       "submitted": "soumis <createdTag>{created}</createdTag>",
-      "updated": " (dernière édition il y a <updatedTag>{updated}</updatedTag>)",
+      "updated": " (dernière édition <updatedTag>{updated}</updatedTag>)",
       "author": " par <authorTag>{name}</authorTag>"
     },
     "new": {
